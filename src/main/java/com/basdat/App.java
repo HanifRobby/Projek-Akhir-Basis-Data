@@ -1,9 +1,11 @@
 package com.basdat;
 
+import com.basdat.controller.WelcomeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,9 +16,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Welcome"), 640, 480);
+        scene = new Scene(loadFXML("Welcome"), 800, 600);
+        stage.setMinWidth(800);
+        stage.setMinHeight(600);
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void setRoot(String fxml) throws IOException {
@@ -30,6 +35,10 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public void SignUpScene() throws IOException {
+        setRoot("SignUp");
     }
 
 }
