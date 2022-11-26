@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: D75020;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.beliController">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox prefHeight="523.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="188.0" prefWidth="800.0">
+                     <children>
+                        <VBox prefHeight="188.0" prefWidth="204.0" style="-fx-background-color: grey;" />
+                     </children>
+                  </HBox>
+               </children></VBox>
+         </center>
+         <bottom>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="360.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="360.0" prefWidth="245.0" style="-fx-background-color: grey;" />
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>
