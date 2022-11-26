@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.loginController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d75020" height="431.0" layoutX="-8.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="654.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d9d9" height="424.0" layoutX="308.0" stroke="BLACK" strokeType="INSIDE" width="339.0" />
+      <Button layoutX="446.0" layoutY="361.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: F9602A; -fx-background-radius: 20;" text="SIGN UP" textFill="WHITE" />
+      <Text fill="#f9602a" layoutX="365.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Login To Continue">
+         <font>
+            <Font name="Gilroy-ExtraBold" size="20.0" />
+         </font></Text>
+      <TextField layoutX="408.0" layoutY="113.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 20;" />
+      <PasswordField layoutX="408.0" layoutY="196.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 20;" />
+      <Text fill="#f9602a" layoutX="441.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+         <font>
+            <Font name="Gilroy-ExtraBold" size="18.0" />
+         </font></Text>
+      <Text fill="#f9602a" layoutX="442.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+         <font>
+            <Font name="Gilroy-ExtraBold" size="18.0" />
+         </font></Text>
+      <Button layoutX="440.0" layoutY="238.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="85.0" style="-fx-background-color: F9602A; -fx-background-radius: 20;" text="Login" textFill="WHITE" />
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="53.0" layoutY="96.0">
+         <image>
+            <Image url="@../../images/mobilzaor.png" />
+         </image>
+      </ImageView>
+      <Text fill="#642711" layoutX="357.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or sign up if you don't have">
+         <font>
+            <Font name="Gilroy-ExtraBold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#642711" layoutX="401.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="an account ,here.">
+         <font>
+            <Font name="Gilroy-ExtraBold" size="20.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="90.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ZAOR">
+         <font>
+            <Font name="Gilroy-ExtraBold" size="48.0" />
+         </font>
+      </Text>
+      <Circle fill="#d75020" layoutX="325.0" layoutY="387.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#d75020" layoutX="325.0" layoutY="410.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#d75020" layoutX="347.0" layoutY="404.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#d75020" layoutX="365.0" layoutY="395.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#d75020" layoutX="382.0" layoutY="410.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#d75020" layoutX="393.0" layoutY="389.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+   </children>
 </AnchorPane>
