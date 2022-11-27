@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 import static com.basdat.repository.DBConnect.connectionUrl;
 
-public class stokAdminController implements Initializable {
+public class StokAdminController implements Initializable {
 
     @FXML
     private TextField searchTF;
@@ -66,7 +66,7 @@ public class stokAdminController implements Initializable {
 
     @FXML
     private void backBtnAction(ActionEvent event) throws IOException{
-        App.setRoot("welcome");
+        App.setRoot("menuAdmin");
     }
 
 

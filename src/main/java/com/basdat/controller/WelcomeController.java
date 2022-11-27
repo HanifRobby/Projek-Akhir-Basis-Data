@@ -27,7 +27,7 @@ public class WelcomeController  {
     private void adminBtnAction() throws IOException {
 
         try {
-            App.setRoot("stokAdmin");
+            App.setRoot("loginAdmin");
         } catch (Exception e) {
 
         }
@@ -38,7 +38,7 @@ public class WelcomeController  {
     private void customerBtnAction() throws IOException {
 
         try {
-
+            App.setRoot("loginCustomer");
         } catch (Exception e) {
 
         }

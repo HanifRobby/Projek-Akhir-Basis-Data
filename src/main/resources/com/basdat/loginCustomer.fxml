@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: D75020;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.loginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: D75020;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.LoginCustomerController">
    <children>
       <BorderPane layoutX="-6.0" layoutY="-6.0" prefHeight="412.0" prefWidth="608.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
@@ -28,7 +28,7 @@
                      </font>
                   </Text>
                   <PasswordField maxWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 15;" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: F9602A; -fx-background-radius: 15;" text="LOGIN" textFill="WHITE">
+                  <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#loginBtnAction" style="-fx-background-color: F9602A; -fx-background-radius: 15;" text="LOGIN" textFill="WHITE">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="16.0" />
                      </font>
@@ -43,7 +43,7 @@
                         <Font name="Gilroy-ExtraBold" size="20.0" />
                      </font>
                   </Text>
-                  <Button mnemonicParsing="false" style="-fx-background-color: F9602A; -fx-background-radius: 15;" text="SIGN UP" textFill="WHITE">
+                  <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#signUpBtnAction" style="-fx-background-color: F9602A; -fx-background-radius: 15;" text="SIGN UP" textFill="WHITE">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="16.0" />
                      </font>

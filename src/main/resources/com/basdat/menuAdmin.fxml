@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: F9602A;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.menuAdminController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: F9602A;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.MenuAdminController">
    <children>
       <GridPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -62,7 +62,7 @@
                               <DropShadow blurType="ONE_PASS_BOX" />
                            </effect>
                         </Button>
-                        <Button layoutX="36.0" layoutY="88.0" mnemonicParsing="false" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="LOGOUT" textFill="WHITE">
+                        <Button fx:id="logoutBtn" layoutX="36.0" layoutY="88.0" mnemonicParsing="false" onAction="#logoutBtnAction" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="LOGOUT" textFill="WHITE">
                            <font>
                               <Font name="Gilroy-ExtraBold" size="24.0" />
                            </font>
@@ -75,7 +75,7 @@
                </children></HBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" style="-fx-background-color: D9D9D9;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="STOK" textFill="WHITE">
+                  <Button fx:id="stokBtn" mnemonicParsing="false" onAction="#stokBtnAction" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="STOK" textFill="WHITE">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="24.0" />
                      </font>
