@@ -22,6 +22,7 @@ public class DBConnect {
 //                "encrypt=true;" +
 //                "trustServerCertificate=false;" +
 //                "loginTimeout=30;";
+
         ResultSet resultSet = null;
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
