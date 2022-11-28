@@ -4,17 +4,20 @@ import com.basdat.App;
 import com.basdat.db_models.Mobil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static com.basdat.repository.DBConnect.connectionUrl;
@@ -43,10 +46,13 @@ public class StokAdminController implements Initializable {
     @FXML
     private TableColumn mobilColorClm;
     @FXML
+    private TableColumn mobilStokClm;
+    @FXML
     private TableColumn mobilHargaClm;
 
 
     private ObservableList<Mobil> data = FXCollections.observableArrayList();
+//    private static TableRow<Mobil> row = new TableRow<>();
 
 
     @Override
@@ -54,14 +60,100 @@ public class StokAdminController implements Initializable {
         pullDB();
         addDataToTable();
 
+        searchOnEnter();
+//        mobilTblPressed();
+        mobilTblClicked();
+
+//        if (!row.isEmpty()) {
+//        System.out.println(row.getItem().getNama());
+//        }
 
 
     }
 
     @FXML
-    private void searchOnEnter(ActionEvent event) throws IOException{
-        System.out.println(searchTF.getText().trim());
+    private void mobilTblPressed() {
+//        TableRow<Mobil> row = new TableRow<>();
+//        row.;
+//
+////        mobilTblView.setRowFactory(tv -> {
+////        TableRow<Mobil> row = new TableRow<>();
+////            row.setOnKeyPressed(keyEvent -> {
+////                System.out.println("Ahh");
+////            });
+////            return row;
+////        });
+//
+////        System.out.println(!row.isEmpty());
+////        if(!row.isEmpty()) {
+////        Mobil keyRow = row.getItem();
+////        System.out.println(keyRow.getNama());
+////
+////        produkTF.setText(keyRow.getID() + " " + keyRow.getNama());
+////        stokTF.setText(keyRow.getHarga());
+////        hargaTF.setText(keyRow.getHarga());
+//
+////        }
+//
+    }
 
+
+    @FXML
+    private void mobilTblClicked() {
+        mobilTblView.setRowFactory(tv -> {
+            TableRow<Mobil> row = new TableRow<>();
+
+            row.setOnMouseClicked(event -> {
+                if ( !row.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
+
+                    Mobil clickedRow = row.getItem();
+//                    System.out.println(clickedRow.getNama());
+
+                    produkTF.setText(clickedRow.getID() + " " + clickedRow.getNama());
+                    stokTF.setText(clickedRow.getHarga());
+                    hargaTF.setText(clickedRow.getHarga());
+                }
+            });
+            return row;
+        });
+
+    }
+
+
+    @FXML
+    private void searchOnEnter() {
+
+        // 1. Wrap the ObservableList in a FilteredList
+        FilteredList<Mobil> filteredData = new FilteredList<>(data, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(mobil -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(mobil.getNama().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if(mobil.getID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Mobil> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(mobilTblView.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        mobilTblView.setItems(sortedData);
     }
 
     @FXML

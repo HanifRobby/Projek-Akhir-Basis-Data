@@ -1,5 +1,6 @@
 package com.basdat.controller;
 
+import com.basdat.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,7 +13,7 @@ public class SignUpController {
     @FXML
     private Label descriptionLabelSU;
     @FXML
-    private Button buttonSU;
+    private Button signUpBtn;
     @FXML
     private TextField fieldEmailSU;
     @FXML
@@ -20,7 +21,9 @@ public class SignUpController {
     @FXML
     private PasswordField fieldPasswordSU;
 
+
     private String password;
+
 
     @FXML
     private void signingUp() throws IOException {
@@ -30,6 +33,7 @@ public class SignUpController {
                 descriptionLabelSU.setText("Pass masih Kosong mas!!");
             } else {
                 descriptionLabelSU.setText(password);
+                App.setRoot("welcome");
             }
         } catch (Exception e) {
 
@@ -37,12 +41,12 @@ public class SignUpController {
     }
 
     @FXML
-    private void signupBtnPressed() throws IOException {
-        buttonSU.setPrefHeight(buttonSU.getPrefHeight()*1.5);
+    private void signUpBtnPressed() throws IOException {
+        signUpBtn.setPrefHeight(signUpBtn.getPrefHeight()*1.5);
     }
 
     @FXML
-    private void signupBtnReleased() throws IOException {
-        buttonSU.setPrefHeight(buttonSU.getPrefHeight()/1.5);
+    private void signUpBtnReleased() throws IOException {
+        signUpBtn.setPrefHeight(signUpBtn.getPrefHeight()/1.5);
     }
 }
