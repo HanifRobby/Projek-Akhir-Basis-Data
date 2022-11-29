@@ -9,8 +9,5 @@
         <module name="projek_akhir_basdat" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="projek_akhir_basdat" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
