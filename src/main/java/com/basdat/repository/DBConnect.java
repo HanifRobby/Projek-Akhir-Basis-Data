@@ -11,15 +11,14 @@ import java.sql.Statement;
 
 public class DBConnect {
 
-    public static String connectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR50;" +
-            "databaseName=test3;" +
-            "encrypt=true;trustServerCertificate=true;" +
+    public static String connectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR5O;" +
+            "databaseName=test;" +
+            "encrypt=true;" +
+            "trustServerCertificate=true;" +
             "integratedSecurity=true;";
 
-    public static String AltConnectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR50;" +
-            "databaseName = University;" +
-            "user = AdminPA;" +
-            "password = admin123" +
+    public static String AltConnectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR5O;" +
+            "databaseName = test4;" +
             "encrypt = true;" +
             "trustServerCertificate = true;" +
             "loginTimeout = 30;";

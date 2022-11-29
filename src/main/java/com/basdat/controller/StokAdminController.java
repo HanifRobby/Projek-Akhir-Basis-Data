@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -53,8 +54,6 @@ public class StokAdminController implements Initializable {
     @FXML
     private TableColumn<Mobil, String> mobilYearClm;
     @FXML
-    private TableColumn<Mobil, String> mobilStokClm;
-    @FXML
     private TableColumn<Mobil, String> mobilHargaClm;
 
     @FXML
@@ -68,8 +67,6 @@ public class StokAdminController implements Initializable {
     @FXML
     private TableColumn<SukuCadang, String> SKYearClm;
     @FXML
-    private TableColumn<SukuCadang, String> SKStokClm;
-    @FXML
     private TableColumn<SukuCadang, String> SKHargaClm;
 
 
@@ -81,12 +78,10 @@ public class StokAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Insert Data Mobil to TableView
-        pullDBMobil();
-        addDataToTableMobil();
+        updateTblMobil();
 
         // Insert Data Suku Cadang to TableView
-        pullDBSK();
-        addDataToTableSK();
+        updateTblSK();
 
         // Search Text Field
         searchOnEnter();
@@ -94,18 +89,155 @@ public class StokAdminController implements Initializable {
     }
 
     @FXML
-    private void addBtnAction() {
+    private void addBtnAction() throws IOException{
+        String id = idTF.getText().trim();
+        String produk = produkTF.getText().trim();
+        String merk = idTF.getText().trim();
+        String tahun = tahunTF.getText().trim();
+        String harga = hargaTF.getText().trim();
 
+        if (selectSK == null) {
+
+            try(Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO Produk values (?,?,?,?,?,?)")) {
+                ps.setString(1, id);
+                ps.setString(2, produk);
+                ps.setString(3, merk);
+                ps.setString(4, "Mobil");
+                ps.setString(5, tahun);
+                ps.setString(6, harga);
+
+                ps.executeUpdate();
+                updateTblSK();
+
+                JOptionPane.showMessageDialog(null, "ADD SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "ADD FAILED");
+            }
+
+        }
+        else if (selectMobil == null) {
+
+            try(Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO Produk values (?,?,?,?,?,?)")) {
+                ps.setString(1, id);
+                ps.setString(2, produk);
+                ps.setString(3, merk);
+                ps.setString(4, "Suku Cadang");
+                ps.setString(5, tahun);
+                ps.setString(6, harga);
+
+                ps.executeUpdate();
+                updateTblMobil();
+
+                JOptionPane.showMessageDialog(null, "ADD SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "ADD FAILED");
+            }
+        }
+        App.setRoot("stokAdmin");
     }
 
     @FXML
-    private void editBtnAction() {
+    private void editBtnAction() throws IOException{
+        String id = idTF.getText().trim();
+        String produk = produkTF.getText().trim();
+        String merk = merkTF.getText().trim();
+        String tahun = tahunTF.getText().trim();
+        String harga = hargaTF.getText().trim();
+        String table = "Produk";
 
+        if (selectSK == null) {
+
+            try(Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement ps = connection.prepareStatement("UPDATE " + table + " SET nama_Produk = ?, merk = ?, tahun_Produksi = ?, harga = ? WHERE ID_Produk = ? AND jenis_Produk = ?")) {
+                ps.setString(1, produk);
+                ps.setString(2, merk);
+                ps.setString(3, tahun);
+                ps.setString(4, harga);
+                ps.setString(5, id);
+                ps.setString(6, "Mobil");
+
+                ps.executeUpdate();
+                updateTblSK();
+
+                JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "EDIT FAILED");
+            }
+
+        }
+        else if (selectMobil == null) {
+
+            try(Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement ps = connection.prepareStatement("UPDATE " + table + " SET nama_Produk = ?, merk = ?, tahun_Produksi = ?, harga = ? WHERE ID_Produk = ? AND jenis_Produk = ?")) {
+                ps.setString(1, produk);
+                ps.setString(2, merk);
+                ps.setString(3, tahun);
+                ps.setString(4, harga);
+                ps.setString(5, id);
+                ps.setString(6, "Suku Cadang");
+
+                ps.executeUpdate();
+                updateTblMobil();
+
+                JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "EDIT FAILED");
+            }
+        }
+        App.setRoot("stokAdmin");
     }
 
     @FXML
-    private void deleteBtnAction() {
+    private void deleteBtnAction() throws  IOException{
+        String id = idTF.getText().trim();
+        String table = "Produk";
 
+        if (selectSK == null) {
+
+            try(Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement ps = connection.prepareStatement("DELETE FROM " + table + " WHERE ID_Produk = ? AND jenis_Produk = ?")) {
+                ps.setString(1, id);
+                ps.setString(2, "Mobil");
+
+                ps.executeUpdate();
+                updateTblSK();
+
+                JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "DELETE FAILED");
+            }
+
+        }
+        else if (selectMobil == null) {
+
+            try(Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement ps = connection.prepareStatement("DELETE FROM " + table + " WHERE ID_Produk = ? AND jenis_Produk = ?")) {
+                ps.setString(1, id);
+                ps.setString(2, "Suku Cadang");
+
+                ps.executeUpdate();
+                updateTblMobil();
+
+                JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "DELETE FAILED");
+            }
+        }
+        App.setRoot("stokAdmin");
     }
 
     @FXML
@@ -119,7 +251,6 @@ public class StokAdminController implements Initializable {
         produkTF.setText(Mobilselect.get(0).getNama());
         merkTF.setText(Mobilselect.get(0).getMerk());
         tahunTF.setText(Mobilselect.get(0).getTahun());
-        stokTF.setText(Mobilselect.get(0).getHarga());
         hargaTF.setText(Mobilselect.get(0).getHarga());
     }
 
@@ -134,7 +265,6 @@ public class StokAdminController implements Initializable {
         produkTF.setText(Mobilselect.get(0).getNama());
         merkTF.setText(Mobilselect.get(0).getMerk());
         tahunTF.setText(Mobilselect.get(0).getTahun());
-        stokTF.setText(Mobilselect.get(0).getHarga());
         hargaTF.setText(Mobilselect.get(0).getHarga());
     }
 
@@ -149,7 +279,6 @@ public class StokAdminController implements Initializable {
         produkTF.setText(SKselect.get(0).getNama());
         merkTF.setText(SKselect.get(0).getMerk());
         tahunTF.setText(SKselect.get(0).getTahun());
-        stokTF.setText(SKselect.get(0).getHarga());
         hargaTF.setText(SKselect.get(0).getHarga());
 
     }
@@ -165,7 +294,6 @@ public class StokAdminController implements Initializable {
         produkTF.setText(SKselect.get(0).getNama());
         merkTF.setText(SKselect.get(0).getMerk());
         tahunTF.setText(SKselect.get(0).getTahun());
-        stokTF.setText(SKselect.get(0).getHarga());
         hargaTF.setText(SKselect.get(0).getHarga());
     }
 
@@ -238,6 +366,16 @@ public class StokAdminController implements Initializable {
         App.setRoot("menuAdmin");
     }
 
+    private void updateTblMobil() {
+        pullDBMobil();
+        addDataToTableMobil();
+    }
+
+    private void updateTblSK() {
+        pullDBSK();
+        addDataToTableSK();
+
+    }
 
     private void pullDBMobil() {
         ResultSet resultSet;
@@ -246,7 +384,7 @@ public class StokAdminController implements Initializable {
             Statement statement = connection.createStatement()) {
 
             // Create and execute a SELECT SQL statement.
-            String selectSql = "SELECT id_produk, nama_Produk, merk, tahun_Produksi, harga from Produk WHERE jenis_Produk='Mobil' ORDER BY id_produk";
+            String selectSql = "SELECT id_produk, nama_Produk, merk, tahun_Produksi,harga from Produk WHERE jenis_Produk = 'Mobil'  ORDER BY id_produk";
             resultSet = statement.executeQuery(selectSql);
 
             // Add result to list
@@ -255,7 +393,7 @@ public class StokAdminController implements Initializable {
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
-                        "Rp" + resultSet.getString(5)
+                        resultSet.getString(5)
                         ));
 
             }
@@ -273,7 +411,7 @@ public class StokAdminController implements Initializable {
             Statement statement = connection.createStatement()) {
 
             // Create and execute a SELECT SQL statement.
-            String selectSql = "SELECT id_produk, nama_Produk, merk, tahun_Produksi, harga from Produk WHERE jenis_Produk = 'Suku Cadang' ORDER BY id_produk";
+            String selectSql = "SELECT id_produk, nama_Produk, merk, tahun_Produksi,harga from Produk WHERE jenis_Produk = 'Suku Cadang'  ORDER BY id_produk";
             resultSet = statement.executeQuery(selectSql);
 
             // Add result to list
@@ -282,8 +420,9 @@ public class StokAdminController implements Initializable {
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
-                        "Rp" + resultSet.getString(5)
+                        resultSet.getString(5)
                 ));
+
 
             }
 
@@ -298,7 +437,6 @@ public class StokAdminController implements Initializable {
         mobilNamaClm.setCellValueFactory(new PropertyValueFactory<>("nama"));
         mobilMerkClm.setCellValueFactory(new PropertyValueFactory<>("merk"));
         mobilYearClm.setCellValueFactory(new PropertyValueFactory<>("tahun"));
-        mobilStokClm.setCellValueFactory(new PropertyValueFactory<>(""));
         mobilHargaClm.setCellValueFactory(new PropertyValueFactory<>("harga"));
 
         mobilTblView.setItems(dataMobil);
@@ -309,7 +447,6 @@ public class StokAdminController implements Initializable {
         SKNamaClm.setCellValueFactory(new PropertyValueFactory<>("nama"));
         SKMerkClm.setCellValueFactory(new PropertyValueFactory<>("merk"));
         SKYearClm.setCellValueFactory(new PropertyValueFactory<>("tahun"));
-        SKStokClm.setCellValueFactory(new PropertyValueFactory<>(""));
         SKHargaClm.setCellValueFactory(new PropertyValueFactory<>("harga"));
 
         SKTblView.setItems(dataSK);
