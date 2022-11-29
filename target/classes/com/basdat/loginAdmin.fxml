@@ -21,7 +21,7 @@
                         <Font name="Gilroy-ExtraBold" size="28.0" />
                      </font>
                   </Text>
-                  <TextField maxWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                  <TextField fx:id="usernameTF" maxWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                      <font>
                         <Font size="20.0" />
                      </font></TextField>
@@ -30,7 +30,7 @@
                         <Font name="Gilroy-ExtraBold" size="28.0" />
                      </font>
                   </Text>
-                  <PasswordField maxWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                  <PasswordField fx:id="passTF" maxWidth="150.0" onAction="#passTFonEnter" style="-fx-background-color: white; -fx-background-radius: 15;">
                      <font>
                         <Font size="20.0" />
                      </font></PasswordField>

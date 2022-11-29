@@ -29,7 +29,7 @@ public class WelcomeController  {
         try {
             App.setRoot("loginAdmin");
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
     }
