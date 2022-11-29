@@ -1,4 +1,4 @@
 package com.basdat.controller;
 
-public class beliController {
+public class BeliController {
 }
