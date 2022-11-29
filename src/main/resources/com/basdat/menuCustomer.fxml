@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: F9602A;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.menuAdminFixController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: F9602A;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.menuAdminFixController">
     <children>
         <HBox alignment="CENTER" prefHeight="600.0" prefWidth="886.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -38,7 +38,7 @@
                             </children></VBox>
                         <VBox alignment="CENTER" prefHeight="368.0" prefWidth="370.0" spacing="20.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 35;">
                             <children>
-                                <Button mnemonicParsing="false" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="BELI" textFill="WHITE">
+                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="BELI" textFill="WHITE">
                                     <font>
                                         <Font name="Gilroy-ExtraBold" size="24.0" />
                                     </font>
@@ -46,7 +46,15 @@
                                         <DropShadow blurType="GAUSSIAN" />
                                     </effect>
                                 </Button>
-                                <Button mnemonicParsing="false" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="LOGOUT" textFill="WHITE">
+                        <Button layoutX="115.0" layoutY="134.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="LIST TRANSAKSI" textFill="WHITE">
+                           <font>
+                              <Font name="Gilroy-ExtraBold" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow blurType="GAUSSIAN" />
+                           </effect>
+                        </Button>
+                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="LOGOUT" textFill="WHITE">
                                     <font>
                                         <Font name="Gilroy-ExtraBold" size="24.0" />
                                     </font>

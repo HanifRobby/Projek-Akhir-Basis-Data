@@ -31,6 +31,7 @@ public class Mobil {
         this.tahun = tahun;
     }
 
+
     public String getNama() {
         return nama;
     }
@@ -50,7 +51,5 @@ public class Mobil {
     public String getTahun() {
         return tahun;
     }
-
-
 
 }

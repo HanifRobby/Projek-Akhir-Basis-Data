@@ -31,6 +31,8 @@ public class SukuCadang {
         this.tahun = tahun;
     }
 
+
+
     public String getNama() {
         return nama;
     }
@@ -50,4 +52,6 @@ public class SukuCadang {
     public String getTahun() {
         return tahun;
     }
+
+
 }

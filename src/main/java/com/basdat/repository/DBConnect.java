@@ -11,8 +11,8 @@ import java.sql.Statement;
 
 public class DBConnect {
 
-    public static String connectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR50;" +
-            "databaseName=test3;" +
+    public static String connectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR5O;" +
+            "databaseName=test;" +
             "encrypt=true;trustServerCertificate=true;" +
             "integratedSecurity=true;";
 

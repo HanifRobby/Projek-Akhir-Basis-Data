@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.StokAdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.StokAdminController">
    <bottom>
       <HBox alignment="CENTER" prefHeight="229.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
@@ -22,8 +13,7 @@
             <Pane prefHeight="201.0" prefWidth="555.0" style="-fx-background-color: #D9D9D9;" HBox.hgrow="SOMETIMES">
                <children>
                   <TextField fx:id="tahunTF" layoutX="367.0" layoutY="15.0" prefHeight="30.0" prefWidth="150.0" />
-                  <TextField fx:id="stokTF" layoutX="367.0" layoutY="87.0" prefHeight="30.0" prefWidth="150.0" />
-                  <TextField fx:id="hargaTF" layoutX="367.0" layoutY="156.0" prefHeight="30.0" prefWidth="150.0" />
+                  <TextField fx:id="hargaTF" layoutX="367.0" layoutY="87.0" prefHeight="30.0" prefWidth="150.0" />
                   <TextField fx:id="merkTF" layoutX="83.0" layoutY="156.0" prefHeight="30.0" />
                   <TextField fx:id="produkTF" layoutX="83.0" layoutY="86.0" prefHeight="30.0" prefWidth="150.0" />
                   <TextField fx:id="idTF" layoutX="82.0" layoutY="14.0" prefHeight="30.0" prefWidth="150.0" />
@@ -42,17 +32,12 @@
                         <Font name="Gilroy-ExtraBold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="299.0" layoutY="87.0" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #707070;" text="  STOK" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Label layoutX="299.0" layoutY="87.0" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #707070;" text="  HARGA" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="14.0" />
                      </font>
                   </Label>
                   <Label layoutX="299.0" layoutY="15.0" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #707070;" text="  TAHUN" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font name="Gilroy-ExtraBold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="299.0" layoutY="156.0" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #707070;" text="  HARGA" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="14.0" />
                      </font>
@@ -138,7 +123,6 @@
                             <TableColumn fx:id="mobilNamaClm" prefWidth="75.0" text="Nama" />
                               <TableColumn fx:id="mobilMerkClm" prefWidth="75.0" text="Merk" />
                               <TableColumn fx:id="mobilYearClm" prefWidth="75.0" text="Tahun Produksi" />
-                              <TableColumn fx:id="mobilStokClm" prefWidth="75.0" text="Stok" />
                               <TableColumn fx:id="mobilHargaClm" prefWidth="75.0" text="Harga" />
                           </columns>
                            <columnResizePolicy>
@@ -159,7 +143,6 @@
                               <TableColumn fx:id="SKNamaClm" prefWidth="75.0" text="Nama" />
                               <TableColumn fx:id="SKMerkClm" prefWidth="75.0" text="Merk" />
                               <TableColumn fx:id="SKYearClm" prefWidth="75.0" text="Tahun Produksi" />
-                              <TableColumn fx:id="SKStokClm" prefWidth="75.0" text="Stok" />
                               <TableColumn fx:id="SKHargaClm" prefWidth="75.0" text="Harga" />
                            </columns>
                            <columnResizePolicy>
