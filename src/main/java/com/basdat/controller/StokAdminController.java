@@ -2,6 +2,7 @@ package com.basdat.controller;
 
 import com.basdat.App;
 import com.basdat.db_models.Mobil;
+import com.basdat.db_models.SukuCadang;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -29,81 +30,143 @@ public class StokAdminController implements Initializable {
     @FXML
     private TextField searchTF;
     @FXML
+    private TextField idTF;
+    @FXML
     private TextField produkTF;
+    @FXML
+    private TextField merkTF;
+    @FXML
+    private TextField tahunTF;
     @FXML
     private TextField stokTF;
     @FXML
     private TextField hargaTF;
 
     @FXML
-    private TableView mobilTblView;
+    private TableView<Mobil> mobilTblView;
     @FXML
-    private TableColumn mobilIdClm;
+    private TableColumn<Mobil, String> mobilIdClm;
     @FXML
-    private TableColumn mobilNamaClm;
+    private TableColumn<Mobil, String> mobilNamaClm;
     @FXML
-    private TableColumn mobilMerkClm;
+    private TableColumn<Mobil, String> mobilMerkClm;
     @FXML
-    private TableColumn mobilYearClm;
+    private TableColumn<Mobil, String> mobilYearClm;
     @FXML
-    private TableColumn mobilColorClm;
+    private TableColumn<Mobil, String> mobilStokClm;
     @FXML
-    private TableColumn mobilStokClm;
+    private TableColumn<Mobil, String> mobilHargaClm;
+
     @FXML
-    private TableColumn mobilHargaClm;
+    private TableView<SukuCadang> SKTblView;
+    @FXML
+    private TableColumn<SukuCadang, String> SKIdClm;
+    @FXML
+    private TableColumn<SukuCadang, String> SKNamaClm;
+    @FXML
+    private TableColumn<SukuCadang, String> SKMerkClm;
+    @FXML
+    private TableColumn<SukuCadang, String> SKYearClm;
+    @FXML
+    private TableColumn<SukuCadang, String> SKStokClm;
+    @FXML
+    private TableColumn<SukuCadang, String> SKHargaClm;
 
 
-    private ObservableList<Mobil> data = FXCollections.observableArrayList();
-    private static TableRow<Mobil> row = new TableRow<>();
-
+    private ObservableList<Mobil> dataMobil = FXCollections.observableArrayList();
+    private ObservableList<Mobil> selectMobil;
+    private ObservableList<SukuCadang> dataSK = FXCollections.observableArrayList();
+    private ObservableList<SukuCadang> selectSK;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        pullDB();
-        addDataToTable();
+        // Insert Data Mobil to TableView
+        pullDBMobil();
+        addDataToTableMobil();
 
+        // Insert Data Suku Cadang to TableView
+        pullDBSK();
+        addDataToTableSK();
+
+        // Search Text Field
         searchOnEnter();
-        mobilTblClicked();
-//        mobilTblPressed();
-
-
 
     }
 
     @FXML
-    private void firstBtnAction() {
-        mobilTblView.requestFocus();
-        mobilTblView.getSelectionModel().select(0);
+    private void addBtnAction() {
 
-        row.getTableView().getSelectionModel().getSelectedItem();
-        System.out.println(row.getItem().getNama());
     }
 
     @FXML
-    private void mobilTblPressed() {
+    private void editBtnAction() {
+
+    }
+
+    @FXML
+    private void deleteBtnAction() {
 
     }
 
     @FXML
     private void mobilTblClicked() {
-        mobilTblView.setRowFactory(tv -> {
-            TableRow<Mobil> row = new TableRow<>();
+        ObservableList<Mobil> Mobilselect;
+        Mobilselect = mobilTblView.getSelectionModel().getSelectedItems();
+        this.selectMobil = Mobilselect;
+        this.selectSK = null;
 
-            row.setOnMouseClicked(event -> {
-                if ( !row.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
-                    this.row = row;
+        idTF.setText(Mobilselect.get(0).getID());
+        produkTF.setText(Mobilselect.get(0).getNama());
+        merkTF.setText(Mobilselect.get(0).getMerk());
+        tahunTF.setText(Mobilselect.get(0).getTahun());
+        stokTF.setText(Mobilselect.get(0).getHarga());
+        hargaTF.setText(Mobilselect.get(0).getHarga());
+    }
 
-                    Mobil clickedRow = row.getItem();
-                    System.out.println(clickedRow.getNama());
+    @FXML
+    private void mobilTblPressed() {
+        ObservableList<Mobil> Mobilselect;
+        Mobilselect = mobilTblView.getSelectionModel().getSelectedItems();
+        this.selectMobil = Mobilselect;
+        this.selectSK = null;
 
-                    produkTF.setText(clickedRow.getID() + " " + clickedRow.getNama());
-                    stokTF.setText(clickedRow.getHarga());
-                    hargaTF.setText(clickedRow.getHarga());
-                }
-            });
-            return row;
-        });
+        idTF.setText(Mobilselect.get(0).getID());
+        produkTF.setText(Mobilselect.get(0).getNama());
+        merkTF.setText(Mobilselect.get(0).getMerk());
+        tahunTF.setText(Mobilselect.get(0).getTahun());
+        stokTF.setText(Mobilselect.get(0).getHarga());
+        hargaTF.setText(Mobilselect.get(0).getHarga());
+    }
 
+    @FXML
+    private void SKTblClicked() {
+        ObservableList<SukuCadang> SKselect;
+        SKselect = SKTblView.getSelectionModel().getSelectedItems();
+        this.selectSK = SKselect;
+        this.selectMobil = null;
+
+        idTF.setText(SKselect.get(0).getID());
+        produkTF.setText(SKselect.get(0).getNama());
+        merkTF.setText(SKselect.get(0).getMerk());
+        tahunTF.setText(SKselect.get(0).getTahun());
+        stokTF.setText(SKselect.get(0).getHarga());
+        hargaTF.setText(SKselect.get(0).getHarga());
+
+    }
+
+    @FXML
+    private void SKTblPressed() {
+        ObservableList<SukuCadang> SKselect;
+        SKselect = SKTblView.getSelectionModel().getSelectedItems();
+        this.selectSK = SKselect;
+        this.selectMobil = null;
+
+        idTF.setText(SKselect.get(0).getID());
+        produkTF.setText(SKselect.get(0).getNama());
+        merkTF.setText(SKselect.get(0).getMerk());
+        tahunTF.setText(SKselect.get(0).getTahun());
+        stokTF.setText(SKselect.get(0).getHarga());
+        hargaTF.setText(SKselect.get(0).getHarga());
     }
 
 
@@ -111,7 +174,8 @@ public class StokAdminController implements Initializable {
     private void searchOnEnter() {
 
         // 1. Wrap the ObservableList in a FilteredList
-        FilteredList<Mobil> filteredData = new FilteredList<>(data, p -> true);
+        FilteredList<Mobil> filteredData = new FilteredList<>(dataMobil, p -> true);
+        FilteredList<SukuCadang> filteredDataSK = new FilteredList<>(dataSK, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
         searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -128,6 +192,29 @@ public class StokAdminController implements Initializable {
                 else if(mobil.getID().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
+                else if(mobil.getMerk().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+
+            });
+
+            filteredDataSK.setPredicate(SK -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(SK.getNama().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if(SK.getID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if(SK.getMerk().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
                 return false;
 
             });
@@ -135,38 +222,40 @@ public class StokAdminController implements Initializable {
 
         // 3. Wrap the FilteredList in a SortedList.
         SortedList<Mobil> sortedData = new SortedList<>(filteredData);
+        SortedList<SukuCadang> sortedDataSK = new SortedList<>(filteredDataSK);
 
         // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(mobilTblView.comparatorProperty());
+        sortedDataSK.comparatorProperty().bind(SKTblView.comparatorProperty());
 
         // 5. Add sorted (and filtered) data to the table.
         mobilTblView.setItems(sortedData);
+        SKTblView.setItems(sortedDataSK);
     }
 
     @FXML
-    private void backBtnAction(ActionEvent event) throws IOException{
+    private void backBtnAction() throws IOException{
         App.setRoot("menuAdmin");
     }
 
 
-    private void pullDB() {
-        ResultSet resultSet = null;
+    private void pullDBMobil() {
+        ResultSet resultSet;
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
-            Statement statement = connection.createStatement();) {
+            Statement statement = connection.createStatement()) {
 
             // Create and execute a SELECT SQL statement.
-            String selectSql = "SELECT id, name, dept_name, dept_name, salary, salary from instructor ORDER BY name";
+            String selectSql = "SELECT id_produk, nama_Produk, merk, tahun_Produksi, harga from Produk WHERE jenis_Produk='Mobil' ORDER BY id_produk";
             resultSet = statement.executeQuery(selectSql);
 
             // Add result to list
             while (resultSet.next()) {
-                data.add(new Mobil(resultSet.getString(1),
+                dataMobil.add(new Mobil(resultSet.getString(1),
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
-                        resultSet.getString(5),
-                        "Rp" + resultSet.getString(6)
+                        "Rp" + resultSet.getString(5)
                         ));
 
             }
@@ -177,15 +266,53 @@ public class StokAdminController implements Initializable {
         }
     }
 
-    private void addDataToTable() {
-        mobilIdClm.setCellValueFactory(new PropertyValueFactory<Mobil, String>("ID"));
-        mobilNamaClm.setCellValueFactory(new PropertyValueFactory<Mobil, String>("nama"));
-        mobilMerkClm.setCellValueFactory(new PropertyValueFactory<Mobil, String>("merk"));
-        mobilYearClm.setCellValueFactory(new PropertyValueFactory<Mobil, String>("tahun"));
-        mobilColorClm.setCellValueFactory(new PropertyValueFactory<Mobil, String>("warna"));
-        mobilHargaClm.setCellValueFactory(new PropertyValueFactory<Mobil, String>("harga"));
+    private void pullDBSK() {
+        ResultSet resultSet;
 
-        mobilTblView.setItems(data);
+        try(Connection connection = DriverManager.getConnection(connectionUrl);
+            Statement statement = connection.createStatement()) {
+
+            // Create and execute a SELECT SQL statement.
+            String selectSql = "SELECT id_produk, nama_Produk, merk, tahun_Produksi, harga from Produk WHERE jenis_Produk = 'Suku Cadang' ORDER BY id_produk";
+            resultSet = statement.executeQuery(selectSql);
+
+            // Add result to list
+            while (resultSet.next()) {
+                dataSK.add(new SukuCadang(resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        "Rp" + resultSet.getString(5)
+                ));
+
+            }
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addDataToTableMobil() {
+        mobilIdClm.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        mobilNamaClm.setCellValueFactory(new PropertyValueFactory<>("nama"));
+        mobilMerkClm.setCellValueFactory(new PropertyValueFactory<>("merk"));
+        mobilYearClm.setCellValueFactory(new PropertyValueFactory<>("tahun"));
+        mobilStokClm.setCellValueFactory(new PropertyValueFactory<>(""));
+        mobilHargaClm.setCellValueFactory(new PropertyValueFactory<>("harga"));
+
+        mobilTblView.setItems(dataMobil);
+    }
+
+    private void addDataToTableSK() {
+        SKIdClm.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        SKNamaClm.setCellValueFactory(new PropertyValueFactory<>("nama"));
+        SKMerkClm.setCellValueFactory(new PropertyValueFactory<>("merk"));
+        SKYearClm.setCellValueFactory(new PropertyValueFactory<>("tahun"));
+        SKStokClm.setCellValueFactory(new PropertyValueFactory<>(""));
+        SKHargaClm.setCellValueFactory(new PropertyValueFactory<>("harga"));
+
+        SKTblView.setItems(dataSK);
     }
 
 
