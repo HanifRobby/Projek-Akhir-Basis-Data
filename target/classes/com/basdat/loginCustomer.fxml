@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -21,7 +22,7 @@
                         <Font name="Gilroy-ExtraBold" size="28.0" />
                      </font>
                   </Text>
-                  <TextField maxWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                  <TextField maxWidth="280.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                      <font>
                         <Font size="20.0" />
                      </font></TextField>
@@ -30,7 +31,7 @@
                         <Font name="Gilroy-ExtraBold" size="28.0" />
                      </font>
                   </Text>
-                  <PasswordField maxWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                  <PasswordField maxWidth="280.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                      <font>
                         <Font size="20.0" />
                      </font></PasswordField>
@@ -57,7 +58,10 @@
                   <Button mnemonicParsing="false" style="-fx-background-color: F9602A; -fx-background-radius: 15;" text="BACK" textFill="WHITE">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="20.0" />
-                     </font></Button>
+                     </font>
+                     <VBox.margin>
+                        <Insets left="300.0" top="10.0" />
+                     </VBox.margin></Button>
                </children></VBox>
          </right>
          <center>
