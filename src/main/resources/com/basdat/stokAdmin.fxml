@@ -12,7 +12,7 @@
             <Pane prefHeight="201.0" prefWidth="30.0" style="-fx-background-color: #D9D9D9;" />
             <Pane prefHeight="201.0" prefWidth="370.0" style="-fx-background-color: #D9D9D9;" HBox.hgrow="SOMETIMES">
                <children>
-                  <Button fx:id="firstBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" stylesheets="@styles/StokAdminStyles.css" text="&lt;&lt;" textFill="WHITE">
+                  <Button fx:id="firstBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#firstBtnAction" prefHeight="30.0" prefWidth="60.0" stylesheets="@styles/StokAdminStyles.css" text="&lt;&lt;" textFill="WHITE">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="12.0" />
                      </font></Button>

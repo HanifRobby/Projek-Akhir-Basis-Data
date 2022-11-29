@@ -16,6 +16,14 @@ public class DBConnect {
             "encrypt=true;trustServerCertificate=true;" +
             "integratedSecurity=true;";
 
+    public static String AltConnectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR50;" +
+            "databaseName = University;" +
+            "user = AdminPA;" +
+            "password = admin123" +
+            "encrypt = true;" +
+            "trustServerCertificate = true;" +
+            "loginTimeout = 30;";
+
     public static void ConnectDB(){
 
     }

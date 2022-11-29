@@ -17,9 +17,11 @@ import javafx.scene.input.MouseButton;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.EventListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static com.basdat.repository.DBConnect.AltConnectionUrl;
 import static com.basdat.repository.DBConnect.connectionUrl;
 
 public class StokAdminController implements Initializable {
@@ -52,7 +54,7 @@ public class StokAdminController implements Initializable {
 
 
     private ObservableList<Mobil> data = FXCollections.observableArrayList();
-//    private static TableRow<Mobil> row = new TableRow<>();
+    private static TableRow<Mobil> row = new TableRow<>();
 
 
     @Override
@@ -61,42 +63,26 @@ public class StokAdminController implements Initializable {
         addDataToTable();
 
         searchOnEnter();
-//        mobilTblPressed();
         mobilTblClicked();
+//        mobilTblPressed();
 
-//        if (!row.isEmpty()) {
-//        System.out.println(row.getItem().getNama());
-//        }
 
 
     }
 
     @FXML
-    private void mobilTblPressed() {
-//        TableRow<Mobil> row = new TableRow<>();
-//        row.;
-//
-////        mobilTblView.setRowFactory(tv -> {
-////        TableRow<Mobil> row = new TableRow<>();
-////            row.setOnKeyPressed(keyEvent -> {
-////                System.out.println("Ahh");
-////            });
-////            return row;
-////        });
-//
-////        System.out.println(!row.isEmpty());
-////        if(!row.isEmpty()) {
-////        Mobil keyRow = row.getItem();
-////        System.out.println(keyRow.getNama());
-////
-////        produkTF.setText(keyRow.getID() + " " + keyRow.getNama());
-////        stokTF.setText(keyRow.getHarga());
-////        hargaTF.setText(keyRow.getHarga());
-//
-////        }
-//
+    private void firstBtnAction() {
+        mobilTblView.requestFocus();
+        mobilTblView.getSelectionModel().select(0);
+
+        row.getTableView().getSelectionModel().getSelectedItem();
+        System.out.println(row.getItem().getNama());
     }
 
+    @FXML
+    private void mobilTblPressed() {
+
+    }
 
     @FXML
     private void mobilTblClicked() {
@@ -105,9 +91,10 @@ public class StokAdminController implements Initializable {
 
             row.setOnMouseClicked(event -> {
                 if ( !row.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
+                    this.row = row;
 
                     Mobil clickedRow = row.getItem();
-//                    System.out.println(clickedRow.getNama());
+                    System.out.println(clickedRow.getNama());
 
                     produkTF.setText(clickedRow.getID() + " " + clickedRow.getNama());
                     stokTF.setText(clickedRow.getHarga());
@@ -183,7 +170,6 @@ public class StokAdminController implements Initializable {
                         ));
 
             }
-
 
         }
         catch (SQLException e) {

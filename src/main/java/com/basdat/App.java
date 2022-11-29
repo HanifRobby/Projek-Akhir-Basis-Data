@@ -20,7 +20,7 @@ public class App extends Application {
         stage.setMinWidth(800);
         stage.setMinHeight(600);
         stage.setScene(scene);
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/mobilzaor.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/LogoZaorOutline.png"))));
         stage.setTitle("ZAOR");
         stage.show();
 
