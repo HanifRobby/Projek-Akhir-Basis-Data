@@ -1,9 +1,9 @@
 package com.basdat.db_models;
 
-public class Mobil {
+public class SukuCadang {
     private String ID, nama, merk, tahun, harga;
 
-    public Mobil(String ID, String nama, String merk, String tahun, String harga) {
+    public SukuCadang(String ID, String nama, String merk, String tahun, String harga) {
         this.ID = ID;
         this.nama = nama;
         this.merk = merk;
@@ -50,7 +50,4 @@ public class Mobil {
     public String getTahun() {
         return tahun;
     }
-
-
-
 }
