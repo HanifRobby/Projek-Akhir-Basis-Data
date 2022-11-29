@@ -4,25 +4,26 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
-// Yooo
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("stokAdmin"), 800, 600);
+        scene = new Scene(loadFXML("welcome"), 800, 600);
         stage.setMinWidth(800);
         stage.setMinHeight(600);
         stage.setScene(scene);
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/LogoZaorOutline.png"))));
+        stage.setTitle("ZAOR");
         stage.show();
+
     }
 
     public static void setRoot(String fxml) throws IOException {
@@ -37,6 +38,5 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 
 }

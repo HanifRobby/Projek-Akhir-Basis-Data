@@ -33,12 +33,12 @@
                                     <Font name="Gilroy-Light" size="24.0" />
                                  </font>
                               </Text>
-                              <Button fx:id="adminBtn" layoutX="330.0" layoutY="381.0" mnemonicParsing="false" onAction="#adminBtnAction" onMousePressed="#adminBtnPressed" onMouseReleased="#adminBtnReleased" prefHeight="69.0" prefWidth="141.0" stylesheets="@Styles/WelcomeStyles.css" text="ADMIN" textFill="WHITE">
+                              <Button fx:id="adminBtn" layoutX="330.0" layoutY="381.0" mnemonicParsing="false" onAction="#adminBtnAction" onMousePressed="#adminBtnPressed" onMouseReleased="#adminBtnReleased" prefHeight="69.0" prefWidth="140.0" stylesheets="@styles/WelcomeStyles.css" text="ADMIN" textFill="WHITE">
                                  <font>
                                     <Font name="Gilroy-ExtraBold" size="28.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="customerBtn" layoutX="287.0" layoutY="462.0" mnemonicParsing="false" onAction="#customerBtnAction" onMousePressed="#customerBtnPressed" onMouseReleased="#customerBtnReleased" prefHeight="69.0" prefWidth="229.0" stylesheets="@Styles/WelcomeStyles.css" text="CUSTOMER" textFill="WHITE">
+                              <Button fx:id="customerBtn" layoutX="287.0" layoutY="462.0" mnemonicParsing="false" onAction="#customerBtnAction" onMousePressed="#customerBtnPressed" onMouseReleased="#customerBtnReleased" prefHeight="69.0" prefWidth="230.0" stylesheets="@styles/WelcomeStyles.css" text="CUSTOMER" textFill="WHITE">
                                  <font>
                                     <Font name="Gilroy-ExtraBold" size="28.0" />
                                  </font>
