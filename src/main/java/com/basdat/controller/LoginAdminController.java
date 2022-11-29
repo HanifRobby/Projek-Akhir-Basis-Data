@@ -22,8 +22,6 @@ public class LoginAdminController {
     private TextField passTF;
     @FXML
     private Button loginBtn;
-    @FXML
-    private Button signUpBtn;
 
     private static String user;
     private static String pass;
@@ -45,16 +43,12 @@ public class LoginAdminController {
     }
 
     @FXML
-    private void signUpBtnAction() {
-        try {
-            App.setRoot("signUp");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void backBtnAction() throws IOException {
+        App.setRoot("welcome");
     }
 
     @FXML
-    private void passTFonEnter() throws IOException{
+    private void passwordTFonAction() throws IOException{
         loginBtnAction();
     }
 
