@@ -15,6 +15,8 @@ public class SignUpController {
     @FXML
     private Button signUpBtn;
     @FXML
+    private Button backSignUpBtn;
+    @FXML
     private TextField fieldEmailSU;
     @FXML
     private TextField fieldUsernameSU;
@@ -48,5 +50,20 @@ public class SignUpController {
     @FXML
     private void signUpBtnReleased() throws IOException {
         signUpBtn.setPrefHeight(signUpBtn.getPrefHeight()/1.5);
+    }
+
+    @FXML
+    private void backSignUpBtnAction() throws  IOException {
+        App.setRoot("loginCustomer");
+    }
+
+    @FXML
+    private void backSignUpBtnPressed() throws  IOException {
+        backSignUpBtn.setPrefHeight(backSignUpBtn.getPrefHeight()*1.1);
+    }
+
+    @FXML
+    private void backSignUpBtnReleased() throws IOException {
+        backSignUpBtn.setPrefHeight(backSignUpBtn.getPrefHeight()/1.1);
     }
 }
