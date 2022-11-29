@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<<<<<<< HEAD
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: D75020;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.signupController">
    <children>
       <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -63,11 +62,4 @@
          </children>
       </HBox>
    </children>
-=======
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.basdat.controller.SignUpController"
-            prefHeight="400.0" prefWidth="600.0">
-
->>>>>>> 65336ced94b1da64349fdcec34fde0c75127954e
 </AnchorPane>
