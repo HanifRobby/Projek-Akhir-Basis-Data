@@ -27,7 +27,7 @@ public class WelcomeController  {
     private void adminBtnAction() throws IOException {
 
         try {
-
+            App.setRoot("loginAdmin");
         } catch (Exception e) {
 
         }
@@ -38,7 +38,7 @@ public class WelcomeController  {
     private void customerBtnAction() throws IOException {
 
         try {
-
+            App.setRoot("loginCustomer");
         } catch (Exception e) {
 
         }
@@ -47,22 +47,22 @@ public class WelcomeController  {
 
     @FXML
     private void adminBtnPressed() throws IOException {
-        adminBtn.setPrefHeight(adminBtn.getPrefHeight()*1.1);
+        adminBtn.setPrefHeight(adminBtn.getPrefHeight()*1.05);
     }
 
     @FXML
     private void adminBtnReleased() throws IOException {
-        adminBtn.setPrefHeight(adminBtn.getPrefHeight()/1.1);
+        adminBtn.setPrefHeight(adminBtn.getPrefHeight()/1.05);
     }
 
     @FXML
     private void customerBtnPressed() throws IOException {
-        customerBtn.setPrefHeight(customerBtn.getPrefHeight()*1.1);
+        customerBtn.setPrefHeight(customerBtn.getPrefHeight()*1.05);
     }
 
     @FXML
     private void customerBtnReleased() throws IOException {
-        customerBtn.setPrefHeight(customerBtn.getPrefHeight()/1.1);
+        customerBtn.setPrefHeight(customerBtn.getPrefHeight()/1.05);
     }
 
 
