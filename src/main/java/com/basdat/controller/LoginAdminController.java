@@ -31,7 +31,7 @@ public class LoginAdminController {
         user = usernameTF.getText().trim();
         pass = passTF.getText().trim();
 
-        if(!user.isEmpty() && !user.isBlank() && !pass.isEmpty() && !pass.isBlank()) {
+        if(checkEmpty(user, pass)) {
             if(verifyLogin()) {
                 App.setRoot("menuAdmin");
             }
@@ -54,26 +54,38 @@ public class LoginAdminController {
 
     private Boolean verifyLogin() {
         ResultSet resultSet;
+        String query = "SELECT ID_Pengguna, Username, Password FROM Pengguna WHERE username = ? AND password = ?";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement("SELECT Username, Password FROM Pengguna WHERE username = ? AND password = ?")) {
+            PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, user);
             ps.setString(2, pass);
 
             resultSet = ps.executeQuery();
 
             if(resultSet.next()) {
-                JOptionPane.showMessageDialog(null, "LOGIN SUCCESS");
-                return true;
+                if ( resultSet.getString(1).charAt(0) == '3' ){
+                    if(resultSet.getString(2).equals(user) && resultSet.getString(3).equals(pass)) {
+                        System.out.println(resultSet.getString(1));
+                        JOptionPane.showMessageDialog(null, "LOGIN SUCCESS");
+                        return true;
+                    }
+                }
 
             }
-            else {
-                JOptionPane.showMessageDialog(null, "LOGIN FAILED");
-            }
+            JOptionPane.showMessageDialog(null, "USERNAME OR PASSWORD IS WRONG");
 
         }
         catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean checkEmpty(String user, String pass) {
+        if(!user.isEmpty() && !user.isBlank() && !pass.isEmpty() && !pass.isBlank()){
+            return true;
         }
 
         return false;

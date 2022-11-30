@@ -24,4 +24,9 @@ public class MenuAdminController {
         App.setRoot("welcome");
     }
 
+    @FXML
+    private void pegawaiBtnAction() throws IOException {
+        App.setRoot("pegawai");
+    }
+
 }
