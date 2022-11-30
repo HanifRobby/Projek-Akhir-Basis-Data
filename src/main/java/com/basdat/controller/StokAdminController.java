@@ -39,8 +39,6 @@ public class StokAdminController implements Initializable {
     @FXML
     private TextField tahunTF;
     @FXML
-    private TextField stokTF;
-    @FXML
     private TextField hargaTF;
 
     @FXML
@@ -369,12 +367,13 @@ public class StokAdminController implements Initializable {
     private void updateTblMobil() {
         pullDBMobil();
         addDataToTableMobil();
+        mobilTblView.refresh();
     }
 
     private void updateTblSK() {
         pullDBSK();
         addDataToTableSK();
-
+        SKTblView.refresh();
     }
 
     private void pullDBMobil() {

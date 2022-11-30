@@ -54,7 +54,7 @@
                               <DropShadow blurType="GAUSSIAN" />
                            </effect>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="PEGAWAI" textFill="WHITE">
+                        <Button fx:id="pegawaiBtn" mnemonicParsing="false" onAction="#pegawaiBtnAction" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="PEGAWAI" textFill="WHITE">
                            <font>
                               <Font name="Gilroy-ExtraBold" size="24.0" />
                            </font>

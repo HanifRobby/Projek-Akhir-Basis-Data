@@ -3,6 +3,8 @@ package com.basdat.db_models;
 public class SukuCadang {
     private String ID, nama, merk, tahun, harga;
 
+    public SukuCadang() {}
+
     public SukuCadang(String ID, String nama, String merk, String tahun, String harga) {
         this.ID = ID;
         this.nama = nama;
