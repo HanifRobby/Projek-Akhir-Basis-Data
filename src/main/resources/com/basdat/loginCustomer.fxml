@@ -40,7 +40,7 @@
                         <Font name="Gilroy-ExtraBold" size="28.0" />
                      </font>
                   </Button>
-                  <Text fill="#642711" strokeType="OUTSIDE" strokeWidth="0.0" text="or sign up if you don't have">
+                  <Text fill="#642711" strokeType="OUTSIDE" strokeWidth="0.0" text="or sign up if you don't have" wrappingWidth="302.9519958496094">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="24.0" />
                      </font>
@@ -50,6 +50,11 @@
                         <Font name="Gilroy-ExtraBold" size="24.0" />
                      </font>
                   </Text>
+                  <Label fx:id="DescriptionLabel">
+                     <font>
+                        <Font name="Gilroy-Light" size="12.0" />
+                     </font>
+                  </Label>
                   <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#signUpBtnAction" stylesheets="@styles/loginStyles.css" text="SIGN UP" textFill="WHITE">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="28.0" />

@@ -12,6 +12,9 @@ public class MenuAdminController {
     private Button stokBtn;
     @FXML
     private Button logoutBtn;
+    @FXML
+    private Button DescriptionLabel;
+
 
 
     @FXML

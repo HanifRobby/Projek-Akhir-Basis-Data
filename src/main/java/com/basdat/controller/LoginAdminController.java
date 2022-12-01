@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import javax.swing.*;
@@ -22,6 +23,8 @@ public class LoginAdminController {
     private TextField passTF;
     @FXML
     private Button loginBtn;
+    @FXML
+    private Label DescriptionLabel;
 
     private static String user;
     private static String pass;
@@ -39,6 +42,7 @@ public class LoginAdminController {
         else{
             usernameTF.clear();
             passTF.clear();
+            DescriptionLabel.setText("Terdapat Kesalahan Dalam Mengisi Username/Password!");
         }
     }
 
