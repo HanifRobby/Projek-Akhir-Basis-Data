@@ -67,6 +67,7 @@ public class PegawaiController implements Initializable {
     @FXML
     private TableColumn<Pegawai, String> NcClm;
 
+
     private ObservableList<Pegawai> dataPegawai = FXCollections.observableArrayList();
     private ObservableList<Pegawai> selectPegawai;
 
@@ -89,10 +90,12 @@ public class PegawaiController implements Initializable {
         String kec = kecTF.getText().trim();
         String kota = kotaTF.getText().trim();
         String cabang = NcTF.getText().trim();
+        String table = "Pegawai";
 
+        String query = "INSERT INTO " + table + " values (?,?,?,?,?,?,?,?)";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO Pegawai values (?,?,?,?,?,?,?,?)")) {
+            PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, Integer.parseInt(idPgn));
             ps.setInt(2, Integer.parseInt(idPgw));
             ps.setString(3, nama);
@@ -127,17 +130,18 @@ public class PegawaiController implements Initializable {
         String cabang = NcTF.getText().trim();
         String table = "Pegawai";
 
+        String query = "UPDATE " + table + " SET Nama = ?, jenis_Kelamin = ?, jalan_Pegawai = ?, kecamatan_Pegawai = ?, kota_Pegawai = ?, no_cabang = ? WHERE ID_Pegawai = ? AND ID_Pengguna = ?";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement("UPDATE " + table + " SET ID_Pengguna = ?, Nama = ?, jenis_Kelamin = ?, jalan_Pegawai = ?, kecamatan_Pegawai = ?, kota_Pegawai = ?, no_cabang = ? WHERE ID_Pegawai = ?")) {
-            ps.setInt(1, Integer.parseInt(idPgn));
-            ps.setString(2, nama);
-            ps.setString(3, kelamin);
-            ps.setString(4, jalan);
-            ps.setString(5, kec);
-            ps.setString(6, kota);
-            ps.setInt(7, Integer.parseInt(cabang));
-            ps.setInt(8, Integer.parseInt(idPgw));
+            PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, nama);
+            ps.setString(2, kelamin);
+            ps.setString(3, jalan);
+            ps.setString(4, kec);
+            ps.setString(5, kota);
+            ps.setInt(6, Integer.parseInt(cabang));
+            ps.setInt(7, Integer.parseInt(idPgw));
+            ps.setInt(8, Integer.parseInt(idPgn));
 
             ps.executeUpdate();
             updateTblPegawai();
@@ -155,11 +159,13 @@ public class PegawaiController implements Initializable {
     @FXML
     private void deleteBtnAction() throws IOException {
         String idPgw = IdTF.getText().trim();
+        String table = "Pegawai";
+
+        String query = "DELETE FROM " + table + " WHERE ID_Pegawai = ?";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM Pegawai WHERE ID_Pegawai = ?")) {
+            PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, Integer.parseInt(idPgw));
-
 
             ps.executeUpdate();
             updateTblPegawai();
@@ -215,10 +221,8 @@ public class PegawaiController implements Initializable {
     }
 
     @FXML
-    private void PegawaiTblClicked(MouseEvent mouseEvent) {
-        ObservableList<Pegawai> selectPegawai;
+    private void PegawaiTblClicked() {
         selectPegawai = PegawaiTblView.getSelectionModel().getSelectedItems();
-        this.selectPegawai = selectPegawai;
 
         IdAkunTF.setText("" + selectPegawai.get(0).getID_Pengguna());
         IdTF.setText("" + selectPegawai.get(0).getID_Pegawai());
@@ -231,10 +235,8 @@ public class PegawaiController implements Initializable {
     }
 
     @FXML
-    private void PegawaiTblPressed(KeyEvent keyEvent) {
-        ObservableList<Pegawai> selectPegawai;
+    private void PegawaiTblPressed() {
         selectPegawai = PegawaiTblView.getSelectionModel().getSelectedItems();
-        this.selectPegawai = selectPegawai;
 
         IdAkunTF.setText("" + selectPegawai.get(0).getID_Pengguna());
         IdTF.setText("" + selectPegawai.get(0).getID_Pegawai());
@@ -248,7 +250,7 @@ public class PegawaiController implements Initializable {
 
     private void updateTblPegawai() {
         pullDBPegawai();
-        addDataToTableMobil();
+        addDataToTablePegawai();
         PegawaiTblView.refresh();
     }
 
@@ -282,7 +284,7 @@ public class PegawaiController implements Initializable {
         }
     }
 
-    private void addDataToTableMobil() {
+    private void addDataToTablePegawai() {
         IdPgnClm.setCellValueFactory(new PropertyValueFactory<>("ID_Pengguna"));
         IdPgwClm.setCellValueFactory(new PropertyValueFactory<>("ID_Pegawai"));
         namaClm.setCellValueFactory(new PropertyValueFactory<>("nama"));

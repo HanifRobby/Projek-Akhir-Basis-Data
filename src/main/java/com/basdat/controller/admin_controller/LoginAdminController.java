@@ -66,7 +66,6 @@ public class LoginAdminController {
             if(resultSet.next()) {
                 if ( resultSet.getString(1).charAt(0) == '3' ){
                     if(resultSet.getString(2).equals(user) && resultSet.getString(3).equals(pass)) {
-                        System.out.println(resultSet.getString(1));
                         JOptionPane.showMessageDialog(null, "LOGIN SUCCESS");
                         return true;
                     }

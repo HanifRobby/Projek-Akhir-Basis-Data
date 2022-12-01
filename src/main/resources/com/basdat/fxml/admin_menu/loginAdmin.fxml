@@ -22,18 +22,18 @@
                         <Font name="Gilroy-ExtraBold" size="28.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="usernameTF" maxWidth="280.0" prefHeight="43.0" prefWidth="357.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                  <TextField fx:id="usernameTF" maxWidth="280.0" prefHeight="43.0" prefWidth="357.0" promptText="username" style="-fx-background-color: white; -fx-background-radius: 15;">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="Gilroy-Light" size="20.0" />
                      </font></TextField>
                   <Text fill="#f9602a" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="28.0" />
                      </font>
                   </Text>
-                  <PasswordField fx:id="passTF" maxWidth="280.0" onAction="#passwordTFonAction" prefHeight="43.0" prefWidth="327.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                  <PasswordField fx:id="passTF" maxWidth="280.0" onAction="#passwordTFonAction" prefHeight="43.0" prefWidth="327.0" promptText="password" style="-fx-background-color: white; -fx-background-radius: 15;">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="Gilroy-Light" size="20.0" />
                      </font></PasswordField>
                   <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#loginBtnAction" stylesheets="@../../styles/loginStyles.css" text="LOGIN" textFill="WHITE">
                      <font>
