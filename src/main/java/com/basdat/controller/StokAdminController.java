@@ -90,7 +90,7 @@ public class StokAdminController implements Initializable {
     private void addBtnAction() throws IOException{
         String id = idTF.getText().trim();
         String produk = produkTF.getText().trim();
-        String merk = idTF.getText().trim();
+        String merk = merkTF.getText().trim();
         String tahun = tahunTF.getText().trim();
         String harga = hargaTF.getText().trim();
 

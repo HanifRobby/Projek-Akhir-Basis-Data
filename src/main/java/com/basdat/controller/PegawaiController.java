@@ -80,61 +80,108 @@ public class PegawaiController implements Initializable {
     }
 
     @FXML
-    public void addBtnAction(ActionEvent event) throws IOException{
+    private void addBtnAction() throws IOException{
         String idPgn = IdAkunTF.getText().trim();
         String idPgw = IdTF.getText().trim();
         String nama = namaTF.getText().trim();
-        String kelamin = namaTF.getText().trim();
-        String jalan = namaTF.getText().trim();
-        String kec = namaTF.getText().trim();
-        String kota = namaTF.getText().trim();
-        String cabang = namaTF.getText().trim();
+        String kelamin = JkTF.getText().trim();
+        String jalan = jalanTF.getText().trim();
+        String kec = kecTF.getText().trim();
+        String kota = kotaTF.getText().trim();
+        String cabang = NcTF.getText().trim();
 
-        if (!selectPegawai.isEmpty()) {
 
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO Pegawai values (?,?,?,?,?,?,?,?)")) {
-                ps.setString(1, idPgn);
-                ps.setString(2, idPgw);
-                ps.setString(3, nama);
-                ps.setString(4, kelamin);
-                ps.setString(5, jalan);
-                ps.setString(6, kec);
-                ps.setString(7, kota);
-                ps.setString(8, cabang);
+        try(Connection connection = DriverManager.getConnection(connectionUrl);
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO Pegawai values (?,?,?,?,?,?,?,?)")) {
+            ps.setInt(1, Integer.parseInt(idPgn));
+            ps.setInt(2, Integer.parseInt(idPgw));
+            ps.setString(3, nama);
+            ps.setString(4, kelamin);
+            ps.setString(5, jalan);
+            ps.setString(6, kec);
+            ps.setString(7, kota);
+            ps.setInt(8, Integer.parseInt(cabang));
 
-                ps.executeUpdate();
-                updateTblPegawai();
+            ps.executeUpdate();
+            updateTblPegawai();
 
-                JOptionPane.showMessageDialog(null, "ADD SUCCESS");
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "ADD FAILED");
-            }
-
+            JOptionPane.showMessageDialog(null, "ADD SUCCESS");
         }
+        catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ADD FAILED");
+        }
+
         App.setRoot("pegawai");
     }
 
     @FXML
-    public void editBtnAction(ActionEvent event) {
+    private void editBtnAction() throws IOException{
+        String idPgn = IdAkunTF.getText().trim();
+        String idPgw = IdTF.getText().trim();
+        String nama = namaTF.getText().trim();
+        String kelamin = JkTF.getText().trim();
+        String jalan = jalanTF.getText().trim();
+        String kec = kecTF.getText().trim();
+        String kota = kotaTF.getText().trim();
+        String cabang = NcTF.getText().trim();
+        String table = "Pegawai";
 
+
+        try(Connection connection = DriverManager.getConnection(connectionUrl);
+            PreparedStatement ps = connection.prepareStatement("UPDATE " + table + " SET ID_Pengguna = ?, Nama = ?, jenis_Kelamin = ?, jalan_Pegawai = ?, kecamatan_Pegawai = ?, kota_Pegawai = ?, no_cabang = ? WHERE ID_Pegawai = ?")) {
+            ps.setInt(1, Integer.parseInt(idPgn));
+            ps.setString(2, nama);
+            ps.setString(3, kelamin);
+            ps.setString(4, jalan);
+            ps.setString(5, kec);
+            ps.setString(6, kota);
+            ps.setInt(7, Integer.parseInt(cabang));
+            ps.setInt(8, Integer.parseInt(idPgw));
+
+            ps.executeUpdate();
+            updateTblPegawai();
+
+            JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "EDIT FAILED");
+        }
+
+        App.setRoot("pegawai");
     }
 
     @FXML
-    public void deleteBtnAction(ActionEvent event) {
+    private void deleteBtnAction() throws IOException {
+        String idPgw = IdTF.getText().trim();
 
+        try(Connection connection = DriverManager.getConnection(connectionUrl);
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM Pegawai WHERE ID_Pegawai = ?")) {
+            ps.setInt(1, Integer.parseInt(idPgw));
+
+
+            ps.executeUpdate();
+            updateTblPegawai();
+
+            JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "DELETE FAILED");
+        }
+
+        App.setRoot("pegawai");
     }
 
 
     @FXML
-    public void backBtnAction(ActionEvent event) throws IOException {
+    private void backBtnAction() throws IOException {
         App.setRoot("menuAdmin");
     }
 
     @FXML
-    public void searchOnEnter() {
+    private void searchOnEnter() {
 
         // 1. Wrap the ObservableList in a FilteredList
         FilteredList<Pegawai> filteredData = new FilteredList<>(dataPegawai, p -> true);
@@ -168,7 +215,7 @@ public class PegawaiController implements Initializable {
     }
 
     @FXML
-    public void PegawaiTblClicked(MouseEvent mouseEvent) {
+    private void PegawaiTblClicked(MouseEvent mouseEvent) {
         ObservableList<Pegawai> selectPegawai;
         selectPegawai = PegawaiTblView.getSelectionModel().getSelectedItems();
         this.selectPegawai = selectPegawai;
@@ -184,7 +231,7 @@ public class PegawaiController implements Initializable {
     }
 
     @FXML
-    public void PegawaiTblPressed(KeyEvent keyEvent) {
+    private void PegawaiTblPressed(KeyEvent keyEvent) {
         ObservableList<Pegawai> selectPegawai;
         selectPegawai = PegawaiTblView.getSelectionModel().getSelectedItems();
         this.selectPegawai = selectPegawai;
@@ -208,7 +255,6 @@ public class PegawaiController implements Initializable {
     private void pullDBPegawai() {
         ResultSet resultSet;
         String query = "SELECT ID_Pengguna, ID_Pegawai, Nama, jenis_Kelamin, jalan_Pegawai, kecamatan_Pegawai, kota_Pegawai, no_Cabang FROM Pegawai";
-        String result = "";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
             PreparedStatement ps = connection.prepareStatement(query)) {

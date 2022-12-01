@@ -38,9 +38,9 @@
                             </children></VBox>
                         <VBox alignment="CENTER" prefHeight="368.0" prefWidth="370.0" spacing="20.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 35;">
                             <children>
-                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="BELI" textFill="WHITE">
+                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="PEMESANAN" textFill="WHITE">
                                     <font>
-                                        <Font name="Gilroy-ExtraBold" size="24.0" />
+                                        <Font name="Gilroy-ExtraBold" size="18.0" />
                                     </font>
                                     <effect>
                                         <DropShadow blurType="GAUSSIAN" />

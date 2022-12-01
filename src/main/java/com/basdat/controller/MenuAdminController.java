@@ -1,6 +1,7 @@
 package com.basdat.controller;
 
 import com.basdat.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -29,4 +30,28 @@ public class MenuAdminController {
         App.setRoot("pegawai");
     }
 
+    @FXML
+    private void produkBtnAction() throws IOException {
+
+    }
+
+    @FXML
+    private void pesananActionBtn() throws IOException {
+
+    }
+
+    @FXML
+    private void stokActionBtn() throws IOException {
+
+    }
+
+    @FXML
+    private void pembelianActionBtn() throws IOException {
+
+    }
+
+    @FXML
+    private void pembeliBtnAction() throws IOException {
+
+    }
 }
