@@ -3,6 +3,8 @@ package com.basdat.db_models;
 public class Mobil {
     private String ID, nama, merk, tahun, harga;
 
+    public Mobil() {}
+
     public Mobil(String ID, String nama, String merk, String tahun, String harga) {
         this.ID = ID;
         this.nama = nama;
@@ -31,6 +33,7 @@ public class Mobil {
         this.tahun = tahun;
     }
 
+
     public String getNama() {
         return nama;
     }
@@ -50,7 +53,5 @@ public class Mobil {
     public String getTahun() {
         return tahun;
     }
-
-
 
 }
