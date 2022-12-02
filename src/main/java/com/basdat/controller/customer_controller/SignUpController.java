@@ -2,10 +2,9 @@ package com.basdat.controller.customer_controller;
 
 import com.basdat.App;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -17,8 +16,7 @@ import java.sql.SQLException;
 import static com.basdat.repository.DBConnect.connectionUrl;
 
 public class SignUpController {
-    @FXML
-    private Label descriptionLabelSU;
+
     @FXML
     private Button signUpBtn;
     @FXML
@@ -29,6 +27,26 @@ public class SignUpController {
     private TextField fieldUsernameSU;
     @FXML
     private PasswordField fieldPasswordSU;
+    @FXML
+    private TextField fieldNamaSU;
+    @FXML
+    private TextField fieldNIKSU;
+    @FXML
+    private TextField fieldJalanSU;
+    @FXML
+    private TextField fieldKecSU;
+    @FXML
+    private TextField fieldKotaSU;
+    @FXML
+    private Label descriptionLabelSU;
+
+    @FXML
+    private ImageView profileImage;
+
+    @FXML
+    private RadioButton MaleRB;
+    @FXML
+    private RadioButton FemaleRB;
 
 
     private String email, user, password;
@@ -79,6 +97,21 @@ public class SignUpController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void MaleRBAction() {
+        FemaleRB.setSelected(false);
+
+        profileImage.setImage(new Image("file:..\\..\\..\\..\\images\\male.png"));
+    }
+
+    @FXML
+    private void FemaleRBAction() {
+        MaleRB.setSelected(false);
+
+        profileImage.setImage(new Image("file:..\\..\\..\\..\\images\\female.png"));
+    }
+
 
     @FXML
     private void signUpBtnPressed() throws IOException {
