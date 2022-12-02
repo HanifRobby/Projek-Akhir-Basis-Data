@@ -4,7 +4,7 @@ public class StokSK {
     private int ID_Cabang, ID_Produk, stok;
     private String nama;
 
-    public StokSk() {
+    public StokSK() {
 
     }
 

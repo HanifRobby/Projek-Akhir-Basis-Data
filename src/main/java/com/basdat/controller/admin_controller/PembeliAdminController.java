@@ -1,9 +1,8 @@
 package com.basdat.controller.admin_controller;
 
 import com.basdat.App;
-import com.basdat.db_models.Mobil;
 import com.basdat.db_models.Pegawai;
-import com.basdat.db_models.SukuCadang;
+import com.basdat.db_models.Pembeli;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -11,13 +10,13 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import org.w3c.dom.Text;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -27,14 +26,16 @@ import java.util.ResourceBundle;
 
 import static com.basdat.repository.DBConnect.connectionUrl;
 
-public class PegawaiController implements Initializable {
+public class PembeliAdminController implements Initializable {
 
     @FXML
     private TextField searchTF;
     @FXML
+    private TextField IdTF;
+    @FXML
     private TextField IdAkunTF;
     @FXML
-    private TextField IdTF;
+    private TextField NikTF;
     @FXML
     private TextField namaTF;
     @FXML
@@ -45,52 +46,49 @@ public class PegawaiController implements Initializable {
     private TextField kecTF;
     @FXML
     private TextField kotaTF;
-    @FXML
-    private TextField NcTF;
 
     @FXML
-    private TableView<Pegawai> PegawaiTblView;
+    private TableView<Pembeli> PembeliTblView;
     @FXML
-    private TableColumn<Pegawai, String> IdPgnClm;
+    private TableColumn<Pembeli, String> IdPmbClm;
     @FXML
-    private TableColumn<Pegawai, String> IdPgwClm;
+    private TableColumn<Pembeli, String> IdPgnClm;
     @FXML
-    private TableColumn<Pegawai, String> namaClm;
+    private TableColumn<Pembeli, String> NikClm;
     @FXML
-    private TableColumn<Pegawai, String> JkClm;
+    private TableColumn<Pembeli, String> namaClm;
     @FXML
-    private TableColumn<Pegawai, String> jalanClm;
+    private TableColumn<Pembeli, String> JkClm;
     @FXML
-    private TableColumn<Pegawai, String> kecClm;
+    private TableColumn<Pembeli, String> jalanClm;
     @FXML
-    private TableColumn<Pegawai, String> kotaClm;
+    private TableColumn<Pembeli, String> kecClm;
     @FXML
-    private TableColumn<Pegawai, String> NcClm;
+    private TableColumn<Pembeli, String> kotaClm;
 
 
-    private ObservableList<Pegawai> dataPegawai = FXCollections.observableArrayList();
-    private ObservableList<Pegawai> selectPegawai;
+    private ObservableList<Pembeli> dataPembeli = FXCollections.observableArrayList();
+    private ObservableList<Pembeli> selectPembeli;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        updateTblPegawai();
+        updateTblPembeli();
 
         searchOnEnter();
-
     }
 
     @FXML
-    private void addBtnAction() throws IOException{
+    private void addBtnAction() throws IOException {
         String idPgn = IdAkunTF.getText().trim();
-        String idPgw = IdTF.getText().trim();
+        String idPmb = IdTF.getText().trim();
         String nama = namaTF.getText().trim();
+        String NIK = NikTF.getText().trim();
         String kelamin = JkTF.getText().trim();
         String jalan = jalanTF.getText().trim();
         String kec = kecTF.getText().trim();
         String kota = kotaTF.getText().trim();
-        String cabang = NcTF.getText().trim();
-        String table = "Pegawai";
+        String table = "Pembeli";
         String table1 = "Pengguna";
 
         String query = "INSERT INTO " + table + " values (?,?,?,?,?,?,?,?)";
@@ -100,19 +98,19 @@ public class PegawaiController implements Initializable {
             Connection connection1 = DriverManager.getConnection(connectionUrl);
             PreparedStatement ps = connection.prepareStatement(query);
             PreparedStatement ps1 = connection1.prepareStatement(query1)) {
-            ps.setInt(1, Integer.parseInt(idPgn));
-            ps.setInt(2, Integer.parseInt(idPgw));
+            ps.setString(1, ("4"+idPgn));
+            ps.setInt(2, Integer.parseInt(idPmb));
             ps.setString(3, nama);
-            ps.setString(4, kelamin);
-            ps.setString(5, jalan);
-            ps.setString(6, kec);
-            ps.setString(7, kota);
-            ps.setInt(8, Integer.parseInt(cabang));
+            ps.setString(4, NIK);
+            ps.setString(5, kelamin);
+            ps.setString(6, jalan);
+            ps.setString(7, kec);
+            ps.setString(8, kota);
 
-            ps1.setString(1, ("3" + idPgn));
-            ps1.setString(2, (nama+"312@gmail.com"));
-            ps1.setString(3, (nama + "321"));
-            ps1.setString(4, (nama+kota));
+            ps1.setString(1, ("4" + idPgn));
+            ps1.setString(2, (nama+"123@gmail.com"));
+            ps1.setString(3, (nama + "123"));
+            ps1.setString(4, (NIK+nama));
 
             ps1.executeUpdate();
 
@@ -125,33 +123,33 @@ public class PegawaiController implements Initializable {
             JOptionPane.showMessageDialog(null, "ADD FAILED");
         }
 
-        App.setRoot("fxml/admin_menu/pegawai");
+        App.setRoot("fxml/admin_menu/pembeliAdmin");
     }
 
     @FXML
-    private void editBtnAction() throws IOException{
+    private void editBtnAction() throws IOException {
         String idPgn = IdAkunTF.getText().trim();
-        String idPgw = IdTF.getText().trim();
+        String idPmb = IdTF.getText().trim();
         String nama = namaTF.getText().trim();
+        String NIK = NikTF.getText().trim();
         String kelamin = JkTF.getText().trim();
         String jalan = jalanTF.getText().trim();
         String kec = kecTF.getText().trim();
         String kota = kotaTF.getText().trim();
-        String cabang = NcTF.getText().trim();
-        String table = "Pegawai";
+        String table = "Pembeli";
 
-        String query = "UPDATE " + table + " SET Nama = ?, jenis_Kelamin = ?, jalan_Pegawai = ?, kecamatan_Pegawai = ?, kota_Pegawai = ?, no_cabang = ? WHERE ID_Pegawai = ? AND ID_Pengguna = ?";
+        String query = "UPDATE " + table + " SET Nama = ?, NIK = ?, jenis_Kelamin = ?, jalan_Pembeli = ?, kecamatan_Pembeli = ?, kota_Pembeli = ? WHERE ID_Pembeli = ? AND ID_Pengguna = ?";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
             PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, nama);
-            ps.setString(2, kelamin);
-            ps.setString(3, jalan);
-            ps.setString(4, kec);
-            ps.setString(5, kota);
-            ps.setInt(6, Integer.parseInt(cabang));
-            ps.setInt(7, Integer.parseInt(idPgw));
-            ps.setInt(8, Integer.parseInt(idPgn));
+            ps.setString(2, NIK);
+            ps.setString(3, kelamin);
+            ps.setString(4, jalan);
+            ps.setString(5, kec);
+            ps.setString(6, kota);
+            ps.setInt(7, Integer.parseInt(idPmb));
+            ps.setInt(8, (Integer.parseInt(idPgn)));
 
             ps.executeUpdate();
 
@@ -162,20 +160,20 @@ public class PegawaiController implements Initializable {
             JOptionPane.showMessageDialog(null, "EDIT FAILED");
         }
 
-        App.setRoot("fxml/admin_menu/pegawai");
+        App.setRoot("fxml/admin_menu/pembeliAdmin");
     }
 
     @FXML
     private void deleteBtnAction() throws IOException {
-        String idPgw = IdTF.getText().trim();
         String idPgn = IdAkunTF.getText().trim();
-        String table = "Pegawai";
+        String idPmb = IdTF.getText().trim();
+        String table = "Pembeli";
         String table1 = "Pengguna";
-        String table2 = "no_Telp_Pegawai"
+        String table2 = "no_Telp_Pembeli";
 
-        String query = "DELETE FROM " + table + " WHERE ID_Pegawai = ? AND ID_Pengguna = ?";
-        String query1 = "DELETE FROM " + table1 + " WHERE ID_Pengguna = ? AND ID_Pegawai = ?";
-        String query2 = "DELETE FROM " + table2 + " WHERE ID_Pegawai = ?";
+        String query = "DELETE FROM " + table + " WHERE ID_Pembeli = ? AND ID_Pengguna = ?";
+        String query1 = "DELETE FROM " + table1 + " WHERE ID_Pengguna = ? AND ID_Pembeli = ?";
+        String query2 = "DELETE FROM " + table2 + " WHERE ID_Pembeli = ?";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
             Connection connection1 = DriverManager.getConnection(connectionUrl);
@@ -183,13 +181,13 @@ public class PegawaiController implements Initializable {
             PreparedStatement ps = connection.prepareStatement(query);
             PreparedStatement ps1 = connection1.prepareStatement(query1);
             PreparedStatement ps2 = connection2.prepareStatement(query2)) {
-            ps.setInt(1, Integer.parseInt(idPgw));
-            ps.setInt(2, Integer.parseInt(idPgn));
+            ps.setString(1, idPmb);
+            ps.setString(2, idPgn);
 
-            ps1.setInt(1, Integer.parseInt(idPgn));
-            ps1.setInt(2, Integer.parseInt(idPgw));
+            ps1.setString(1, idPgn);
+            ps1.setString(2, idPmb);
 
-            ps2.setInt(1, Integer.parseInt(idPgw));
+            ps2.setString(1, idPmb);
 
             ps2.executeUpdate();
             ps1.executeUpdate();
@@ -202,9 +200,8 @@ public class PegawaiController implements Initializable {
             JOptionPane.showMessageDialog(null, "DELETE FAILED");
         }
 
-        App.setRoot("fxml/admin_menu/pegawai");
+        App.setRoot("fxml/admin_menu/pembeliAdmin");
     }
-
 
     @FXML
     private void backBtnAction() throws IOException {
@@ -215,18 +212,18 @@ public class PegawaiController implements Initializable {
     private void searchOnEnter() {
 
         // 1. Wrap the ObservableList in a FilteredList
-        FilteredList<Pegawai> filteredData = new FilteredList<>(dataPegawai, p -> true);
+        FilteredList<Pembeli> filteredData = new FilteredList<>(dataPembeli, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
         searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(pegawai -> {
+            filteredData.setPredicate(pembeli -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
 
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if(pegawai.getNama().toLowerCase().contains(lowerCaseFilter)) {
+                if(pembeli.getNama().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
                 return false;
@@ -235,53 +232,53 @@ public class PegawaiController implements Initializable {
         });
 
         // 3. Wrap the FilteredList in a SortedList.
-        SortedList<Pegawai> sortedData = new SortedList<>(filteredData);
+        SortedList<Pembeli> sortedData = new SortedList<>(filteredData);
 
         // 4. Bind the SortedList comparator to the TableView comparator.
-        sortedData.comparatorProperty().bind(PegawaiTblView.comparatorProperty());
+        sortedData.comparatorProperty().bind(PembeliTblView.comparatorProperty());
 
         // 5. Add sorted (and filtered) data to the table.
-        PegawaiTblView.setItems(sortedData);
+        PembeliTblView.setItems(sortedData);
 
     }
 
     @FXML
-    private void PegawaiTblClicked() {
-        selectPegawai = PegawaiTblView.getSelectionModel().getSelectedItems();
+    private void PembeliTblClicked() {
+        selectPembeli = PembeliTblView.getSelectionModel().getSelectedItems();
 
-        IdAkunTF.setText("" + selectPegawai.get(0).getID_Pengguna());
-        IdTF.setText("" + selectPegawai.get(0).getID_Pegawai());
-        namaTF.setText(selectPegawai.get(0).getNama());
-        JkTF.setText(selectPegawai.get(0).getJenisKelamin());
-        jalanTF.setText(selectPegawai.get(0).getJalan());
-        kecTF.setText(selectPegawai.get(0).getKecamatan());
-        kotaTF.setText(selectPegawai.get(0).getKota());
-        NcTF.setText("" + selectPegawai.get(0).getNo_cabang());
+        IdAkunTF.setText("" + selectPembeli.get(0).getID_Pengguna());
+        IdTF.setText("" + selectPembeli.get(0).getID_Pembeli());
+        NikTF.setText("" + selectPembeli.get(0).getNIK());
+        namaTF.setText(selectPembeli.get(0).getNama());
+        JkTF.setText(selectPembeli.get(0).getJenisKelamin());
+        jalanTF.setText(selectPembeli.get(0).getJalan());
+        kecTF.setText(selectPembeli.get(0).getKecamatan());
+        kotaTF.setText(selectPembeli.get(0).getKota());
     }
 
     @FXML
-    private void PegawaiTblPressed() {
-        selectPegawai = PegawaiTblView.getSelectionModel().getSelectedItems();
+    private void PembeliTblPressed() {
+        selectPembeli = PembeliTblView.getSelectionModel().getSelectedItems();
 
-        IdAkunTF.setText("" + selectPegawai.get(0).getID_Pengguna());
-        IdTF.setText("" + selectPegawai.get(0).getID_Pegawai());
-        namaTF.setText(selectPegawai.get(0).getNama());
-        JkTF.setText(selectPegawai.get(0).getJenisKelamin());
-        jalanTF.setText(selectPegawai.get(0).getJalan());
-        kecTF.setText(selectPegawai.get(0).getKecamatan());
-        kotaTF.setText(selectPegawai.get(0).getKota());
-        NcTF.setText("" + selectPegawai.get(0).getNo_cabang());
+        IdAkunTF.setText("" + selectPembeli.get(0).getID_Pengguna());
+        IdTF.setText("" + selectPembeli.get(0).getID_Pembeli());
+        NikTF.setText("" + selectPembeli.get(0).getNIK());
+        namaTF.setText(selectPembeli.get(0).getNama());
+        JkTF.setText(selectPembeli.get(0).getJenisKelamin());
+        jalanTF.setText(selectPembeli.get(0).getJalan());
+        kecTF.setText(selectPembeli.get(0).getKecamatan());
+        kotaTF.setText(selectPembeli.get(0).getKota());
     }
 
-    private void updateTblPegawai() {
-        pullDBPegawai();
-        addDataToTablePegawai();
-        PegawaiTblView.refresh();
+    private void updateTblPembeli() {
+        pullDBPembeli();
+        addDataToTablePembeli();
+        PembeliTblView.refresh();
     }
 
-    private void pullDBPegawai() {
+    private void pullDBPembeli() {
         ResultSet resultSet;
-        String query = "SELECT ID_Pengguna, ID_Pegawai, Nama, jenis_Kelamin, jalan_Pegawai, kecamatan_Pegawai, kota_Pegawai, no_Cabang FROM Pegawai";
+        String query = "SELECT ID_Pengguna, ID_Pembeli, Nama, NIK,jenis_Kelamin, jalan_Pembeli, kecamatan_Pembeli, kota_Pembeli FROM Pembeli";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
             PreparedStatement ps = connection.prepareStatement(query)) {
@@ -291,14 +288,14 @@ public class PegawaiController implements Initializable {
 
             // Add result to list
             while (resultSet.next()) {
-                dataPegawai.add(new Pegawai(Integer.parseInt(resultSet.getString(1)),
+                dataPembeli.add(new Pembeli(Integer.parseInt(resultSet.getString(1)),
                         Integer.parseInt(resultSet.getString(2)),
                         resultSet.getString(3),
                         resultSet.getString(4),
                         resultSet.getString(5),
                         resultSet.getString(6),
                         resultSet.getString(7),
-                        Integer.parseInt(resultSet.getString(8))
+                        resultSet.getString(8)
                 ));
 
             }
@@ -309,18 +306,17 @@ public class PegawaiController implements Initializable {
         }
     }
 
-    private void addDataToTablePegawai() {
+    private void addDataToTablePembeli() {
+        IdPmbClm.setCellValueFactory(new PropertyValueFactory<>("ID_Pembeli"));
         IdPgnClm.setCellValueFactory(new PropertyValueFactory<>("ID_Pengguna"));
-        IdPgwClm.setCellValueFactory(new PropertyValueFactory<>("ID_Pegawai"));
+        NikClm.setCellValueFactory(new PropertyValueFactory<>("NIK"));
         namaClm.setCellValueFactory(new PropertyValueFactory<>("nama"));
         JkClm.setCellValueFactory(new PropertyValueFactory<>("jenisKelamin"));
         jalanClm.setCellValueFactory(new PropertyValueFactory<>("jalan"));
         kecClm.setCellValueFactory(new PropertyValueFactory<>("kecamatan"));
         kotaClm.setCellValueFactory(new PropertyValueFactory<>("kota"));
-        NcClm.setCellValueFactory(new PropertyValueFactory<>("no_cabang"));
 
-        PegawaiTblView.setItems(dataPegawai);
+        PembeliTblView.setItems(dataPembeli);
     }
-
 
 }

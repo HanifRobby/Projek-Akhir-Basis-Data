@@ -17,6 +17,7 @@ import javafx.scene.input.MouseButton;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.URL;
 import java.sql.*;
 import java.util.EventListener;
@@ -94,10 +95,12 @@ public class ProdukAdminController implements Initializable {
         String tahun = tahunTF.getText().trim();
         String harga = hargaTF.getText().trim();
 
+        String query = "INSERT INTO Produk values (?,?,?,?,?,?)";
+
         if (selectSK == null) {
 
             try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO Produk values (?,?,?,?,?,?)")) {
+                PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, id);
                 ps.setString(2, produk);
                 ps.setString(3, merk);
@@ -106,7 +109,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(6, harga);
 
                 ps.executeUpdate();
-                updateTblSK();
 
                 JOptionPane.showMessageDialog(null, "ADD SUCCESS");
             }
@@ -119,7 +121,7 @@ public class ProdukAdminController implements Initializable {
         else if (selectMobil == null) {
 
             try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO Produk values (?,?,?,?,?,?)")) {
+                PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, id);
                 ps.setString(2, produk);
                 ps.setString(3, merk);
@@ -128,7 +130,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(6, harga);
 
                 ps.executeUpdate();
-                updateTblMobil();
 
                 JOptionPane.showMessageDialog(null, "ADD SUCCESS");
             }
@@ -137,7 +138,7 @@ public class ProdukAdminController implements Initializable {
                 JOptionPane.showMessageDialog(null, "ADD FAILED");
             }
         }
-        App.setRoot("fxml/admin_menu/stokAdmin");
+        App.setRoot("fxml/admin_menu/produkAdmin");
     }
 
     @FXML
@@ -149,10 +150,12 @@ public class ProdukAdminController implements Initializable {
         String harga = hargaTF.getText().trim();
         String table = "Produk";
 
+        String query = "UPDATE " + table + " SET nama_Produk = ?, merk = ?, tahun_Produksi = ?, harga = ? WHERE ID_Produk = ? AND jenis_Produk = ?";
+
         if (selectSK == null) {
 
             try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement("UPDATE " + table + " SET nama_Produk = ?, merk = ?, tahun_Produksi = ?, harga = ? WHERE ID_Produk = ? AND jenis_Produk = ?")) {
+                PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, produk);
                 ps.setString(2, merk);
                 ps.setString(3, tahun);
@@ -161,7 +164,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(6, "Mobil");
 
                 ps.executeUpdate();
-                updateTblSK();
 
                 JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
             }
@@ -174,7 +176,7 @@ public class ProdukAdminController implements Initializable {
         else if (selectMobil == null) {
 
             try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement("UPDATE " + table + " SET nama_Produk = ?, merk = ?, tahun_Produksi = ?, harga = ? WHERE ID_Produk = ? AND jenis_Produk = ?")) {
+                PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, produk);
                 ps.setString(2, merk);
                 ps.setString(3, tahun);
@@ -183,7 +185,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(6, "Suku Cadang");
 
                 ps.executeUpdate();
-                updateTblMobil();
 
                 JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
             }
@@ -192,23 +193,31 @@ public class ProdukAdminController implements Initializable {
                 JOptionPane.showMessageDialog(null, "EDIT FAILED");
             }
         }
-        App.setRoot("fxml/admin_menu/stokAdmin");
+        App.setRoot("fxml/admin_menu/produkAdmin");
     }
 
     @FXML
     private void deleteBtnAction() throws  IOException{
         String id = idTF.getText().trim();
         String table = "Produk";
+        String table1 = "Stok";
+
+        String query = "DELETE FROM " + table + " WHERE ID_Produk = ? AND jenis_Produk = ?";
+        String query1 = "DELETE FROM " + table1 + " WHERE ID_Produk = ?";
 
         if (selectSK == null) {
 
             try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement("DELETE FROM " + table + " WHERE ID_Produk = ? AND jenis_Produk = ?")) {
+                Connection connection1 = DriverManager.getConnection(connectionUrl);
+                PreparedStatement ps = connection.prepareStatement(query);
+                PreparedStatement ps1 = connection1.prepareStatement(query1)) {
                 ps.setString(1, id);
                 ps.setString(2, "Mobil");
 
+                ps1.setString(1, id);
+
+                ps1.executeUpdate();
                 ps.executeUpdate();
-                updateTblSK();
 
                 JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
             }
@@ -226,7 +235,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(2, "Suku Cadang");
 
                 ps.executeUpdate();
-                updateTblMobil();
 
                 JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
             }
@@ -235,7 +243,7 @@ public class ProdukAdminController implements Initializable {
                 JOptionPane.showMessageDialog(null, "DELETE FAILED");
             }
         }
-        App.setRoot("fxml/admin_menu/stokAdmin");
+        App.setRoot("fxml/admin_menu/produkAdmin");
     }
 
     @FXML
