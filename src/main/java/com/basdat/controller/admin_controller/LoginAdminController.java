@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -16,6 +17,8 @@ import static com.basdat.repository.DBConnect.connectionUrl;
 
 public class LoginAdminController {
 
+    @FXML
+    private Text loginError;
     @FXML
     private TextField usernameTF;
     @FXML
@@ -36,9 +39,18 @@ public class LoginAdminController {
                 App.setRoot("fxml/admin_menu/menuAdmin");
             }
         }
-        else{
+        else if (!checkEmpty(user, pass)){
             usernameTF.clear();
             passTF.clear();
+            loginError.setText("Username and password is blank");
+        }
+        else if (!checkEmpty(user)){
+            usernameTF.clear();
+            loginError.setText("Username is blank");
+        }
+        else if (!checkEmpty(pass)) {
+            passTF.clear();
+            loginError.setText("Password is blank");
         }
     }
 
@@ -72,7 +84,7 @@ public class LoginAdminController {
                 }
 
             }
-            JOptionPane.showMessageDialog(null, "USERNAME OR PASSWORD IS WRONG");
+            loginError.setText("Username or password is invalid");
 
         }
         catch (SQLException e) {
@@ -83,7 +95,15 @@ public class LoginAdminController {
     }
 
     public boolean checkEmpty(String user, String pass) {
-        if(!user.isEmpty() && !user.isBlank() && !pass.isEmpty() && !pass.isBlank()){
+        if(!user.isBlank() && !pass.isBlank()){
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkEmpty(String text) {
+        if(!text.isBlank()) {
             return true;
         }
 

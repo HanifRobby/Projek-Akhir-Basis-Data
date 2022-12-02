@@ -109,7 +109,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(6, harga);
 
                 ps.executeUpdate();
-                updateTblMobil();
 
                 JOptionPane.showMessageDialog(null, "ADD SUCCESS");
             }
@@ -131,7 +130,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(6, harga);
 
                 ps.executeUpdate();
-                updateTblSK();
 
                 JOptionPane.showMessageDialog(null, "ADD SUCCESS");
             }
@@ -166,7 +164,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(6, "Mobil");
 
                 ps.executeUpdate();
-                updateTblMobil();
 
                 JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
             }
@@ -188,7 +185,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(6, "Suku Cadang");
 
                 ps.executeUpdate();
-                updateTblSK();
 
                 JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
             }
@@ -222,7 +218,6 @@ public class ProdukAdminController implements Initializable {
 
                 ps1.executeUpdate();
                 ps.executeUpdate();
-                updateTblMobil();
 
                 JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
             }
@@ -240,7 +235,6 @@ public class ProdukAdminController implements Initializable {
                 ps.setString(2, "Suku Cadang");
 
                 ps.executeUpdate();
-                updateTblSK();
 
                 JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
             }

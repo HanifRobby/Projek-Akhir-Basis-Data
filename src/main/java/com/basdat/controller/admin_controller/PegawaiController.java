@@ -91,11 +91,15 @@ public class PegawaiController implements Initializable {
         String kota = kotaTF.getText().trim();
         String cabang = NcTF.getText().trim();
         String table = "Pegawai";
+        String table1 = "Pengguna";
 
         String query = "INSERT INTO " + table + " values (?,?,?,?,?,?,?,?)";
+        String query1 = "INSERT INTO " + table1 + " values (?,?,?,?)";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+            Connection connection1 = DriverManager.getConnection(connectionUrl);
+            PreparedStatement ps = connection.prepareStatement(query);
+            PreparedStatement ps1 = connection1.prepareStatement(query1)) {
             ps.setInt(1, Integer.parseInt(idPgn));
             ps.setInt(2, Integer.parseInt(idPgw));
             ps.setString(3, nama);
@@ -105,8 +109,14 @@ public class PegawaiController implements Initializable {
             ps.setString(7, kota);
             ps.setInt(8, Integer.parseInt(cabang));
 
+            ps1.setString(1, ("3" + idPgn));
+            ps1.setString(2, (nama+"312@gmail.com"));
+            ps1.setString(3, (nama + "321"));
+            ps1.setString(4, (nama+kota));
+
+            ps1.executeUpdate();
+
             ps.executeUpdate();
-            updateTblPegawai();
 
             JOptionPane.showMessageDialog(null, "ADD SUCCESS");
         }
@@ -144,7 +154,6 @@ public class PegawaiController implements Initializable {
             ps.setInt(8, Integer.parseInt(idPgn));
 
             ps.executeUpdate();
-            updateTblPegawai();
 
             JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
         }
@@ -159,16 +168,32 @@ public class PegawaiController implements Initializable {
     @FXML
     private void deleteBtnAction() throws IOException {
         String idPgw = IdTF.getText().trim();
+        String idPgn = IdAkunTF.getText().trim();
         String table = "Pegawai";
+        String table1 = "Pengguna";
+        String table2 = "no_Telp_Pegawai"
 
-        String query = "DELETE FROM " + table + " WHERE ID_Pegawai = ?";
+        String query = "DELETE FROM " + table + " WHERE ID_Pegawai = ? AND ID_Pengguna = ?";
+        String query1 = "DELETE FROM " + table1 + " WHERE ID_Pengguna = ? AND ID_Pegawai = ?";
+        String query2 = "DELETE FROM " + table2 + " WHERE ID_Pegawai = ?";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+            Connection connection1 = DriverManager.getConnection(connectionUrl);
+            Connection connection2 = DriverManager.getConnection(connectionUrl);
+            PreparedStatement ps = connection.prepareStatement(query);
+            PreparedStatement ps1 = connection1.prepareStatement(query1);
+            PreparedStatement ps2 = connection2.prepareStatement(query2)) {
             ps.setInt(1, Integer.parseInt(idPgw));
+            ps.setInt(2, Integer.parseInt(idPgn));
 
+            ps1.setInt(1, Integer.parseInt(idPgn));
+            ps1.setInt(2, Integer.parseInt(idPgw));
+
+            ps2.setInt(1, Integer.parseInt(idPgw));
+
+            ps2.executeUpdate();
+            ps1.executeUpdate();
             ps.executeUpdate();
-            updateTblPegawai();
 
             JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
         }

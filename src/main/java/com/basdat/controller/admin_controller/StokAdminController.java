@@ -92,7 +92,6 @@ public class StokAdminController implements Initializable {
                 ps.setInt(3, stok);
 
                 ps.executeUpdate();
-                updateTblStokMobil();
 
                 JOptionPane.showMessageDialog(null, "ADD SUCCESS");
             }
@@ -111,7 +110,6 @@ public class StokAdminController implements Initializable {
                 ps.setInt(3, stok);
 
                 ps.executeUpdate();
-                updateTblStokSK();
 
                 JOptionPane.showMessageDialog(null, "ADD SUCCESS");
             }
@@ -141,7 +139,6 @@ public class StokAdminController implements Initializable {
                 ps.setInt(3, idProduk);
 
                 ps.executeUpdate();
-                updateTblStokMobil();
 
                 JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
             }
@@ -160,7 +157,6 @@ public class StokAdminController implements Initializable {
                 ps.setInt(3, idProduk);
 
                 ps.executeUpdate();
-                updateTblStokSK();
 
                 JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
             }
@@ -188,7 +184,6 @@ public class StokAdminController implements Initializable {
                 ps.setInt(2, idProduk);
 
                 ps.executeUpdate();
-                updateTblStokMobil();
 
                 JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
             }
@@ -206,7 +201,6 @@ public class StokAdminController implements Initializable {
                 ps.setInt(2, idProduk);
 
                 ps.executeUpdate();
-                updateTblStokSK();
 
                 JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
             }

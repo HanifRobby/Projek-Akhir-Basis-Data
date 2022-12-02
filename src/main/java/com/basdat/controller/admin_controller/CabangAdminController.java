@@ -93,7 +93,6 @@ public class CabangAdminController implements Initializable {
             ps.setInt(6, kapasitas);
 
             ps.executeUpdate();
-            updateTblCabang();
 
             JOptionPane.showMessageDialog(null, "ADD SUCCESS");
         }
@@ -127,7 +126,6 @@ public class CabangAdminController implements Initializable {
             ps.setInt(6, noCabang);
 
             ps.executeUpdate();
-            updateTblCabang();
 
             JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
         }
@@ -144,22 +142,27 @@ public class CabangAdminController implements Initializable {
         int noCabang = Integer.parseInt(IdTF.getText().trim());
         String table = "Cabang";
         String table1 = "Stok";
+        String table2 = "no_Telp_Cabang";
 
         String query = "DELETE FROM " + table + " WHERE no_Cabang = ?";
         String query1 = "DELETE FROM " + table1 + " WHERE ID_Cabang = ?";
+        String query2 = "DELETE FROM " + table2 + " WHERE ID_Cabang = ?";
 
         try(Connection connection = DriverManager.getConnection(connectionUrl);
             Connection connection1 = DriverManager.getConnection(connectionUrl);
+            Connection connection2 = DriverManager.getConnection(connectionUrl);
             PreparedStatement ps = connection.prepareStatement(query);
-            PreparedStatement ps1 = connection1.prepareStatement(query1)) {
+            PreparedStatement ps1 = connection1.prepareStatement(query1);
+            PreparedStatement ps2 = connection2.prepareStatement(query2)) {
             ps.setInt(1, noCabang);
 
             ps1.setInt(1, noCabang);
 
-            ps1.executeUpdate();
+            ps2.setInt(1, noCabang);
 
+            ps2.executeUpdate();
+            ps1.executeUpdate();
             ps.executeUpdate();
-            updateTblCabang();
 
             JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
         }

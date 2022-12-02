@@ -35,6 +35,11 @@
                      <font>
                         <Font name="Gilroy-Light" size="20.0" />
                      </font></PasswordField>
+                  <Text fx:id="loginError" fill="RED" layoutX="49.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="Gilroy-Light" size="18.0" />
+                     </font>
+                  </Text>
                   <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#loginBtnAction" stylesheets="@../../styles/loginStyles.css" text="LOGIN" textFill="WHITE">
                      <font>
                         <Font name="Gilroy-ExtraBold" size="28.0" />

@@ -116,8 +116,6 @@ public class PesananAdminController implements Initializable {
 
             ps.executeUpdate();
 
-            updateTblPesanan();
-
             JOptionPane.showMessageDialog(null, "ADD SUCCESS");
         }
         catch (SQLException e) {
@@ -158,8 +156,6 @@ public class PesananAdminController implements Initializable {
 
             ps.executeUpdate();
 
-            updateTblPesanan();
-
             JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
         }
         catch (SQLException e) {
@@ -189,8 +185,6 @@ public class PesananAdminController implements Initializable {
 
             ps1.executeUpdate();
             ps.executeUpdate();
-
-            updateTblPesanan();
 
             JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
         }
