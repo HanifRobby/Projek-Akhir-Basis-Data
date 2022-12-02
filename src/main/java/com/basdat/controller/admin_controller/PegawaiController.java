@@ -125,7 +125,7 @@ public class PegawaiController implements Initializable {
             JOptionPane.showMessageDialog(null, "ADD FAILED");
         }
 
-        App.setRoot("fxml/admin_menu/pegawai");
+        App.setRoot("fxml/admin_menu/pegawaiAdmin");
     }
 
     @FXML
@@ -162,7 +162,7 @@ public class PegawaiController implements Initializable {
             JOptionPane.showMessageDialog(null, "EDIT FAILED");
         }
 
-        App.setRoot("fxml/admin_menu/pegawai");
+        App.setRoot("fxml/admin_menu/pegawaiAdmin");
     }
 
     @FXML
@@ -171,7 +171,7 @@ public class PegawaiController implements Initializable {
         String idPgn = IdAkunTF.getText().trim();
         String table = "Pegawai";
         String table1 = "Pengguna";
-        String table2 = "no_Telp_Pegawai"
+        String table2 = "no_Telp_Pegawai";
 
         String query = "DELETE FROM " + table + " WHERE ID_Pegawai = ? AND ID_Pengguna = ?";
         String query1 = "DELETE FROM " + table1 + " WHERE ID_Pengguna = ? AND ID_Pegawai = ?";
@@ -202,7 +202,7 @@ public class PegawaiController implements Initializable {
             JOptionPane.showMessageDialog(null, "DELETE FAILED");
         }
 
-        App.setRoot("fxml/admin_menu/pegawai");
+        App.setRoot("fxml/admin_menu/pegawaiAdmin");
     }
 
 

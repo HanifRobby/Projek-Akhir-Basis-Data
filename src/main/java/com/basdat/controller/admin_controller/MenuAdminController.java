@@ -48,7 +48,7 @@ public class MenuAdminController implements Initializable {
 
     @FXML
     private void pegawaiBtnAction() throws IOException {
-        App.setRoot("fxml/admin_menu/pegawai");
+        App.setRoot("fxml/admin_menu/pegawaiAdmin");
     }
 
     @FXML
