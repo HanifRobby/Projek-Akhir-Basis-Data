@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.admin_controller.PembeliAdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../styles/PembeliAdminStyles.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.admin_controller.PembeliAdminController">
     <bottom>
         <HBox alignment="CENTER" prefHeight="229.0" prefWidth="800.0" BorderPane.alignment="CENTER">
             <children>
@@ -99,17 +92,17 @@
                 </Pane>
                 <Pane prefHeight="170.0" prefWidth="185.0" style="-fx-background-color: #D9D9D9;">
                     <children>
-                        <Button fx:id="editBtn" layoutX="28.0" layoutY="80.0" mnemonicParsing="false" onAction="#editBtnAction" prefHeight="40.0" prefWidth="130.0" stylesheets="@../../styles/StokAdminStyles.css" text="EDIT" textFill="WHITE">
+                        <Button fx:id="editBtn" layoutX="28.0" layoutY="80.0" mnemonicParsing="false" onAction="#editBtnAction" prefHeight="40.0" prefWidth="130.0" text="EDIT" textFill="WHITE">
                             <font>
                                 <Font name="Gilroy-ExtraBold" size="18.0" />
                             </font>
                         </Button>
-                        <Button fx:id="deleteBtn" layoutX="28.0" layoutY="145.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="40.0" prefWidth="130.0" stylesheets="@../../styles/StokAdminStyles.css" text="DELETE" textFill="WHITE">
+                        <Button fx:id="deleteBtn" layoutX="28.0" layoutY="145.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="40.0" prefWidth="130.0" text="DELETE" textFill="WHITE">
                             <font>
                                 <Font name="Gilroy-ExtraBold" size="18.0" />
                             </font>
                         </Button>
-                        <Button fx:id="addBtn" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="40.0" prefWidth="130.0" stylesheets="@../../styles/StokAdminStyles.css" text="ADD" textFill="WHITE">
+                        <Button fx:id="addBtn" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="40.0" prefWidth="130.0" text="ADD" textFill="WHITE">
                             <font>
                                 <Font name="Gilroy-ExtraBold" size="18.0" />
                             </font>
@@ -126,7 +119,7 @@
                 <Pane prefHeight="200.0" prefWidth="30.0" style="-fx-background-color: #D9D9D9;" />
                 <Pane prefHeight="75.0" prefWidth="370.0" style="-fx-background-color: #D9D9D9;" HBox.hgrow="SOMETIMES">
                     <children>
-                        <Button fx:id="backBtn" layoutX="13.0" layoutY="19.0" mnemonicParsing="false" onAction="#backBtnAction" prefHeight="40.0" prefWidth="130.0" stylesheets="@../../styles/StokAdminStyles.css" text="BACK" textFill="WHITE">
+                        <Button fx:id="backBtn" layoutX="13.0" layoutY="19.0" mnemonicParsing="false" onAction="#backBtnAction" prefHeight="40.0" prefWidth="130.0" text="BACK" textFill="WHITE">
                             <font>
                                 <Font name="Gilroy-ExtraBold" size="18.0" />
                             </font>
