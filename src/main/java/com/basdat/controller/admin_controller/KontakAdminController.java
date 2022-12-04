@@ -1,12 +1,13 @@
 package com.basdat.controller.admin_controller;
 
 import com.basdat.App;
-import com.basdat.db_models.NomorTelepon;
-import com.basdat.db_models.Pembeli;
-import com.basdat.db_models.StokMobil;
-import com.basdat.db_models.StokSK;
+import com.basdat.db_models.*;
+import com.basdat.repository.DBConnect;
+import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +24,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 import static com.basdat.repository.DBConnect.connectionUrl;
+import static com.basdat.repository.DBConnect.getConnection;
 
 public class KontakAdminController implements Initializable {
 
@@ -83,17 +85,112 @@ public class KontakAdminController implements Initializable {
 
     @FXML
     private void addBtnAction() throws IOException {
+        String id = IdTF.getText().trim();
+        String nomor = nomorTF.getText().trim();
 
-    }
+        Connection con = getConnection();
+        String query = "INSERT INTO no_Telp_Cabang values (?,?)";
+        String query1 = "INSERT INTO no_Telp_Pegawai values (?,?)";
+        String query2 = "INSERT INTO no_Telp_Pembeli values (?,?)";
 
-    @FXML
-    private void editBtnAction() throws IOException {
+        if (!(selectCabang == null)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
+                ps.setString(1, id);
+                ps.setString(2, nomor);
 
+                ps.executeUpdate();
+
+                Notification.Information("Information", "ADD SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                Notification.Error("ERROR", "ADD FAILED");
+            }
+        }
+        else if (!(selectPegawai == null)) {
+            try(PreparedStatement ps = con.prepareStatement(query1)) {
+                ps.setString(1, id);
+                ps.setString(2, nomor);
+
+                ps.executeUpdate();
+
+                Notification.Information("Information", "ADD SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                Notification.Error("ERROR", "ADD FAILED");
+            }
+        }
+        else if (!(selectPembeli == null)) {
+            try(PreparedStatement ps = con.prepareStatement(query2)) {
+                ps.setString(1, id);
+                ps.setString(2, nomor);
+
+                ps.executeUpdate();
+
+                Notification.Information("Information", "ADD SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                Notification.Error("ERROR", "ADD FAILED");
+            }
+        }
+        App.setRoot("fxml/admin_menu/kontakAdmin");
     }
 
     @FXML
     private void deleteBtnAction() throws IOException {
+        String id = IdTF.getText().trim();
+        String nomor = nomorTF.getText().trim();
 
+        Connection con = getConnection();
+        String query = "DELETE FROM no_Telp_Cabang WHERE no_Cabang = ? AND no_Telp = ?";
+        String query1 = "DELETE FROM no_Telp_Pegawai WHERE ID_Pegawai = ? AND no_Telp = ?";
+        String query2 = "DELETE FROM no_Telp_Pembeli WHERE ID_Pembeli = ? AND no_Telp = ?";
+
+        if (!(selectCabang == null)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
+                ps.setString(1, id);
+                ps.setString(2, nomor);
+
+                ps.executeUpdate();
+
+                Notification.Information("Information", "DELETE SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                Notification.Error("ERROR", "DELETE FAILED");
+            }
+        }
+        else if (!(selectPegawai == null)) {
+            try(PreparedStatement ps = con.prepareStatement(query1)) {
+                ps.setString(1, id);
+                ps.setString(2, nomor);
+
+                ps.executeUpdate();
+
+                Notification.Information("Information", "DELETE SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                Notification.Error("ERROR", "DELETE FAILED");
+            }
+        }
+        else if (!(selectPembeli == null)) {
+            try(PreparedStatement ps = con.prepareStatement(query2)) {
+                ps.setString(1, id);
+                ps.setString(2, nomor);
+
+                ps.executeUpdate();
+
+                Notification.Information("Information", "DELETE SUCCESS");
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                Notification.Error("ERROR", "DELETE FAILED");
+            }
+        }
+        App.setRoot("fxml/admin_menu/kontakAdmin");
     }
 
     @FXML
@@ -104,46 +201,166 @@ public class KontakAdminController implements Initializable {
     @FXML
     private void searchOnEnter() {
 
-    }
+        // 1. Wrap the ObservableList in a FilteredList
+        FilteredList<NomorTelepon> filteredData = new FilteredList<>(dataCabang, p -> true);
+        FilteredList<NomorTelepon> filteredDataPegawai = new FilteredList<>(dataPegawai, p -> true);
+        FilteredList<NomorTelepon> filteredDataPembeli = new FilteredList<>(dataPembeli, p -> true);
 
-    @FXML
-    private void mobilTblClicked() {
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(nomorTelepon -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
 
-    }
+                String lowerCaseFilter = newValue.toLowerCase();
 
-    @FXML
-    private void mobilTblPressed() {
+                if(nomorTelepon.getNama().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if(nomorTelepon.getID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if(nomorTelepon.getNomorTelepon().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
 
+            });
+
+            filteredDataPegawai.setPredicate(nomorTelepon -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(nomorTelepon.getNama().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if(nomorTelepon.getID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if(nomorTelepon.getNomorTelepon().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+
+            });
+
+            filteredDataPembeli.setPredicate(nomorTelepon -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(nomorTelepon.getNama().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if(nomorTelepon.getID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if(nomorTelepon.getNomorTelepon().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<NomorTelepon> sortedData = new SortedList<>(filteredData);
+        SortedList<NomorTelepon> sortedDataPegawai = new SortedList<>(filteredDataPegawai);
+        SortedList<NomorTelepon> sortedDataPembeli = new SortedList<>(filteredDataPembeli);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(CabangTableView.comparatorProperty());
+        sortedDataPegawai.comparatorProperty().bind(PegawaiTableView.comparatorProperty());
+        sortedDataPembeli.comparatorProperty().bind(PembeliTableView.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        CabangTableView.setItems(sortedData);
+        PegawaiTableView.setItems(sortedDataPegawai);
+        PembeliTableView.setItems(sortedDataPembeli);
     }
 
     @FXML
     private void CbgTblPressed() {
+        ObservableList<NomorTelepon> Cabangselect;
+        Cabangselect = CabangTableView.getSelectionModel().getSelectedItems();
+        this.selectCabang = Cabangselect;
+        this.selectPegawai = null;
+        this.selectPembeli = null;
 
+        IdTF.setText(Cabangselect.get(0).getID());
+        namaTF.setText(Cabangselect.get(0).getNama());
+        nomorTF.setText(Cabangselect.get(0).getNomorTelepon());
     }
 
     @FXML
     private void CbgTblClicked() {
+        ObservableList<NomorTelepon> Cabangselect;
+        Cabangselect = CabangTableView.getSelectionModel().getSelectedItems();
+        this.selectCabang = Cabangselect;
+        this.selectPegawai = null;
+        this.selectPembeli = null;
 
+        IdTF.setText(Cabangselect.get(0).getID());
+        namaTF.setText(Cabangselect.get(0).getNama());
+        nomorTF.setText(Cabangselect.get(0).getNomorTelepon());
     }
 
     @FXML
     private void PgwTblPressed() {
+        ObservableList<NomorTelepon> Pegawaiselect;
+        Pegawaiselect = PegawaiTableView.getSelectionModel().getSelectedItems();
+        this.selectPegawai = Pegawaiselect;
+        this.selectCabang = null;
+        this.selectPembeli = null;
 
+        IdTF.setText(Pegawaiselect.get(0).getID());
+        namaTF.setText(Pegawaiselect.get(0).getNama());
+        nomorTF.setText(Pegawaiselect.get(0).getNomorTelepon());
     }
 
     @FXML
     private void PgwTblClicked() {
+        ObservableList<NomorTelepon> Pegawaiselect;
+        Pegawaiselect = PegawaiTableView.getSelectionModel().getSelectedItems();
+        this.selectPegawai = Pegawaiselect;
+        this.selectCabang = null;
+        this.selectPembeli = null;
 
+        IdTF.setText(Pegawaiselect.get(0).getID());
+        namaTF.setText(Pegawaiselect.get(0).getNama());
+        nomorTF.setText(Pegawaiselect.get(0).getNomorTelepon());
     }
 
     @FXML
     private void PmbTblPressed() {
+        ObservableList<NomorTelepon> Pembeliselect;
+        Pembeliselect = PembeliTableView.getSelectionModel().getSelectedItems();
+        this.selectPembeli = Pembeliselect;
+        this.selectCabang = null;
+        this.selectPegawai = null;
 
+        IdTF.setText(Pembeliselect.get(0).getID());
+        namaTF.setText(Pembeliselect.get(0).getNama());
+        nomorTF.setText(Pembeliselect.get(0).getNomorTelepon());
     }
 
     @FXML
     private void PmbTblClicked() {
+        ObservableList<NomorTelepon> Pembeliselect;
+        Pembeliselect = PembeliTableView.getSelectionModel().getSelectedItems();
+        this.selectPembeli = Pembeliselect;
+        this.selectCabang = null;
+        this.selectPegawai = null;
 
+        IdTF.setText(Pembeliselect.get(0).getID());
+        namaTF.setText(Pembeliselect.get(0).getNama());
+        nomorTF.setText(Pembeliselect.get(0).getNomorTelepon());
     }
 
     private void updateTblCabang() {
@@ -163,11 +380,11 @@ public class KontakAdminController implements Initializable {
 
 
     private void pullDBCabang() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
         String query = "SELECT n.no_Cabang, email_Cabang, no_Telp FROM no_Telp_Cabang n JOIN Cabang c ON n.no_Cabang = c.no_Cabang";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
 
             // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();
@@ -188,11 +405,11 @@ public class KontakAdminController implements Initializable {
     }
 
     private void pullDBPegawai() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
         String query = "SELECT n.ID_Pegawai, p.Nama, no_Telp FROM no_Telp_Pegawai n JOIN Pegawai p ON n.ID_Pegawai = p.ID_Pegawai";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
 
             // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();
@@ -213,11 +430,11 @@ public class KontakAdminController implements Initializable {
     }
 
     private void pullDBPembeli() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
         String query = "SELECT n.ID_Pembeli, p.Nama, no_Telp FROM no_Telp_Pembeli n JOIN Pembeli p ON n.ID_Pembeli = p.ID_Pembeli";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
 
             // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();

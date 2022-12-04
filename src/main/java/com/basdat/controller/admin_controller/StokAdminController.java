@@ -5,6 +5,8 @@ import com.basdat.db_models.Mobil;
 import com.basdat.db_models.StokMobil;
 import com.basdat.db_models.StokSK;
 import com.basdat.db_models.SukuCadang;
+import com.basdat.repository.DBConnect;
+import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,6 +28,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 import static com.basdat.repository.DBConnect.connectionUrl;
+import static com.basdat.repository.DBConnect.getConnection;
 
 public class StokAdminController implements Initializable {
 
@@ -81,41 +84,40 @@ public class StokAdminController implements Initializable {
         int idCabang = Integer.parseInt(IdCbgTF.getText().trim());
         int stok = Integer.parseInt(stokTF.getText().trim());
 
+        Connection con = DBConnect.getConnection();
         String query = "INSERT INTO Stok values (?,?,?)";
 
         if (selectSK == null) {
 
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setInt(1, idCabang);
                 ps.setInt(2, idProduk);
                 ps.setInt(3, stok);
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "ADD SUCCESS");
+                Notification.Information("Information", "ADD SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "ADD FAILED");
+                Notification.Error("ERROR", "ADD FAILED");
             }
 
         }
         else if (selectMobil == null) {
 
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setInt(1, idCabang);
                 ps.setInt(2, idProduk);
                 ps.setInt(3, stok);
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "ADD SUCCESS");
+                Notification.Information("Information", "ADD SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "ADD FAILED");
+                Notification.Error("ERROR", "ADD FAILED");
             }
         }
         App.setRoot("fxml/admin_menu/stokAdmin");
@@ -126,43 +128,38 @@ public class StokAdminController implements Initializable {
         int idProduk = Integer.parseInt(IdPrdTF.getText().trim());
         int idCabang = Integer.parseInt(IdCbgTF.getText().trim());
         int stok = Integer.parseInt(stokTF.getText().trim());
-        String table = "Stok";
 
-        String query = "UPDATE " + table + " SET stok = ? WHERE ID_Cabang = ? AND ID_Produk = ?";
+        Connection con = DBConnect.getConnection();
+        String query = "UPDATE Stok SET stok = ? WHERE ID_Cabang = ? AND ID_Produk = ?";
 
         if (selectSK == null) {
-
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setInt(1, stok);
                 ps.setInt(2, idCabang);
                 ps.setInt(3, idProduk);
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+                Notification.Information("Information", "EDIT SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "EDIT FAILED");
+                Notification.Error("ERROR", "EDIT FAILED");
             }
-
         }
         else if (selectMobil == null) {
-
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setInt(1, stok);
                 ps.setInt(2, idCabang);
                 ps.setInt(3, idProduk);
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+                Notification.Information("Information", "EDIT SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "EDIT FAILED");
+                Notification.Error("ERROR", "EDIT FAILED");
             }
         }
         App.setRoot("fxml/admin_menu/stokAdmin");
@@ -172,41 +169,36 @@ public class StokAdminController implements Initializable {
     private void deleteBtnAction() throws IOException {
         int idProduk = Integer.parseInt(IdPrdTF.getText().trim());
         int idCabang = Integer.parseInt(IdCbgTF.getText().trim());
-        String table = "Stok";
 
-        String query = "DELETE FROM " + table + " WHERE ID_Cabang = ? AND ID_Produk = ?";
+        Connection con = DBConnect.getConnection();
+        String query = "DELETE FROM Stok WHERE ID_Cabang = ? AND ID_Produk = ?";
 
         if (selectSK == null) {
-
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setInt(1, idCabang);
                 ps.setInt(2, idProduk);
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+                Notification.Information("Information", "DELETE SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "DELETE FAILED");
+                Notification.Error("ERROR", "DELETE FAILED");
             }
-
         }
         else if (selectMobil == null) {
-
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setInt(1, idCabang);
                 ps.setInt(2, idProduk);
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+                Notification.Information("Information", "DELETE SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "DELETE FAILED");
+                Notification.Error("ERROR", "DELETE FAILED");
             }
         }
         App.setRoot("fxml/admin_menu/stokAdmin");
@@ -341,22 +333,44 @@ public class StokAdminController implements Initializable {
     }
 
     private void pullDBStokMobil() {
-        ResultSet resultSet;
-        String query = "SELECT DISTINCT ID_Cabang, p.ID_Produk, nama_Produk, stok FROM Stok s JOIN Produk p ON p.ID_Produk = s.ID_Produk WHERE jenis_Produk = ? ORDER BY p.ID_Produk";
+        Connection con = getConnection();
+        ResultSet resultSet, resultSet1;
+        String query = "SELECT ID_Cabang, ID_Produk, SUM(stok) as stok FROM Stok " +
+                "GROUP BY ID_Cabang, ID_Produk " +
+                "ORDER BY ID_Produk";
+        String query1 = "DELETE FROM Stok";
+        String query2 = "INSERT INTO Stok values (?,?,?)";
+        String query3 = "SELECT DISTINCT ID_Cabang, p.ID_Produk, nama_Produk, stok FROM Stok s JOIN Produk p ON p.ID_Produk = s.ID_Produk " +
+                "WHERE jenis_Produk = ? ORDER BY p.ID_Produk";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, "Mobil");
+        try(PreparedStatement ps = con.prepareStatement(query);
+        PreparedStatement ps1 = con.prepareStatement(query1);
+        PreparedStatement ps2 = con.prepareStatement(query2);
+        PreparedStatement ps3 = con.prepareStatement(query3)) {
 
-            // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();
 
-            // Add result to list
+            ps1.executeUpdate();
+
             while (resultSet.next()) {
-                dataMobil.add(new StokMobil(resultSet.getInt(1),
-                        resultSet.getInt(2),
-                        resultSet.getString(3),
-                        resultSet.getInt(4)
+                ps2.setString(1, resultSet.getString(1));
+                ps2.setString(2, resultSet.getString(2));
+                ps2.setString(3, resultSet.getString(3));
+
+                ps2.executeUpdate();
+            }
+
+            ps3.setString(1, "Mobil");
+
+            // Create and execute a SELECT SQL statement.
+            resultSet1 = ps3.executeQuery();
+
+            // Add result to list
+            while (resultSet1.next()) {
+                dataMobil.add(new StokMobil(resultSet1.getInt(1),
+                        resultSet1.getInt(2),
+                        resultSet1.getString(3),
+                        resultSet1.getInt(4)
                 ));
 
             }
@@ -368,22 +382,44 @@ public class StokAdminController implements Initializable {
     }
 
     private void pullDBStokSK() {
-        ResultSet resultSet;
-        String query = "SELECT DISTINCT ID_Cabang, p.ID_Produk, nama_Produk, stok FROM Stok s JOIN Produk p ON p.ID_Produk = s.ID_Produk WHERE jenis_Produk = ? ORDER BY p.ID_Produk";
+        Connection con = getConnection();
+        ResultSet resultSet, resultSet1;
+        String query = "SELECT ID_Cabang, ID_Produk, SUM(stok) as stok FROM Stok " +
+                "GROUP BY ID_Cabang, ID_Produk " +
+                "ORDER BY ID_Produk";
+        String query1 = "DELETE FROM Stok";
+        String query2 = "INSERT INTO Stok values (?,?,?)";
+        String query3 = "SELECT DISTINCT ID_Cabang, p.ID_Produk, nama_Produk, stok FROM Stok s JOIN Produk p ON p.ID_Produk = s.ID_Produk " +
+                "WHERE jenis_Produk = ? ORDER BY p.ID_Produk";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, "Suku Cadang");
+        try(PreparedStatement ps = con.prepareStatement(query);
+            PreparedStatement ps1 = con.prepareStatement(query1);
+            PreparedStatement ps2 = con.prepareStatement(query2);
+            PreparedStatement ps3 = con.prepareStatement(query3)) {
 
-            // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();
 
-            // Add result to list
+            ps1.executeUpdate();
+
             while (resultSet.next()) {
-                dataSK.add(new StokSK(resultSet.getInt(1),
-                        resultSet.getInt(2),
-                        resultSet.getString(3),
-                        resultSet.getInt(4)
+                ps2.setString(1, resultSet.getString(1));
+                ps2.setString(2, resultSet.getString(2));
+                ps2.setString(3, resultSet.getString(3));
+
+                ps2.executeUpdate();
+            }
+
+            ps3.setString(1, "Suku Cadang");
+
+            // Create and execute a SELECT SQL statement.
+            resultSet1 = ps3.executeQuery();
+
+            // Add result to list
+            while (resultSet1.next()) {
+                dataMobil.add(new StokMobil(resultSet1.getInt(1),
+                        resultSet1.getInt(2),
+                        resultSet1.getString(3),
+                        resultSet1.getInt(4)
                 ));
 
             }

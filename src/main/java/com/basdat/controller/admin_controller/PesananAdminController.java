@@ -4,6 +4,8 @@ import com.basdat.App;
 import com.basdat.db_models.DaftarPesanan;
 import com.basdat.db_models.Pegawai;
 import com.basdat.db_models.Pesanan;
+import com.basdat.repository.DBConnect;
+import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -22,9 +24,12 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.basdat.repository.DBConnect.connectionUrl;
+import static com.basdat.repository.DBConnect.getConnection;
 
 public class PesananAdminController implements Initializable {
 
@@ -87,36 +92,70 @@ public class PesananAdminController implements Initializable {
     }
 
     @FXML
-    private void addBtnAction() throws IOException {
+    private void serveBtnAction() throws IOException {
         String IdPesanan = IdPsnTF.getText().trim();
-        String IdPembeli =  IdPblTF.getText().trim();
-        Date tanggalPembelian = Date.valueOf(TglTF.getText().trim());
-        String status = "";
-        String IdPegawai = IdPgwTF.getText().trim();
-        String IdPembayaran = IdPmbTF.getText().trim();
-        String table = "Pesanan";
+        String ID_Pegawai = LoginAdminController.getID_Pegawai();
 
-        if(!IdPembayaran.isBlank()) {
-            status = "Terbayar";
-        }
-        else {
-            status = "Belum Terbayar";
-        }
+        Connection con = DBConnect.getConnection();
+        String query = "UPDATE Pesanan SET ID_Pegawai = ? WHERE ID_Pesanan = ?";
 
-        String query = "INSERT INTO " + table + " values (?,?,?,?,?,?)";
-
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, IdPesanan);
-            ps.setString(2, IdPembeli);
-            ps.setDate(3, tanggalPembelian);
-            ps.setString(4, status);
-            ps.setString(5, IdPegawai);
-            ps.setString(6, IdPembayaran);
+        try(PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, ID_Pegawai);
+            ps.setString(2, IdPesanan);
 
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "ADD SUCCESS");
+            Notification.Information("Information", "SUCCESS");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            Notification.Error("ERROR", "FAILED");
+        }
+
+        App.setRoot("fxml/admin_menu/PesananAdmin");
+    }
+
+    @FXML
+    private void deleteBtnAction() throws IOException {
+        String IdPesanan = IdPsnTF.getText().trim();
+        String IdProduk = produkTF.getText().trim();
+
+        Connection con = DBConnect.getConnection();
+        String query = "DELETE FROM Daftar_Pesanan WHERE ID_Pesanan = ? AND ID_Produk = ?";
+
+        try(PreparedStatement ps = con.prepareStatement(query)){
+            ps.setString(1, IdPesanan);
+            ps.setString(2, IdProduk);
+
+            ps.executeUpdate();
+
+            Notification.Information("Information", "DELETE SUCCESS");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            Notification.Error("ERROR", "DELETE FAILED");
+        }
+
+        App.setRoot("fxml/admin_menu/PesananAdmin");
+    }
+
+    @FXML
+    private void addBtnAction() throws IOException {
+        String IdPesanan = IdPsnTF.getText().trim();
+        String IdProduk = produkTF.getText().trim();
+        String kuantitas = kuantitasTF.getText().trim();
+
+        Connection con = DBConnect.getConnection();
+        String query = "INSERT INTO Daftar_Pesanan values (?,?,?)";
+
+        try(PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, IdPesanan);
+            ps.setString(2, IdProduk);
+            ps.setString(3, kuantitas);
+
+            ps.executeUpdate();
+
+            Notification.Information("Information", "ADD SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -129,68 +168,46 @@ public class PesananAdminController implements Initializable {
     @FXML
     private void editBtnAction() throws IOException {
         String IdPesanan = IdPsnTF.getText().trim();
-        String IdPembeli =  IdPblTF.getText().trim();
-        Date tanggalPembelian = Date.valueOf(TglTF.getText().trim());
-        String status = "";
-        String IdPegawai = IdPgwTF.getText().trim();
-        String IdPembayaran = IdPmbTF.getText().trim();
-        String table = "Pesanan";
+        String IdProduk = produkTF.getText().trim();
+        String kuantitas = kuantitasTF.getText().trim();
 
-        if(!IdPembayaran.isBlank()) {
-            status = "Terbayar";
-        }
-        else {
-            status = "Belum Terbayar";
-        }
+        Connection con = DBConnect.getConnection();
+        String query = "UPDATE Daftar_Pesanan SET jumlah_Pembelian WHERE ID_Pesanan = ? AND ID_Produk = ?";
 
-        String query = "UPDATE " + table + " SET ID_Pembeli = ?, tanggal_Pesanan = ?, Status = ?, ID_Pegawai = ?, ID_Pembayaran = ? WHERE ID_Pesanan = ?";
-
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, IdPembeli);
-            ps.setDate(2, tanggalPembelian);
-            ps.setString(3, status);
-            ps.setString(4, IdPegawai);
-            ps.setString(5, IdPembayaran);
-            ps.setString(6, IdPesanan);
+        try(PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, kuantitas);
+            ps.setString(2, IdPesanan);
+            ps.setString(3, IdProduk);
 
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+            Notification.Information("Information", "EDIT SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "EDIT FAILED");
+            Notification.Error("ERROR", "EDIT FAILED");
         }
 
         App.setRoot("fxml/admin_menu/PesananAdmin");
     }
 
     @FXML
-    private void deleteBtnAction() throws IOException {
+    private void deleteBtnAction1() throws IOException {
         String IdPesanan = IdPsnTF.getText().trim();
-        String table = "Pesanan";
-        String table1 = "Daftar_Pesanan";
 
-        String query = "DELETE FROM " + table + " WHERE ID_Pesanan = ?";
-        String query1 = "DELETE FROM " + table1 + " WHERE ID_Pesanan = ?";
+        Connection con = getConnection();
+        String query = "DELETE FROM Pesanan WHERE ID_Pesanan = ?";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            Connection connection1 = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query);
-            PreparedStatement ps1 = connection1.prepareStatement(query1)) {
+        try(PreparedStatement ps = con.prepareStatement(query)){
             ps.setString(1, IdPesanan);
 
-            ps1.setString(1, IdPesanan);
-
-            ps1.executeUpdate();
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+            Notification.Information("Information", "DELETE SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "DELETE FAILED");
+            Notification.Error("ERROR", "DELETE FAILED");
         }
 
         App.setRoot("fxml/admin_menu/PesananAdmin");
@@ -279,6 +296,7 @@ public class PesananAdminController implements Initializable {
         statTF.setText(selectPesanan.get(0).getStatus());
         IdPgwTF.setText(selectPesanan.get(0).getID_Pegawai());
         IdPmbTF.setText(selectPesanan.get(0).getID_Pembayaran());
+
         produkTF.clear();
         kuantitasTF.clear();
     }
@@ -293,6 +311,7 @@ public class PesananAdminController implements Initializable {
         statTF.setText(selectPesanan.get(0).getStatus());
         IdPgwTF.setText(selectPesanan.get(0).getID_Pegawai());
         IdPmbTF.setText(selectPesanan.get(0).getID_Pembayaran());
+
         produkTF.clear();
         kuantitasTF.clear();
     }
@@ -326,11 +345,11 @@ public class PesananAdminController implements Initializable {
     }
 
     private void pullDBPesanan() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
         String query = "SELECT ID_Pesanan, ID_Pembeli, tanggal_Pesanan, Status, ID_Pegawai, ID_Pembayaran FROM Pesanan ORDER BY ID_Pesanan";
 
-        try (Connection connection = DriverManager.getConnection(connectionUrl);
-             PreparedStatement ps = connection.prepareStatement(query)) {
+        try (PreparedStatement ps = con.prepareStatement(query)) {
 
             // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();
@@ -353,22 +372,46 @@ public class PesananAdminController implements Initializable {
     }
 
     private void pullDBDaftarPesanan() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
-        String query = "SELECT ID_Pesanan, ID_Produk, jumlah_Pembelian FROM Daftar_Pesanan ORDER BY ID_Produk";
 
-        try (Connection connection = DriverManager.getConnection(connectionUrl);
-             PreparedStatement ps = connection.prepareStatement(query)) {
+        String query = "SELECT ID_Pesanan, ID_Produk, SUM(jumlah_Pembelian) as jumlah_Pembelian FROM Daftar_Pesanan \n " +
+                "GROUP BY ID_Pesanan, ID_Produk\n " +
+                "ORDER BY ID_Pesanan";
+        String query1 = "DELETE FROM Daftar_Pesanan";
+        String query2 = "INSERT INTO Daftar_Pesanan values (?,?,?)";
+
+        try (PreparedStatement ps = con.prepareStatement(query);
+        PreparedStatement ps1 = con.prepareStatement(query1);
+        PreparedStatement ps2 = con.prepareStatement(query2)) {
 
             // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();
 
             // Add result to list
+            List<DaftarPesanan> entities = new ArrayList<DaftarPesanan>();
             while (resultSet.next()) {
                 dataDaftarPesanan.add(new DaftarPesanan(resultSet.getString(1),
                         resultSet.getString(2),
                         resultSet.getInt(3)
                 ));
 
+                DaftarPesanan entity = new DaftarPesanan();
+                entity.setID_Pesanan(resultSet.getString(1));
+                entity.setID_Produk(resultSet.getString(2));
+                entity.setKuantitas(resultSet.getInt(3));
+
+                entities.add(entity);
+            }
+
+            ps1.executeUpdate();
+
+            for (DaftarPesanan daftarPesanan : entities) {
+                ps2.setString(1, daftarPesanan.getID_Pesanan());
+                ps2.setString(2, daftarPesanan.getID_Produk());
+                ps2.setInt(3, daftarPesanan.getKuantitas());
+
+                ps2.executeUpdate();
             }
 
         } catch (SQLException e) {

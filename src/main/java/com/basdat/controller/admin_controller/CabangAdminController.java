@@ -3,6 +3,8 @@ package com.basdat.controller.admin_controller;
 import com.basdat.App;
 import com.basdat.db_models.Cabang;
 import com.basdat.db_models.Pegawai;
+import com.basdat.repository.DBConnect;
+import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -73,32 +75,29 @@ public class CabangAdminController implements Initializable {
 
     @FXML
     private void addBtnAction() throws IOException {
-        int noCabang = Integer.parseInt(IdTF.getText().trim());
         String email = emailTF.getText().trim();
         String jalan = jalanTF.getText().trim();
         String kec = kecTF.getText().trim();
         String kota = kotaTF.getText().trim();
         int kapasitas = Integer.parseInt(kptsTF.getText().trim());
-        String table = "Cabang";
 
-        String query = "INSERT INTO " + table + " values (?,?,?,?,?,?)";
+        Connection con = DBConnect.getConnection();
+        String query = "INSERT INTO Cabang values (?,?,?,?,?)";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, noCabang);
-            ps.setString(2, email);
-            ps.setString(3, jalan);
-            ps.setString(4, kec);
-            ps.setString(5, kota);
-            ps.setInt(6, kapasitas);
+        try(PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, email);
+            ps.setString(2, jalan);
+            ps.setString(3, kec);
+            ps.setString(4, kota);
+            ps.setInt(5, kapasitas);
 
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "ADD SUCCESS");
+            Notification.Information("Information", "ADD SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "ADD FAILED");
+            Notification.Error("ERROR", "ADD FAILED");
         }
 
         App.setRoot("fxml/admin_menu/cabangAdmin");
@@ -112,12 +111,11 @@ public class CabangAdminController implements Initializable {
         String kec = kecTF.getText().trim();
         String kota = kotaTF.getText().trim();
         int kapasitas = Integer.parseInt(kptsTF.getText().trim());
-        String table = "Cabang";
 
-        String query = "UPDATE " + table + "SET email_Cabang = ?, jalan_Cabang = ?, kecamatan_Cabang = ?, kota_Cabang = ?, kapasitas = ? WHERE no_Cabang = ?";
+        Connection con = DBConnect.getConnection();
+        String query = "UPDATE Cabang SET email_Cabang = ?, jalan_Cabang = ?, kecamatan_Cabang = ?, kota_Cabang = ?, kapasitas = ? WHERE no_Cabang = ?";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, email);
             ps.setString(2, jalan);
             ps.setString(3, kec);
@@ -127,11 +125,11 @@ public class CabangAdminController implements Initializable {
 
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+            Notification.Information("Information", "EDIT SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "EDIT FAILED");
+            Notification.Error("ERROR", "EDIT FAILED");
         }
 
         App.setRoot("fxml/admin_menu/cabangAdmin");
@@ -140,35 +138,21 @@ public class CabangAdminController implements Initializable {
     @FXML
     private void deleteBtnAction() throws IOException {
         int noCabang = Integer.parseInt(IdTF.getText().trim());
-        String table = "Cabang";
-        String table1 = "Stok";
-        String table2 = "no_Telp_Cabang";
 
-        String query = "DELETE FROM " + table + " WHERE no_Cabang = ?";
-        String query1 = "DELETE FROM " + table1 + " WHERE ID_Cabang = ?";
-        String query2 = "DELETE FROM " + table2 + " WHERE ID_Cabang = ?";
+        Connection con = DBConnect.getConnection();
+        String query = "DELETE FROM Cabang WHERE no_Cabang = ?";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            Connection connection1 = DriverManager.getConnection(connectionUrl);
-            Connection connection2 = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query);
-            PreparedStatement ps1 = connection1.prepareStatement(query1);
-            PreparedStatement ps2 = connection2.prepareStatement(query2)) {
+        try(PreparedStatement ps = con.prepareStatement(query)){
+
             ps.setInt(1, noCabang);
 
-            ps1.setInt(1, noCabang);
-
-            ps2.setInt(1, noCabang);
-
-            ps2.executeUpdate();
-            ps1.executeUpdate();
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+            Notification.Information("Information", "DELETE SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "DELETE FAILED");
+            Notification.Error("ERROR", "DELETE FAILED");
         }
 
         App.setRoot("fxml/admin_menu/cabangAdmin");
@@ -250,11 +234,11 @@ public class CabangAdminController implements Initializable {
     }
 
     private void pullDBCabang() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
         String query = "SELECT no_Cabang, email_Cabang, jalan_Cabang, kecamatan_Cabang, kota_Cabang, kapasitas FROM Cabang";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
 
             // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();

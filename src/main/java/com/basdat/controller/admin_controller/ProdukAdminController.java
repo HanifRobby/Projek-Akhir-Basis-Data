@@ -3,6 +3,8 @@ package com.basdat.controller.admin_controller;
 import com.basdat.App;
 import com.basdat.db_models.Mobil;
 import com.basdat.db_models.SukuCadang;
+import com.basdat.repository.DBConnect;
+import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -24,8 +26,8 @@ import java.util.EventListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static com.basdat.repository.DBConnect.AltConnectionUrl;
 import static com.basdat.repository.DBConnect.connectionUrl;
+import static com.basdat.repository.DBConnect.getConnection;
 
 public class ProdukAdminController implements Initializable {
 
@@ -95,12 +97,11 @@ public class ProdukAdminController implements Initializable {
         String tahun = tahunTF.getText().trim();
         String harga = hargaTF.getText().trim();
 
+        Connection con = getConnection();
         String query = "INSERT INTO Produk values (?,?,?,?,?,?)";
 
         if (selectSK == null) {
-
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setString(1, id);
                 ps.setString(2, produk);
                 ps.setString(3, merk);
@@ -110,18 +111,15 @@ public class ProdukAdminController implements Initializable {
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "ADD SUCCESS");
+                Notification.Information("Information", "ADD SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "ADD FAILED");
+                Notification.Error("ERROR", "ADD FAILED");
             }
-
         }
         else if (selectMobil == null) {
-
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setString(1, id);
                 ps.setString(2, produk);
                 ps.setString(3, merk);
@@ -131,11 +129,11 @@ public class ProdukAdminController implements Initializable {
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "ADD SUCCESS");
+                Notification.Information("Information", "ADD SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "ADD FAILED");
+                Notification.Error("ERROR", "ADD FAILED");
             }
         }
         App.setRoot("fxml/admin_menu/produkAdmin");
@@ -148,12 +146,10 @@ public class ProdukAdminController implements Initializable {
         String merk = merkTF.getText().trim();
         String tahun = tahunTF.getText().trim();
         String harga = hargaTF.getText().trim();
-        String table = "Produk";
 
-        String query = "UPDATE " + table + " SET nama_Produk = ?, merk = ?, tahun_Produksi = ?, harga = ? WHERE ID_Produk = ? AND jenis_Produk = ?";
+        String query = "UPDATE Produk SET nama_Produk = ?, merk = ?, tahun_Produksi = ?, harga = ? WHERE ID_Produk = ? AND jenis_Produk = ?";
 
         if (selectSK == null) {
-
             try(Connection connection = DriverManager.getConnection(connectionUrl);
                 PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, produk);
@@ -165,16 +161,15 @@ public class ProdukAdminController implements Initializable {
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+                Notification.Information("Information", "EDIT SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "EDIT FAILED");
+                Notification.Error("ERROR", "EDIT FAILED");
             }
 
         }
         else if (selectMobil == null) {
-
             try(Connection connection = DriverManager.getConnection(connectionUrl);
                 PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, produk);
@@ -186,11 +181,11 @@ public class ProdukAdminController implements Initializable {
 
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+                Notification.Information("Information", "EDIT SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "EDIT FAILED");
+                Notification.Error("ERROR", "EDIT FAILED");
             }
         }
         App.setRoot("fxml/admin_menu/produkAdmin");
@@ -206,41 +201,41 @@ public class ProdukAdminController implements Initializable {
         String query1 = "DELETE FROM " + table1 + " WHERE ID_Produk = ?";
 
         if (selectSK == null) {
-
             try(Connection connection = DriverManager.getConnection(connectionUrl);
-                Connection connection1 = DriverManager.getConnection(connectionUrl);
                 PreparedStatement ps = connection.prepareStatement(query);
-                PreparedStatement ps1 = connection1.prepareStatement(query1)) {
+                PreparedStatement ps1 = connection.prepareStatement(query1)) {
                 ps.setString(1, id);
                 ps.setString(2, "Mobil");
 
                 ps1.setString(1, id);
 
-                ps1.executeUpdate();
                 ps.executeUpdate();
+                ps1.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+                Notification.Information("Information", "DELETE SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "DELETE FAILED");
+                Notification.Error("ERROR", "DELETE FAILED");
             }
-
         }
         else if (selectMobil == null) {
-
             try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement("DELETE FROM " + table + " WHERE ID_Produk = ? AND jenis_Produk = ?")) {
+                PreparedStatement ps = connection.prepareStatement(query);
+                PreparedStatement ps1 = connection.prepareStatement(query1)) {
                 ps.setString(1, id);
                 ps.setString(2, "Suku Cadang");
 
-                ps.executeUpdate();
+                ps1.setString(1, id);
 
-                JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+                ps.executeUpdate();
+                ps1.executeUpdate();
+
+                Notification.Information("Information", "DELETE SUCCESS");
             }
             catch (SQLException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "DELETE FAILED");
+                Notification.Error("ERROR", "DELETE FAILED");
             }
         }
         App.setRoot("fxml/admin_menu/produkAdmin");
@@ -385,11 +380,11 @@ public class ProdukAdminController implements Initializable {
     }
 
     private void pullDBMobil() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
         String query = "SELECT id_produk, nama_Produk, merk, tahun_Produksi,harga from Produk WHERE jenis_Produk = ? ORDER BY id_produk";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, "Mobil");
 
             // Create and execute a SELECT SQL statement.
@@ -413,11 +408,11 @@ public class ProdukAdminController implements Initializable {
     }
 
     private void pullDBSK() {
+        Connection con = getConnection();
         ResultSet resultSet;
         String query = "SELECT id_produk, nama_Produk, merk, tahun_Produksi,harga from Produk WHERE jenis_Produk = ? ORDER BY id_produk";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, "Suku Cadang");
 
             // Create and execute a SELECT SQL statement.
