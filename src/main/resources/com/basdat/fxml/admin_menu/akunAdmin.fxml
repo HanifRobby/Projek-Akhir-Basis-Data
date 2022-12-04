@@ -78,7 +78,7 @@
                                         <Font name="Gilroy-ExtraBold" size="18.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="backBtn" layoutX="595.0" layoutY="2.0" mnemonicParsing="false" onAction="#backBtnAction" prefHeight="40.0" prefWidth="80.0" stylesheets="@../../styles/SignUpStyles.css" text="BACK" textAlignment="CENTER" textFill="WHITE">
+                                <Button fx:id="backBtn" layoutX="595.0" layoutY="2.0" mnemonicParsing="false" onAction="#backBtnAct" prefHeight="40.0" prefWidth="80.0" stylesheets="@../../styles/SignUpStyles.css" text="BACK" textAlignment="CENTER" textFill="WHITE">
                                     <font>
                                         <Font name="Gilroy-ExtraBold" size="18.0" />
                                     </font>

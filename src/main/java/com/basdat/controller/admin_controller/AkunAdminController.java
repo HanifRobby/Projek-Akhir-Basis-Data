@@ -106,6 +106,11 @@ public class AkunAdminController implements Initializable {
 
     }
 
+    @FXML
+    private void backBtnAct() throws IOException {
+        App.setRoot("fxml/admin_menu/menuAdmin");
+    }
+
     private void setNewPass (String newPass) {
         String ID_Pengguna = LoginAdminController.getID_Pengguna();
 
@@ -114,7 +119,7 @@ public class AkunAdminController implements Initializable {
 
         try(PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, newPass);
-            ps.setString(2, LoginAdminController.getID_Pengguna());
+            ps.setString(2, ID_Pengguna);
 
             ps.executeUpdate();
         }
@@ -124,9 +129,5 @@ public class AkunAdminController implements Initializable {
         }
     }
 
-    @FXML
-    private void backBtnAction() throws IOException {
-        App.setRoot("fxml/admin_menu/akunAdmin");
-    }
 
 }
