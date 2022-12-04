@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: D75020;" stylesheets="@../../styles/AkunAdminStyles.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.admin_controller.AkunAdminController">
+    <children>
+        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Pane prefHeight="200.0" prefWidth="100.0" />
+                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" spacing="10.0" style="-fx-background-color: D9D9D9;">
+                    <padding>
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                    </padding>
+                    <children>
+                        <Pane prefHeight="600.0" prefWidth="0.0">
+                            <children>
+                        <Text fx:id="emailTxt" layoutX="306.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hanif@gmail.com" wrappingWidth="367.0">
+                           <font>
+                              <Font name="Gilroy-Light" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="namaTxt" layoutX="308.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hanif Robby Rodhiya" wrappingWidth="367.0">
+                           <font>
+                              <Font name="Gilroy-Light" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="noCabangTxt" layoutX="365.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="61321412" wrappingWidth="367.0">
+                           <font>
+                              <Font name="Gilroy-Light" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="jalanTxt" layoutX="306.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blora Cepu" wrappingWidth="367.0">
+                           <font>
+                              <Font name="Gilroy-Light" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="kecTxt" layoutX="360.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jepon" wrappingWidth="297.0">
+                           <font>
+                              <Font name="Gilroy-Light" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="kotaTxt" layoutX="297.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blora" wrappingWidth="367.0">
+                           <font>
+                              <Font name="Gilroy-Light" size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="usernameTxt" layoutX="133.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hanif123" wrappingWidth="217.0">
+                           <font>
+                              <Font name="Gilroy-Light" size="18.0" />
+                           </font>
+                        </Text>
+                                <Label alignment="CENTER" layoutX="-9.0" layoutY="-1.0" prefHeight="46.0" prefWidth="308.0" text="PERSONAL DATA" textAlignment="CENTER" textFill="#f9602a">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="37.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="242.0" layoutY="56.0" prefHeight="24.0" prefWidth="74.0" text="Email" textAlignment="CENTER" textFill="#f9602a">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="25.0" layoutY="332.0" text="username" textAlignment="CENTER" textFill="#f9602a">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="descriptionLabelSU" layoutX="391.0" layoutY="467.0" prefHeight="29.0" prefWidth="266.0" textFill="RED">
+                                    <font>
+                                        <Font name="Gilroy-Light" size="16.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="newPassBtn" layoutX="24.0" layoutY="523.0" mnemonicParsing="false" onAction="#newPassBtnAction" prefHeight="8.0" prefWidth="119.0" stylesheets="@../../styles/SignUpStyles.css" text="CONFIRM" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="18.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="backBtn" layoutX="595.0" layoutY="2.0" mnemonicParsing="false" onAction="#backBtnAction" prefHeight="40.0" prefWidth="80.0" stylesheets="@../../styles/SignUpStyles.css" text="BACK" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="18.0" />
+                                    </font>
+                                </Button>
+                                <Label layoutX="242.0" layoutY="92.0" text="Nama" textAlignment="CENTER" textFill="#f9602a">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="244.0" layoutY="247.0" text="No Cabang" textAlignment="CENTER" textFill="#f9602a">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="242.0" layoutY="131.0" text="Jalan" textFill="#f9602a">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="243.0" layoutY="172.0" text="Kecamatan" textFill="#f9602a">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="243.0" layoutY="208.0" text="Kota" textFill="#f9602a">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" layoutY="286.0" prefHeight="46.0" prefWidth="217.0" text="CHANGE PASSWORD" textFill="#f9602a">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <ImageView fx:id="profileImage" fitHeight="200.0" fitWidth="200.0" layoutX="14.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../images/male.png" />
+                                    </image>
+                                </ImageView>
+                        <Label layoutX="25.0" layoutY="370.0" text="new password" textAlignment="CENTER" textFill="#f9602a">
+                           <font>
+                              <Font name="Gilroy-ExtraBold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="25.0" layoutY="441.0" text="confirm password" textAlignment="CENTER" textFill="#f9602a">
+                           <font>
+                              <Font name="Gilroy-ExtraBold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Text fx:id="wrongPassTxt" fill="RED" layoutX="25.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="546.0">
+                           <font>
+                              <Font name="Gilroy-Light" size="18.0" />
+                           </font>
+                        </Text>
+                        <PasswordField fx:id="newPassTF" layoutX="25.0" layoutY="398.0" prefHeight="25.0" prefWidth="217.0" />
+                        <PasswordField fx:id="newPassTF1" layoutX="25.0" layoutY="469.0" prefHeight="25.0" prefWidth="217.0" />
+                            </children>
+                        </Pane>
+                    </children>
+                </VBox>
+                <Pane prefHeight="200.0" prefWidth="100.0" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

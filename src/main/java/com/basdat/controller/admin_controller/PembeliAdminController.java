@@ -3,6 +3,8 @@ package com.basdat.controller.admin_controller;
 import com.basdat.App;
 import com.basdat.db_models.Pegawai;
 import com.basdat.db_models.Pembeli;
+import com.basdat.repository.DBConnect;
+import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -79,54 +81,6 @@ public class PembeliAdminController implements Initializable {
     }
 
     @FXML
-    private void addBtnAction() throws IOException {
-        String idPgn = IdAkunTF.getText().trim();
-        String idPmb = IdTF.getText().trim();
-        String nama = namaTF.getText().trim();
-        String NIK = NikTF.getText().trim();
-        String kelamin = JkTF.getText().trim();
-        String jalan = jalanTF.getText().trim();
-        String kec = kecTF.getText().trim();
-        String kota = kotaTF.getText().trim();
-        String table = "Pembeli";
-        String table1 = "Pengguna";
-
-        String query = "INSERT INTO " + table + " values (?,?,?,?,?,?,?,?)";
-        String query1 = "INSERT INTO " + table1 + " values (?,?,?,?)";
-
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            Connection connection1 = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query);
-            PreparedStatement ps1 = connection1.prepareStatement(query1)) {
-            ps.setString(1, ("4"+idPgn));
-            ps.setInt(2, Integer.parseInt(idPmb));
-            ps.setString(3, nama);
-            ps.setString(4, NIK);
-            ps.setString(5, kelamin);
-            ps.setString(6, jalan);
-            ps.setString(7, kec);
-            ps.setString(8, kota);
-
-            ps1.setString(1, ("4" + idPgn));
-            ps1.setString(2, (nama+"123@gmail.com"));
-            ps1.setString(3, (nama + "123"));
-            ps1.setString(4, (NIK+nama));
-
-            ps1.executeUpdate();
-
-            ps.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "ADD SUCCESS");
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "ADD FAILED");
-        }
-
-        App.setRoot("fxml/admin_menu/pembeliAdmin");
-    }
-
-    @FXML
     private void editBtnAction() throws IOException {
         String idPgn = IdAkunTF.getText().trim();
         String idPmb = IdTF.getText().trim();
@@ -136,12 +90,12 @@ public class PembeliAdminController implements Initializable {
         String jalan = jalanTF.getText().trim();
         String kec = kecTF.getText().trim();
         String kota = kotaTF.getText().trim();
-        String table = "Pembeli";
 
-        String query = "UPDATE " + table + " SET Nama = ?, NIK = ?, jenis_Kelamin = ?, jalan_Pembeli = ?, kecamatan_Pembeli = ?, kota_Pembeli = ? WHERE ID_Pembeli = ? AND ID_Pengguna = ?";
+        Connection con = DBConnect.getConnection();
+        String query = "UPDATE Pembeli SET Nama = ?, NIK = ?, jenis_Kelamin = ?, jalan_Pembeli = ?, kecamatan_Pembeli = ?, kota_Pembeli = ? " +
+                "WHERE ID_Pembeli = ? AND ID_Pengguna = ?";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, nama);
             ps.setString(2, NIK);
             ps.setString(3, kelamin);
@@ -153,11 +107,11 @@ public class PembeliAdminController implements Initializable {
 
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+            Notification.Information("Information", "EDIT SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "EDIT FAILED");
+            Notification.Error("ERROR", "EDIT FAILED");
         }
 
         App.setRoot("fxml/admin_menu/pembeliAdmin");
@@ -167,37 +121,21 @@ public class PembeliAdminController implements Initializable {
     private void deleteBtnAction() throws IOException {
         String idPgn = IdAkunTF.getText().trim();
         String idPmb = IdTF.getText().trim();
-        String table = "Pembeli";
-        String table1 = "Pengguna";
-        String table2 = "no_Telp_Pembeli";
 
-        String query = "DELETE FROM " + table + " WHERE ID_Pembeli = ? AND ID_Pengguna = ?";
-        String query1 = "DELETE FROM " + table1 + " WHERE ID_Pengguna = ? AND ID_Pembeli = ?";
-        String query2 = "DELETE FROM " + table2 + " WHERE ID_Pembeli = ?";
+        Connection con = DBConnect.getConnection();
+        String query = "DELETE FROM Pengguna WHERE ID_Pengguna = ?";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            Connection connection1 = DriverManager.getConnection(connectionUrl);
-            Connection connection2 = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query);
-            PreparedStatement ps1 = connection1.prepareStatement(query1);
-            PreparedStatement ps2 = connection2.prepareStatement(query2)) {
-            ps.setString(1, idPmb);
-            ps.setString(2, idPgn);
+        try(PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps1.setString(1, idPgn);
-            ps1.setString(2, idPmb);
+            ps.setString(1, idPgn);
 
-            ps2.setString(1, idPmb);
-
-            ps2.executeUpdate();
-            ps1.executeUpdate();
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+            Notification.Information("Information", "DELETE SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "DELETE FAILED");
+            Notification.Error("ERROR", "DELETE FAILED");
         }
 
         App.setRoot("fxml/admin_menu/pembeliAdmin");
@@ -277,11 +215,11 @@ public class PembeliAdminController implements Initializable {
     }
 
     private void pullDBPembeli() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
         String query = "SELECT ID_Pengguna, ID_Pembeli, Nama, NIK,jenis_Kelamin, jalan_Pembeli, kecamatan_Pembeli, kota_Pembeli FROM Pembeli";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
 
             // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();

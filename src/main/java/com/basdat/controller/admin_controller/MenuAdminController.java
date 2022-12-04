@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +17,8 @@ public class MenuAdminController implements Initializable {
 
 
     @FXML
+    private ImageView profileImage;
+    @FXML
     private Button logoutBtn;
     @FXML
     private Label adminName;
@@ -22,7 +26,14 @@ public class MenuAdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        adminName.setText(LoginAdminController.getUser());
+        adminName.setText(LoginAdminController.getNama());
+
+        if (LoginAdminController.getJenisKelamin().equals("Perempuan")) {
+            profileImage.setImage(new Image("file:src/main/resources/images/female.png"));
+        }
+        else {
+            profileImage.setImage(new Image("file:src/main/resources/images/male.png"));
+        }
     }
 
 
@@ -42,8 +53,8 @@ public class MenuAdminController implements Initializable {
     }
 
     @FXML
-    private void cabangBtnAction() throws IOException {
-        App.setRoot("fxml/admin_menu/cabangAdmin");
+    private void akunBtnAction() throws IOException {
+        App.setRoot("fxml/admin_menu/akunAdmin");
     }
 
     @FXML
@@ -57,12 +68,18 @@ public class MenuAdminController implements Initializable {
     }
 
     @FXML
+    private void cabangBtnAction() throws IOException {
+        App.setRoot("fxml/admin_menu/cabangAdmin");
+    }
+
+    @FXML
     private void kontakBtnAction() throws IOException {
         App.setRoot("fxml/admin_menu/kontakAdmin");
     }
 
     @FXML
     private void logoutBtnAction() throws IOException {
+        LoginAdminController.ClearLoginInformation();
         App.setRoot("fxml/welcome");
     }
 
