@@ -3,16 +3,28 @@ package com.basdat.controller.admin_controller;
 import com.basdat.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MenuAdminController {
+public class MenuAdminController implements Initializable {
 
-    @FXML
-    private Button stokBtn;
+
     @FXML
     private Button logoutBtn;
+    @FXML
+    private Label adminName;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        adminName.setText(LoginAdminController.getUser());
+    }
+
 
     @FXML
     private void produkBtnAction() throws IOException {
@@ -21,32 +33,32 @@ public class MenuAdminController {
 
     @FXML
     private void stokBtnAction() throws IOException {
-
+        App.setRoot("fxml/admin_menu/stokAdmin");
     }
 
     @FXML
     private void pesananBtnAction() throws IOException {
-
+        App.setRoot("fxml/admin_menu/pesananAdmin");
     }
 
     @FXML
     private void cabangBtnAction() throws IOException {
-
+        App.setRoot("fxml/admin_menu/cabangAdmin");
     }
 
     @FXML
     private void pegawaiBtnAction() throws IOException {
-        App.setRoot("fxml/admin_menu/pegawai");
+        App.setRoot("fxml/admin_menu/pegawaiAdmin");
     }
 
     @FXML
     private void pembeliBtnAction() throws IOException {
-
+        App.setRoot("fxml/admin_menu/pembeliAdmin");
     }
 
     @FXML
     private void kontakBtnAction() throws IOException {
-
+        App.setRoot("fxml/admin_menu/kontakAdmin");
     }
 
     @FXML

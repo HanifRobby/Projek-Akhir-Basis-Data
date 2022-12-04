@@ -6,8 +6,8 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -18,13 +18,13 @@ import static com.basdat.repository.DBConnect.connectionUrl;
 public class LoginAdminController {
 
     @FXML
+    private Text loginError;
+    @FXML
     private TextField usernameTF;
     @FXML
     private TextField passTF;
     @FXML
     private Button loginBtn;
-    @FXML
-    private Label DescriptionLabel;
 
     private static String user;
     private static String pass;
@@ -39,10 +39,18 @@ public class LoginAdminController {
                 App.setRoot("fxml/admin_menu/menuAdmin");
             }
         }
-        else{
+        else if (!checkEmpty(user, pass)){
             usernameTF.clear();
             passTF.clear();
-            DescriptionLabel.setText("Terdapat Kesalahan Dalam Mengisi Username/Password!");
+            loginError.setText("Username and password is blank");
+        }
+        else if (!checkEmpty(user)){
+            usernameTF.clear();
+            loginError.setText("Username is blank");
+        }
+        else if (!checkEmpty(pass)) {
+            passTF.clear();
+            loginError.setText("Password is blank");
         }
     }
 
@@ -70,14 +78,13 @@ public class LoginAdminController {
             if(resultSet.next()) {
                 if ( resultSet.getString(1).charAt(0) == '3' ){
                     if(resultSet.getString(2).equals(user) && resultSet.getString(3).equals(pass)) {
-                        System.out.println(resultSet.getString(1));
                         JOptionPane.showMessageDialog(null, "LOGIN SUCCESS");
                         return true;
                     }
                 }
 
             }
-            JOptionPane.showMessageDialog(null, "USERNAME OR PASSWORD IS WRONG");
+            loginError.setText("Username or password is invalid");
 
         }
         catch (SQLException e) {
@@ -88,7 +95,15 @@ public class LoginAdminController {
     }
 
     public boolean checkEmpty(String user, String pass) {
-        if(!user.isEmpty() && !user.isBlank() && !pass.isEmpty() && !pass.isBlank()){
+        if(!user.isBlank() && !pass.isBlank()){
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkEmpty(String text) {
+        if(!text.isBlank()) {
             return true;
         }
 

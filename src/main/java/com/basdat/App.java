@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("fxml/customer_menu/pesan"), 800, 600);
+        scene = new Scene(loadFXML("fxml/welcome"), 800, 600);
         stage.setMinWidth(800);
         stage.setMinHeight(600);
         stage.setScene(scene);

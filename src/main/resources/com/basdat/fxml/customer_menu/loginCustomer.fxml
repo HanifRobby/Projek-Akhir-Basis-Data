@@ -33,7 +33,7 @@
                   </Text>
                   <PasswordField fx:id="passTF" maxWidth="280.0" onAction="#passwordTFonAction" style="-fx-background-color: white; -fx-background-radius: 15;">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="Gilroy-Light" size="20.0" />
                      </font></PasswordField>
                   <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#loginBtnAction" stylesheets="@../../styles/loginStyles.css" text="LOGIN" textFill="WHITE">
                      <font>
