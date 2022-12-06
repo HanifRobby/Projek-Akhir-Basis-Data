@@ -8,22 +8,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-import static com.basdat.repository.DBConnect.connectionUrl;
 import static com.basdat.repository.DBConnect.getConnection;
 
 public class KontakAdminController implements Initializable {
@@ -221,10 +217,7 @@ public class KontakAdminController implements Initializable {
                 else if(nomorTelepon.getID().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
-                else if(nomorTelepon.getNomorTelepon().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+                else return nomorTelepon.getNomorTelepon().toLowerCase().contains(lowerCaseFilter);
 
             });
 
@@ -241,10 +234,7 @@ public class KontakAdminController implements Initializable {
                 else if(nomorTelepon.getID().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
-                else if(nomorTelepon.getNomorTelepon().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+                else return nomorTelepon.getNomorTelepon().toLowerCase().contains(lowerCaseFilter);
 
             });
 
@@ -261,10 +251,7 @@ public class KontakAdminController implements Initializable {
                 else if(nomorTelepon.getID().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
-                else if(nomorTelepon.getNomorTelepon().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+                else return nomorTelepon.getNomorTelepon().toLowerCase().contains(lowerCaseFilter);
 
             });
         });

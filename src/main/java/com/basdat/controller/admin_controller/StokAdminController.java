@@ -1,33 +1,26 @@
 package com.basdat.controller.admin_controller;
 
 import com.basdat.App;
-import com.basdat.db_models.Mobil;
 import com.basdat.db_models.StokMobil;
 import com.basdat.db_models.StokSK;
-import com.basdat.db_models.SukuCadang;
 import com.basdat.repository.DBConnect;
 import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-import static com.basdat.repository.DBConnect.connectionUrl;
 import static com.basdat.repository.DBConnect.getConnection;
 
 public class StokAdminController implements Initializable {
@@ -274,10 +267,7 @@ public class StokAdminController implements Initializable {
                 else if(String.valueOf(mobil.getID_Cabang()).contains(lowerCaseFilter)) {
                     return true;
                 }
-                else if(String.valueOf(mobil.getID_Produk()).contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+                else return String.valueOf(mobil.getID_Produk()).contains(lowerCaseFilter);
 
             });
 
@@ -294,10 +284,7 @@ public class StokAdminController implements Initializable {
                 else if(String.valueOf(SK.getID_Cabang()).contains(lowerCaseFilter)) {
                     return true;
                 }
-                else if(String.valueOf(SK.getID_Cabang()).contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+                else return String.valueOf(SK.getID_Cabang()).contains(lowerCaseFilter);
 
             });
         });

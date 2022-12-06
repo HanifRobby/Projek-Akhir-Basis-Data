@@ -1,7 +1,6 @@
 package com.basdat.controller.admin_controller;
 
 import com.basdat.App;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,8 +17,6 @@ public class MenuAdminController implements Initializable {
 
     @FXML
     private ImageView profileImage;
-    @FXML
-    private Button logoutBtn;
     @FXML
     private Label adminName;
 

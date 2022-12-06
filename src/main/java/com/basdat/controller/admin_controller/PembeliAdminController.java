@@ -1,7 +1,6 @@
 package com.basdat.controller.admin_controller;
 
 import com.basdat.App;
-import com.basdat.db_models.Pegawai;
 import com.basdat.db_models.Pembeli;
 import com.basdat.repository.DBConnect;
 import com.basdat.util.Notification;
@@ -9,24 +8,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import org.w3c.dom.Text;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-
-import static com.basdat.repository.DBConnect.connectionUrl;
 
 public class PembeliAdminController implements Initializable {
 
@@ -120,7 +112,6 @@ public class PembeliAdminController implements Initializable {
     @FXML
     private void deleteBtnAction() throws IOException {
         String idPgn = IdAkunTF.getText().trim();
-        String idPmb = IdTF.getText().trim();
 
         Connection con = DBConnect.getConnection();
         String query = "DELETE FROM Pengguna WHERE ID_Pengguna = ?";
@@ -153,21 +144,16 @@ public class PembeliAdminController implements Initializable {
         FilteredList<Pembeli> filteredData = new FilteredList<>(dataPembeli, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
-        searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(pembeli -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
+        searchTF.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(pembeli -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
 
-                String lowerCaseFilter = newValue.toLowerCase();
+            String lowerCaseFilter = newValue.toLowerCase();
 
-                if(pembeli.getNama().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+            return pembeli.getNama().toLowerCase().contains(lowerCaseFilter);
 
-            });
-        });
+        }));
 
         // 3. Wrap the FilteredList in a SortedList.
         SortedList<Pembeli> sortedData = new SortedList<>(filteredData);

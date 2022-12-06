@@ -8,11 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.*;
-
-import static com.basdat.repository.DBConnect.connectionUrl;
 
 public class SignUpController {
 
@@ -52,7 +49,7 @@ public class SignUpController {
     private String nama, NIK, jenisKelamin, jalan, kecamatan, kota;
 
     @FXML
-    private void signingUp() throws IOException {
+    private void signingUp() {
         email = fieldEmailSU.getText().trim();
         user = fieldUsernameSU.getText().trim();
         password = fieldPasswordSU.getText().trim();
@@ -112,15 +109,13 @@ public class SignUpController {
                 }
                 catch (SQLException e) {
                     e.printStackTrace();
-                    if (con != null) {
-                        try {
-                        con.rollback();
-                        }
-                        catch (Exception ex) {
-                            System.out.println("Rollback Failed");
-                        }
-                        System.out.println("Rollback Succes");
+                    try {
+                    con.rollback();
                     }
+                    catch (Exception ex) {
+                        System.out.println("Rollback Failed");
+                    }
+                    System.out.println("Rollback Succes");
                     Notification.Error("ERROR", "SIGNUP FAILED");
                 }
 
@@ -147,12 +142,12 @@ public class SignUpController {
 
 
     @FXML
-    private void signUpBtnPressed() throws IOException {
+    private void signUpBtnPressed() {
         signUpBtn.setPrefHeight(signUpBtn.getPrefHeight()*1.5);
     }
 
     @FXML
-    private void signUpBtnReleased() throws IOException {
+    private void signUpBtnReleased() {
         signUpBtn.setPrefHeight(signUpBtn.getPrefHeight()/1.5);
     }
 
@@ -162,20 +157,16 @@ public class SignUpController {
     }
 
     @FXML
-    private void backSignUpBtnPressed() throws  IOException {
+    private void backSignUpBtnPressed() {
         backSignUpBtn.setPrefHeight(backSignUpBtn.getPrefHeight()*1.1);
     }
 
     @FXML
-    private void backSignUpBtnReleased() throws IOException {
+    private void backSignUpBtnReleased() {
         backSignUpBtn.setPrefHeight(backSignUpBtn.getPrefHeight()/1.1);
     }
 
     private boolean checkFieldEmpty() {
-        if (!email.isBlank() && !user.isBlank() && !password.isBlank() && !nama.isBlank() && !NIK.isBlank() && !jenisKelamin.isBlank() && !jalan.isBlank() && !kecamatan.isBlank() && !kota.isBlank()) {
-            return true;
-        }
-
-        return  false;
+        return !email.isBlank() && !user.isBlank() && !password.isBlank() && !nama.isBlank() && !NIK.isBlank() && !jenisKelamin.isBlank() && !jalan.isBlank() && !kecamatan.isBlank() && !kota.isBlank();
     }
 }

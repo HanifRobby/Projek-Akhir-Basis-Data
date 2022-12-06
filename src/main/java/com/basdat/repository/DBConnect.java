@@ -19,16 +19,6 @@ public class DBConnect {
             "integratedSecurity=true;" +
             "loginTimeout = 30;";
 
-    public static String connectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR5O;" +
-            "databaseName=test3;" +
-            "encrypt=true;" +
-            "trustServerCertificate=true;" +
-            "integratedSecurity=true;" +
-            "loginTimeout = 30;";
-
-    public static String AltConnectionUrl = "";
-
-
     public static Connection getConnection() {
         if (con != null) {
             return con;

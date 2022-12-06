@@ -1,6 +1,5 @@
 package com.basdat;
 
-import com.basdat.util.Notification;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

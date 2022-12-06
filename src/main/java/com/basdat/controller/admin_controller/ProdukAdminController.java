@@ -9,24 +9,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.URL;
 import java.sql.*;
-import java.util.EventListener;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static com.basdat.repository.DBConnect.connectionUrl;
 import static com.basdat.repository.DBConnect.getConnection;
 
 public class ProdukAdminController implements Initializable {
@@ -147,11 +139,11 @@ public class ProdukAdminController implements Initializable {
         String tahun = tahunTF.getText().trim();
         String harga = hargaTF.getText().trim();
 
+        Connection con = DBConnect.getConnection();
         String query = "UPDATE Produk SET nama_Produk = ?, merk = ?, tahun_Produksi = ?, harga = ? WHERE ID_Produk = ? AND jenis_Produk = ?";
 
         if (selectSK == null) {
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setString(1, produk);
                 ps.setString(2, merk);
                 ps.setString(3, tahun);
@@ -170,8 +162,7 @@ public class ProdukAdminController implements Initializable {
 
         }
         else if (selectMobil == null) {
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query)) {
+            try(PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setString(1, produk);
                 ps.setString(2, merk);
                 ps.setString(3, tahun);
@@ -197,13 +188,13 @@ public class ProdukAdminController implements Initializable {
         String table = "Produk";
         String table1 = "Stok";
 
+        Connection con = DBConnect.getConnection();
         String query = "DELETE FROM " + table + " WHERE ID_Produk = ? AND jenis_Produk = ?";
         String query1 = "DELETE FROM " + table1 + " WHERE ID_Produk = ?";
 
         if (selectSK == null) {
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query);
-                PreparedStatement ps1 = connection.prepareStatement(query1)) {
+            try(PreparedStatement ps = con.prepareStatement(query);
+                PreparedStatement ps1 = con.prepareStatement(query1)) {
                 ps.setString(1, id);
                 ps.setString(2, "Mobil");
 
@@ -220,9 +211,8 @@ public class ProdukAdminController implements Initializable {
             }
         }
         else if (selectMobil == null) {
-            try(Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement ps = connection.prepareStatement(query);
-                PreparedStatement ps1 = connection.prepareStatement(query1)) {
+            try(PreparedStatement ps = con.prepareStatement(query);
+                PreparedStatement ps1 = con.prepareStatement(query1)) {
                 ps.setString(1, id);
                 ps.setString(2, "Suku Cadang");
 
@@ -321,10 +311,7 @@ public class ProdukAdminController implements Initializable {
                 else if(mobil.getID().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
-                else if(mobil.getMerk().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+                else return mobil.getMerk().toLowerCase().contains(lowerCaseFilter);
 
             });
 
@@ -341,10 +328,7 @@ public class ProdukAdminController implements Initializable {
                 else if(SK.getID().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
-                else if(SK.getMerk().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+                else return SK.getMerk().toLowerCase().contains(lowerCaseFilter);
 
             });
         });

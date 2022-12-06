@@ -1,33 +1,24 @@
 package com.basdat.controller.admin_controller;
 
 import com.basdat.App;
-import com.basdat.db_models.Mobil;
 import com.basdat.db_models.Pegawai;
-import com.basdat.db_models.SukuCadang;
 import com.basdat.repository.DBConnect;
 import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-
-import static com.basdat.repository.DBConnect.connectionUrl;
 
 public class PegawaiController implements Initializable {
 
@@ -85,7 +76,6 @@ public class PegawaiController implements Initializable {
     @FXML
     private void addBtnAction() throws IOException{
         String idPgn = IdAkunTF.getText().trim();
-        String idPgw = IdTF.getText().trim();
         String nama = namaTF.getText().trim();
         String kelamin = JkTF.getText().trim();
         String jalan = jalanTF.getText().trim();
@@ -127,15 +117,13 @@ public class PegawaiController implements Initializable {
         }
         catch (SQLException e) {
             e.printStackTrace();
-            if (con != null) {
-                try {
-                    con.rollback();
-                }
-                catch (Exception ex) {
-                    System.out.println("Rollback Failed");
-                }
-                System.out.println("Rollback Succes");
+            try {
+                con.rollback();
             }
+            catch (Exception ex) {
+                System.out.println("Rollback Failed");
+            }
+            System.out.println("Rollback Succes");
             Notification.Error("ERROR", "ADD FAILED");
         }
         App.setRoot("fxml/admin_menu/pegawaiAdmin");
@@ -208,15 +196,13 @@ public class PegawaiController implements Initializable {
         }
         catch (SQLException e) {
             e.printStackTrace();
-            if (con != null) {
-                try {
-                    con.rollback();
-                }
-                catch (Exception ex) {
-                    System.out.println("Rollback Failed");
-                }
-                System.out.println("Rollback Succes");
+            try {
+                con.rollback();
             }
+            catch (Exception ex) {
+                System.out.println("Rollback Failed");
+            }
+            System.out.println("Rollback Succes");
             Notification.Error("ERROR", "DELETE FAILED");
         }
 
@@ -236,21 +222,16 @@ public class PegawaiController implements Initializable {
         FilteredList<Pegawai> filteredData = new FilteredList<>(dataPegawai, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
-        searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(pegawai -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
+        searchTF.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(pegawai -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
 
-                String lowerCaseFilter = newValue.toLowerCase();
+            String lowerCaseFilter = newValue.toLowerCase();
 
-                if(pegawai.getNama().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+            return pegawai.getNama().toLowerCase().contains(lowerCaseFilter);
 
-            });
-        });
+        }));
 
         // 3. Wrap the FilteredList in a SortedList.
         SortedList<Pegawai> sortedData = new SortedList<>(filteredData);

@@ -2,7 +2,6 @@ package com.basdat.controller.admin_controller;
 
 import com.basdat.App;
 import com.basdat.db_models.DaftarPesanan;
-import com.basdat.db_models.Pegawai;
 import com.basdat.db_models.Pesanan;
 import com.basdat.repository.DBConnect;
 import com.basdat.util.Notification;
@@ -10,15 +9,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -28,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static com.basdat.repository.DBConnect.connectionUrl;
 import static com.basdat.repository.DBConnect.getConnection;
 
 public class PesananAdminController implements Initializable {
@@ -225,24 +220,19 @@ public class PesananAdminController implements Initializable {
         FilteredList<Pesanan> filteredData = new FilteredList<>(dataPesanan, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
-        searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(pesanan -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
+        searchTF.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(pesanan -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
 
-                String lowerCaseFilter = newValue.toLowerCase();
+            String lowerCaseFilter = newValue.toLowerCase();
 
-                if(pesanan.getID_Pesanan().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                else if(pesanan.getID_Pembeli().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+            if(pesanan.getID_Pesanan().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            }
+            else return pesanan.getID_Pembeli().toLowerCase().contains(lowerCaseFilter);
 
-            });
-        });
+        }));
 
         // 3. Wrap the FilteredList in a SortedList.
         SortedList<Pesanan> sortedData = new SortedList<>(filteredData);
@@ -260,21 +250,16 @@ public class PesananAdminController implements Initializable {
         FilteredList<DaftarPesanan> filteredData = new FilteredList<>(dataDaftarPesanan, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
-        IdPsnTF.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(daftarPesanan -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
+        IdPsnTF.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(daftarPesanan -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
 
-                String lowerCaseFilter = newValue.toLowerCase();
+            String lowerCaseFilter = newValue.toLowerCase();
 
-                if(daftarPesanan.getID_Pesanan().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+            return daftarPesanan.getID_Pesanan().contains(lowerCaseFilter);
 
-            });
-        });
+        }));
 
         // 3. Wrap the FilteredList in a SortedList.
         SortedList<DaftarPesanan> sortedData = new SortedList<>(filteredData);
@@ -389,7 +374,7 @@ public class PesananAdminController implements Initializable {
             resultSet = ps.executeQuery();
 
             // Add result to list
-            List<DaftarPesanan> entities = new ArrayList<DaftarPesanan>();
+            List<DaftarPesanan> entities = new ArrayList<>();
             while (resultSet.next()) {
                 dataDaftarPesanan.add(new DaftarPesanan(resultSet.getString(1),
                         resultSet.getString(2),

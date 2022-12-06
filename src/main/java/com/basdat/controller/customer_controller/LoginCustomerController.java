@@ -1,6 +1,7 @@
 package com.basdat.controller.customer_controller;
 
 import com.basdat.App;
+import com.basdat.repository.DBConnect;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +11,6 @@ import javafx.scene.control.TextField;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.*;
-
-import static com.basdat.repository.DBConnect.connectionUrl;
 
 public class LoginCustomerController {
 
@@ -59,11 +58,11 @@ public class LoginCustomerController {
     }
 
     private Boolean verifyLogin() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
         String query = "SELECT ID_Pengguna, Username, Password FROM Pengguna WHERE username = ? AND password = ?";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, user);
             ps.setString(2, pass);
 

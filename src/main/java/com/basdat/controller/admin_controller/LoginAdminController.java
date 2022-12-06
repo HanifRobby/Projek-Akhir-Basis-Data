@@ -1,18 +1,12 @@
 package com.basdat.controller.admin_controller;
 
 import com.basdat.App;
-import com.basdat.db_models.Mobil;
 import com.basdat.repository.DBConnect;
 import com.basdat.util.Notification;
-import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.*;
 
@@ -25,8 +19,6 @@ public class LoginAdminController {
     private TextField usernameTF;
     @FXML
     private TextField passTF;
-    @FXML
-    private Button loginBtn;
 
     private static String ID_Pengguna, email, user, pass;
     private static String ID_Pegawai, nama, jenisKelamin, jalan, kecamatan, kota, noCabang;
@@ -116,19 +108,11 @@ public class LoginAdminController {
     }
 
     public boolean checkEmpty(String user, String pass) {
-        if(!user.isBlank() && !pass.isBlank()){
-            return true;
-        }
-
-        return false;
+        return !user.isBlank() && !pass.isBlank();
     }
 
     public boolean checkEmpty(String text) {
-        if(!text.isBlank()) {
-            return true;
-        }
-
-        return false;
+        return !text.isBlank();
     }
 
     public static String getID_Pengguna() {

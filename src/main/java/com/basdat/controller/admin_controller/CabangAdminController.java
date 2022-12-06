@@ -2,31 +2,23 @@ package com.basdat.controller.admin_controller;
 
 import com.basdat.App;
 import com.basdat.db_models.Cabang;
-import com.basdat.db_models.Pegawai;
 import com.basdat.repository.DBConnect;
 import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-
-import static com.basdat.repository.DBConnect.connectionUrl;
 
 public class CabangAdminController implements Initializable {
 
@@ -170,27 +162,22 @@ public class CabangAdminController implements Initializable {
         FilteredList<Cabang> filteredData = new FilteredList<>(dataCabang, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
-        searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(cabang -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
+        searchTF.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(cabang -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
 
-                String lowerCaseFilter = newValue.toLowerCase();
+            String lowerCaseFilter = newValue.toLowerCase();
 
-                if(String.valueOf(cabang.getNoCabang()).contains(lowerCaseFilter)) {
-                    return true;
-                }
-                else if(cabang.getKota().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                else if(cabang.getKecamatan().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
+            if(String.valueOf(cabang.getNoCabang()).contains(lowerCaseFilter)) {
+                return true;
+            }
+            else if(cabang.getKota().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            }
+            else return cabang.getKecamatan().toLowerCase().contains(lowerCaseFilter);
 
-            });
-        });
+        }));
 
         // 3. Wrap the FilteredList in a SortedList.
         SortedList<Cabang> sortedData = new SortedList<>(filteredData);
@@ -263,11 +250,11 @@ public class CabangAdminController implements Initializable {
 
     private void addToTableCabang() {
         IdCbgClm.setCellValueFactory(new PropertyValueFactory<>("noCabang"));
-        emailClm.setCellValueFactory(new PropertyValueFactory<>("email"));;
-        jalanClm.setCellValueFactory(new PropertyValueFactory<>("jalan"));;
-        kecClm.setCellValueFactory(new PropertyValueFactory<>("kecamatan"));;
-        kotaClm.setCellValueFactory(new PropertyValueFactory<>("kota"));;
-        kptsClm.setCellValueFactory(new PropertyValueFactory<>("kapasitas"));;
+        emailClm.setCellValueFactory(new PropertyValueFactory<>("email"));
+        jalanClm.setCellValueFactory(new PropertyValueFactory<>("jalan"));
+        kecClm.setCellValueFactory(new PropertyValueFactory<>("kecamatan"));
+        kotaClm.setCellValueFactory(new PropertyValueFactory<>("kota"));
+        kptsClm.setCellValueFactory(new PropertyValueFactory<>("kapasitas"));
 
         cabangTblView.setItems(dataCabang);
     }
