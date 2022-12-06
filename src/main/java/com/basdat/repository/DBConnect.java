@@ -7,40 +7,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+
 public class DBConnect {
-    public static void ConnectDB(){
-        String connectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR5O;" +
-            "databaseName=University;" +
-            "encrypt=true;trustServerCertificate=true;" +
-            "integratedSecurity=true;";
+    private static Connection con;
 
-//        String connectionUrl =
-//                "jdbc:sqlserver://LAPTOP-72IKFR5O.database.windows.net:1433;" +
-//                "database=University;" +
-//                "user=hanif@LAPTOP-72IKFR5O;" +
-//                "password=password;" +
-//                "encrypt=true;" +
-//                "trustServerCertificate=false;" +
-//                "loginTimeout=30;";
-        ResultSet resultSet = null;
+    private static String url = "jdbc:sqlserver://LAPTOP-72IKFR5O;" +
+            "databaseName=test3;" +
+            "encrypt=true;" +
+            "trustServerCertificate=true;" +
+            "integratedSecurity=true;" +
+            "loginTimeout = 30;";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            Statement statement = connection.createStatement();) {
-            // Create and execute a SELECT SQL statement.
-            String selectSql = "SELECT TOP 5 id, name,dept_name from instructor";
-            resultSet = statement.executeQuery(selectSql);
+    public static String connectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR5O;" +
+            "databaseName=test3;" +
+            "encrypt=true;" +
+            "trustServerCertificate=true;" +
+            "integratedSecurity=true;" +
+            "loginTimeout = 30;";
 
-            // Print results from select statement
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString(2) + " (" +
-                                    resultSet.getString(3) + ")");
-            }
+    public static String AltConnectionUrl = "";
 
 
+    public static Connection getConnection() {
+        if (con != null) {
+            return con;
         }
-        catch (SQLException e) {
+
+        return getConnection(url);
+    }
+
+    private static Connection getConnection(String url) {
+        try {
+            con = DriverManager.getConnection(url);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
+
+        return con;
     }
 
 

@@ -1,0 +1,161 @@
+#akunBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#akunBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#akunBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#stokBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#stokBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#stokBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#kontakBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#kontakBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#kontakBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#pembeliBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#pembeliBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#pembeliBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#cabangBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#cabangBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#cabangBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#pesananBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#pesananBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#pesananBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#pegawaiBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#pegawaiBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#pegawaiBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#produkBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#produkBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#produkBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#logoutBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#logoutBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#logoutBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 10;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
