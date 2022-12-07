@@ -1,15 +1,16 @@
 package com.basdat.db_models;
 
 public class Mobil {
-    private String ID, nama, harga, merk, tahun, warna;
+    private String ID, nama, merk, tahun, harga;
 
-    public Mobil(String ID, String nama, String merk, String tahun, String warna, String harga) {
+    public Mobil() {}
+
+    public Mobil(String ID, String nama, String merk, String tahun, String harga) {
         this.ID = ID;
         this.nama = nama;
-        this.harga = harga;
         this.merk = merk;
         this.tahun = tahun;
-        this.warna = warna;
+        this.harga = harga;
     }
 
     public void setNama(String nama) {
@@ -32,9 +33,6 @@ public class Mobil {
         this.tahun = tahun;
     }
 
-    public void setWarna(String warna) {
-        this.warna = warna;
-    }
 
     public String getNama() {
         return nama;
@@ -55,10 +53,5 @@ public class Mobil {
     public String getTahun() {
         return tahun;
     }
-
-    public String getWarna() {
-        return warna;
-    }
-
 
 }

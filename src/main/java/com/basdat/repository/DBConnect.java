@@ -10,22 +10,42 @@ import java.sql.Statement;
 
 
 public class DBConnect {
+    private static Connection con;
 
-    public static String connectionUrl = "jdbc:sqlserver://LAPTOP-HLKP1IBT;" +
-            "databaseName=University;" +
-            "encrypt=true;trustServerCertificate=true;" +
-            "integratedSecurity=true;";
-
-    public static String AltConnectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR50;" +
-            "databaseName = University;" +
-            "user = AdminPA;" +
-            "password = admin123" +
-            "encrypt = true;" +
-            "trustServerCertificate = true;" +
+    private static String url = "jdbc:sqlserver://LAPTOP-72IKFR5O;" +
+            "databaseName=test3;" +
+            "encrypt=true;" +
+            "trustServerCertificate=true;" +
+            "integratedSecurity=true;" +
             "loginTimeout = 30;";
 
-    public static void ConnectDB(){
+    public static String connectionUrl = "jdbc:sqlserver://LAPTOP-72IKFR5O;" +
+            "databaseName=test3;" +
+            "encrypt=true;" +
+            "trustServerCertificate=true;" +
+            "integratedSecurity=true;" +
+            "loginTimeout = 30;";
 
+    public static String AltConnectionUrl = "";
+
+
+    public static Connection getConnection() {
+        if (con != null) {
+            return con;
+        }
+
+        return getConnection(url);
+    }
+
+    private static Connection getConnection(String url) {
+        try {
+            con = DriverManager.getConnection(url);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return con;
     }
 
 

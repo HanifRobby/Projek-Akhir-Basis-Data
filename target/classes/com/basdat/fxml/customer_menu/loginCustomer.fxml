@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: D75020;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.customer_controller.LoginCustomerController">
+   <children>
+      <BorderPane layoutX="-6.0" layoutY="-6.0" prefHeight="412.0" prefWidth="608.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <right>
+            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="506.0" spacing="15.0" style="-fx-background-color: D9D9D9;" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="#f9602a" strokeType="OUTSIDE" strokeWidth="0.0" text="please login to continue">
+                     <font>
+                        <Font name="Gilroy-ExtraBold" size="38.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#f9602a" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+                     <font>
+                        <Font name="Gilroy-ExtraBold" size="28.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="usernameTF" maxWidth="280.0" promptText="username" style="-fx-background-color: white; -fx-background-radius: 15;">
+                     <font>
+                        <Font name="Gilroy-Light" size="20.0" />
+                     </font></TextField>
+                  <Text fill="#f9602a" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+                     <font>
+                        <Font name="Gilroy-ExtraBold" size="28.0" />
+                     </font>
+                  </Text>
+                  <PasswordField fx:id="passTF" maxWidth="280.0" onAction="#passwordTFonAction" promptText="password" style="-fx-background-color: white; -fx-background-radius: 15;">
+                     <font>
+                        <Font name="Gilroy-Light" size="20.0" />
+                     </font></PasswordField>
+                  <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#loginBtnAction" stylesheets="@../../styles/loginStyles.css" text="LOGIN" textFill="WHITE">
+                     <font>
+                        <Font name="Gilroy-ExtraBold" size="28.0" />
+                     </font>
+                  </Button>
+                  <Text fill="#642711" strokeType="OUTSIDE" strokeWidth="0.0" text="or sign up if you don't have">
+                     <font>
+                        <Font name="Gilroy-ExtraBold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#642711" strokeType="OUTSIDE" strokeWidth="0.0" text="an account, here.">
+                     <font>
+                        <Font name="Gilroy-ExtraBold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#signUpBtnAction" stylesheets="@../../styles/loginStyles.css" text="SIGN UP" textFill="WHITE">
+                     <font>
+                        <Font name="Gilroy-ExtraBold" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnAction" style="-fx-background-color: F9602A; -fx-background-radius: 15;" text="BACK" textFill="WHITE">
+                     <font>
+                        <Font name="Gilroy-ExtraBold" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="300.0" top="10.0" />
+                     </VBox.margin></Button>
+               </children></VBox>
+         </right>
+         <center>
+            <VBox alignment="CENTER" prefHeight="412.0" prefWidth="354.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="231.0" fitWidth="239.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/mobilzaor.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ZAOR" textAlignment="CENTER" wrappingWidth="267.9040069580078">
+                     <font>
+                        <Font name="Gilroy-ExtraBold" size="62.0" />
+                     </font>
+                  </Text>
+               </children></VBox>
+         </center></BorderPane>
+   </children>
+</AnchorPane>

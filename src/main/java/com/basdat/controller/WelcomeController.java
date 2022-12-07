@@ -27,9 +27,9 @@ public class WelcomeController  {
     private void adminBtnAction() throws IOException {
 
         try {
-            App.setRoot("loginAdmin");
+            App.setRoot("fxml/admin_menu/loginAdmin");
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
     }
@@ -38,7 +38,7 @@ public class WelcomeController  {
     private void customerBtnAction() throws IOException {
 
         try {
-            App.setRoot("loginCustomer");
+            App.setRoot("fxml/customer_menu/loginCustomer");
         } catch (Exception e) {
 
         }
