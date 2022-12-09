@@ -1,0 +1,89 @@
+#baruBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#baruBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#baruBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#removeBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#removeBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#removeBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#deleteBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#deleteBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#deleteBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#buyBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#buyBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#buyBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#backBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#backBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#backBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
