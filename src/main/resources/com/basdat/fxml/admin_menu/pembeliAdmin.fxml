@@ -12,11 +12,11 @@
                 <Pane prefHeight="201.0" prefWidth="30.0" style="-fx-background-color: #D9D9D9;" />
                 <Pane prefHeight="201.0" prefWidth="555.0" style="-fx-background-color: #D9D9D9;" HBox.hgrow="SOMETIMES">
                     <children>
-                        <TextField fx:id="IdTF" layoutX="82.0" layoutY="14.0" prefHeight="30.0" prefWidth="150.0">
+                        <TextField fx:id="IdTF" editable="false" layoutX="82.0" layoutY="14.0" prefHeight="30.0" prefWidth="150.0">
                             <font>
                                 <Font name="Gilroy-ExtraBold" size="12.0" />
                             </font></TextField>
-                        <TextField fx:id="IdAkunTF" layoutX="83.0" layoutY="62.0" prefHeight="30.0" prefWidth="150.0">
+                        <TextField fx:id="IdAkunTF" editable="false" layoutX="83.0" layoutY="62.0" prefHeight="30.0" prefWidth="150.0">
                             <font>
                                 <Font name="Gilroy-ExtraBold" size="12.0" />
                             </font></TextField>
@@ -92,17 +92,12 @@
                 </Pane>
                 <Pane prefHeight="170.0" prefWidth="185.0" style="-fx-background-color: #D9D9D9;">
                     <children>
-                        <Button fx:id="editBtn" layoutX="28.0" layoutY="80.0" mnemonicParsing="false" onAction="#editBtnAction" prefHeight="40.0" prefWidth="130.0" text="EDIT" textFill="WHITE">
+                        <Button fx:id="deleteBtn" layoutX="28.0" layoutY="80.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="40.0" prefWidth="130.0" text="DELETE" textFill="WHITE">
                             <font>
                                 <Font name="Gilroy-ExtraBold" size="18.0" />
                             </font>
                         </Button>
-                        <Button fx:id="deleteBtn" layoutX="28.0" layoutY="145.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="40.0" prefWidth="130.0" text="DELETE" textFill="WHITE">
-                            <font>
-                                <Font name="Gilroy-ExtraBold" size="18.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="addBtn" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="40.0" prefWidth="130.0" text="ADD" textFill="WHITE">
+                        <Button fx:id="editBtn" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" onAction="#editBtnAction" prefHeight="40.0" prefWidth="130.0" text="EDIT" textFill="WHITE">
                             <font>
                                 <Font name="Gilroy-ExtraBold" size="18.0" />
                             </font>

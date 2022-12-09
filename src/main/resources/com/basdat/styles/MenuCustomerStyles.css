@@ -16,73 +16,19 @@
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
-#stokBtn {
+#beliBtn {
   -fx-background-color:  #F9602A;
   -fx-background-radius: 10;
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
-#stokBtn:hover {
+#beliBtn:hover {
   -fx-background-color:  #CD613A;
   -fx-background-radius: 10;
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
-#stokBtn:pressed {
-  -fx-background-color:  #DB4E1B;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#kontakBtn {
-  -fx-background-color:  #F9602A;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#kontakBtn:hover {
-  -fx-background-color:  #CD613A;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#kontakBtn:pressed {
-  -fx-background-color:  #DB4E1B;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#pembeliBtn {
-  -fx-background-color:  #F9602A;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#pembeliBtn:hover {
-  -fx-background-color:  #CD613A;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#pembeliBtn:pressed {
-  -fx-background-color:  #DB4E1B;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#cabangBtn {
-  -fx-background-color:  #F9602A;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#cabangBtn:hover {
-  -fx-background-color:  #CD613A;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#cabangBtn:pressed {
+#beliBtn:pressed {
   -fx-background-color:  #DB4E1B;
   -fx-background-radius: 10;
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
@@ -106,37 +52,19 @@
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
-#pegawaiBtn {
+#pembayaranBtn {
   -fx-background-color:  #F9602A;
   -fx-background-radius: 10;
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
-#pegawaiBtn:hover {
+#pembayaranBtn:hover {
   -fx-background-color:  #CD613A;
   -fx-background-radius: 10;
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
-#pegawaiBtn:pressed {
-  -fx-background-color:  #DB4E1B;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#produkBtn {
-  -fx-background-color:  #F9602A;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#produkBtn:hover {
-  -fx-background-color:  #CD613A;
-  -fx-background-radius: 10;
-  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
-}
-
-#produkBtn:pressed {
+#pembayaranBtn:pressed {
   -fx-background-color:  #DB4E1B;
   -fx-background-radius: 10;
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);

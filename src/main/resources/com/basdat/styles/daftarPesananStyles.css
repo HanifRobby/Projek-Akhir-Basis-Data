@@ -16,6 +16,42 @@
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
+#addBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#addBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#addBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#removeBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#removeBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#removeBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
 #cancelBtn {
   -fx-background-color:  #F9602A;
   -fx-background-radius: 15;
@@ -29,6 +65,24 @@
 }
 
 #cancelBtn:pressed {
+  -fx-background-color:  #DB4E1B;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#printBtn {
+  -fx-background-color:  #F9602A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#printBtn:hover {
+  -fx-background-color:  #CD613A;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#printBtn:pressed {
   -fx-background-color:  #DB4E1B;
   -fx-background-radius: 15;
   -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);

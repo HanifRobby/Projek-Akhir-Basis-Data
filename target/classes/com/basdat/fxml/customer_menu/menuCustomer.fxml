@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.customer_controller.MenuCustomerController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../styles/MenuAdminStyles.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.basdat.controller.customer_controller.MenuCustomerController">
     <center>
         <HBox alignment="CENTER" prefHeight="600.0" prefWidth="886.0" style="-fx-background-color: F9602A;" BorderPane.alignment="CENTER">
             <children>
@@ -15,14 +15,14 @@
                     <children>
                         <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="224.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <Circle fill="#d9d9d9" layoutX="33.0" layoutY="36.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                                <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#d9d9d9" height="46.0" layoutX="37.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="190.0" />
-                                <ImageView fitHeight="46.0" fitWidth="45.0" layoutX="11.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                <Circle fill="#d9d9d9" layoutX="42.0" layoutY="42.0" radius="33.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#d9d9d9" height="46.0" layoutX="53.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="166.0" />
+                                <ImageView fx:id="profileImage" fitHeight="45.0" fitWidth="45.0" layoutX="20.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../../../images/mobilzaor-01.png" />
+                                        <Image url="@../../../../images/male.png" />
                                     </image>
                                 </ImageView>
-                                <Label layoutX="63.0" layoutY="26.0" prefHeight="23.0" prefWidth="152.0" text="ADMIN">
+                                <Label fx:id="customerName" layoutX="75.0" layoutY="31.0" prefHeight="23.0" prefWidth="152.0" text="Pengguna" textOverrun="WORD_ELLIPSIS">
                                     <font>
                                         <Font name="Gilroy-ExtraBold" size="18.0" />
                                     </font>
@@ -37,7 +37,7 @@
                             <children>
                                 <Pane prefHeight="99.0" prefWidth="370.0">
                                     <children>
-                                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="65.0" layoutY="14.0" prefHeight="65.0" prefWidth="241.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 35;" text="MENU CUSTOMER" textFill="#f9602a">
+                                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="72.0" layoutY="14.0" prefHeight="65.0" prefWidth="226.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 10;" text="MENU CUSTOMER" textFill="#f9602a">
                                             <font>
                                                 <Font name="Gilroy-ExtraBold" size="26.0" />
                                             </font>
@@ -46,9 +46,9 @@
                                 </Pane>
                             </children>
                         </VBox>
-                        <Pane prefHeight="450.0" prefWidth="370.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 35;">
+                        <Pane prefHeight="450.0" prefWidth="370.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 10;">
                             <children>
-                                <Button fx:id="pesanBtn" layoutX="105.0" layoutY="90.0" mnemonicParsing="false" onAction="#pesanBtnAction" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="PESAN" textFill="WHITE">
+                                <Button fx:id="akunBtn" layoutX="15.0" layoutY="100.0" mnemonicParsing="false" onAction="#akunBtnAction" prefHeight="50.0" prefWidth="160.0" stylesheets="@../../styles/MenuCustomerStyles.css" text="AKUN" textFill="WHITE">
                                     <font>
                                         <Font name="Gilroy-ExtraBold" size="24.0" />
                                     </font>
@@ -56,15 +56,23 @@
                                         <DropShadow blurType="GAUSSIAN" />
                                     </effect>
                                 </Button>
-                                <Button fx:id="daftarPesanBtn" layoutX="105.0" layoutY="170.0" mnemonicParsing="false" onAction="#daftarPesanBtnAction" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="DAFTAR PESAN" textFill="WHITE">
+                                <Button fx:id="beliBtn" layoutX="15.0" layoutY="25.0" mnemonicParsing="false" onAction="#beliBtnAction" prefHeight="50.0" prefWidth="160.0" stylesheets="@../../styles/MenuCustomerStyles.css" text="BELI" textFill="WHITE">
                                     <font>
-                                        <Font name="Gilroy-ExtraBold" size="19.0" />
+                                        <Font name="Gilroy-ExtraBold" size="24.0" />
                                     </font>
                                     <effect>
                                         <DropShadow blurType="GAUSSIAN" />
                                     </effect>
                                 </Button>
-                                <Button fx:id="logoutBtn" layoutX="14.0" layoutY="375.0" mnemonicParsing="false" onAction="#logoutBtnAction" prefHeight="50.0" prefWidth="132.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="LOGOUT" textAlignment="CENTER" textFill="WHITE">
+                                <Button fx:id="pesananBtn" layoutX="195.0" layoutY="25.0" mnemonicParsing="false" onAction="#pesananBtnAction" prefHeight="50.0" prefWidth="160.0" stylesheets="@../../styles/MenuCustomerStyles.css" text="PESANAN" textFill="WHITE">
+                                    <font>
+                                        <Font name="Gilroy-ExtraBold" size="24.0" />
+                                    </font>
+                                    <effect>
+                                        <DropShadow blurType="GAUSSIAN" />
+                                    </effect>
+                                </Button>
+                                <Button fx:id="logoutBtn" layoutX="14.0" layoutY="375.0" mnemonicParsing="false" onAction="#logoutBtnAction" prefHeight="50.0" prefWidth="132.0" stylesheets="@../../styles/MenuCustomerStyles.css" text="LOGOUT" textAlignment="CENTER" textFill="WHITE">
                                     <font>
                                         <Font name="Gilroy-ExtraBold" size="18.0" />
                                     </font>
@@ -79,13 +87,6 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                        <Button fx:id="pembayaranBtn" layoutX="105.0" layoutY="249.0" mnemonicParsing="false" onAction="#pembayaranBtnAction" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F9602A; -fx-background-radius: 35;" text="PEMBAYARAN" textFill="WHITE">
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                           <font>
-                              <Font name="Gilroy-ExtraBold" size="20.0" />
-                           </font></Button>
                             </children>
                         </Pane>
                         <Pane prefHeight="20.0" prefWidth="370.0" />

@@ -4,6 +4,8 @@ import com.basdat.App;
 import com.basdat.db_models.Mobil;
 import com.basdat.db_models.Pegawai;
 import com.basdat.db_models.SukuCadang;
+import com.basdat.repository.DBConnect;
+import com.basdat.util.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -90,41 +92,52 @@ public class PegawaiController implements Initializable {
         String kec = kecTF.getText().trim();
         String kota = kotaTF.getText().trim();
         String cabang = NcTF.getText().trim();
-        String table = "Pegawai";
-        String table1 = "Pengguna";
 
-        String query = "INSERT INTO " + table + " values (?,?,?,?,?,?,?,?)";
-        String query1 = "INSERT INTO " + table1 + " values (?,?,?,?)";
+        Connection con = DBConnect.getConnection();
+        String query = "SET IDENTITY_INSERT Pengguna ON " +
+                "INSERT INTO pengguna(ID_Pengguna, Email, Username, Password) values (?,?,?,?) " +
+                "SET IDENTITY_INSERT Pengguna OFF";
+        String query1 = "INSERT INTO Pegawai values (?,?,?,?,?,?,?)";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            Connection connection1 = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query);
-            PreparedStatement ps1 = connection1.prepareStatement(query1)) {
-            ps.setInt(1, Integer.parseInt(idPgn));
-            ps.setInt(2, Integer.parseInt(idPgw));
-            ps.setString(3, nama);
-            ps.setString(4, kelamin);
-            ps.setString(5, jalan);
-            ps.setString(6, kec);
-            ps.setString(7, kota);
-            ps.setInt(8, Integer.parseInt(cabang));
+        try(PreparedStatement ps = con.prepareStatement(query);
+            PreparedStatement ps1 = con.prepareStatement(query1)) {
 
-            ps1.setString(1, ("3" + idPgn));
-            ps1.setString(2, (nama+"312@gmail.com"));
-            ps1.setString(3, (nama + "321"));
-            ps1.setString(4, (nama+kota));
+            con.setAutoCommit(false);
 
-            ps1.executeUpdate();
+            ps.setString(1, (""+(Integer.parseInt(idPgn) + 2)));
+            ps.setString(2, (nama + "123@gmail.com"));
+            ps.setString(3, (nama + "123"));
+            ps.setString(4, (nama+  123));
 
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "ADD SUCCESS");
+            ps1.setInt(1, Integer.parseInt(idPgn));
+            ps1.setString(2, nama);
+            ps1.setString(3, kelamin);
+            ps1.setString(4, jalan);
+            ps1.setString(5, kec);
+            ps1.setString(6, kota);
+            ps1.setInt(7, Integer.parseInt(cabang));
+
+            ps1.executeUpdate();
+
+            con.commit();
+
+            Notification.Information("Information", "ADD SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "ADD FAILED");
+            if (con != null) {
+                try {
+                    con.rollback();
+                }
+                catch (Exception ex) {
+                    System.out.println("Rollback Failed");
+                }
+                System.out.println("Rollback Succes");
+            }
+            Notification.Error("ERROR", "ADD FAILED");
         }
-
         App.setRoot("fxml/admin_menu/pegawaiAdmin");
     }
 
@@ -138,12 +151,12 @@ public class PegawaiController implements Initializable {
         String kec = kecTF.getText().trim();
         String kota = kotaTF.getText().trim();
         String cabang = NcTF.getText().trim();
-        String table = "Pegawai";
 
-        String query = "UPDATE " + table + " SET Nama = ?, jenis_Kelamin = ?, jalan_Pegawai = ?, kecamatan_Pegawai = ?, kota_Pegawai = ?, no_cabang = ? WHERE ID_Pegawai = ? AND ID_Pengguna = ?";
+        Connection con = DBConnect.getConnection();
+        String query = "UPDATE Pegawai SET Nama = ?, jenis_Kelamin = ?, jalan_Pegawai = ?, kecamatan_Pegawai = ?, kota_Pegawai = ?, no_cabang = ? " +
+                "WHERE ID_Pegawai = ? AND ID_Pengguna = ?";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, nama);
             ps.setString(2, kelamin);
             ps.setString(3, jalan);
@@ -155,11 +168,11 @@ public class PegawaiController implements Initializable {
 
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "EDIT SUCCESS");
+            Notification.Information("Information", "EDIT SUCCES");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "EDIT FAILED");
+            Notification.Error("ERROR", "EDIT FAILED");
         }
 
         App.setRoot("fxml/admin_menu/pegawaiAdmin");
@@ -167,39 +180,44 @@ public class PegawaiController implements Initializable {
 
     @FXML
     private void deleteBtnAction() throws IOException {
-        String idPgw = IdTF.getText().trim();
         String idPgn = IdAkunTF.getText().trim();
-        String table = "Pegawai";
-        String table1 = "Pengguna";
-        String table2 = "no_Telp_Pegawai";
+        String idPgw = IdTF.getText().trim();
 
-        String query = "DELETE FROM " + table + " WHERE ID_Pegawai = ? AND ID_Pengguna = ?";
-        String query1 = "DELETE FROM " + table1 + " WHERE ID_Pengguna = ? AND ID_Pegawai = ?";
-        String query2 = "DELETE FROM " + table2 + " WHERE ID_Pegawai = ?";
+        Connection con = DBConnect.getConnection();
+        String query = "UPDATE Pesanan SET ID_Pegawai = ? WHERE ID_Pegawai = ?";
+        String query1 = "DELETE FROM Pegawai WHERE ID_Pengguna = ?";
+        String query2 = "DELETE FROM Pengguna WHERE ID_Pengguna = ?";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            Connection connection1 = DriverManager.getConnection(connectionUrl);
-            Connection connection2 = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query);
-            PreparedStatement ps1 = connection1.prepareStatement(query1);
-            PreparedStatement ps2 = connection2.prepareStatement(query2)) {
-            ps.setInt(1, Integer.parseInt(idPgw));
-            ps.setInt(2, Integer.parseInt(idPgn));
+        try(PreparedStatement ps = con.prepareStatement(query);
+            PreparedStatement ps1 = con.prepareStatement(query1);
+            PreparedStatement ps2 = con.prepareStatement(query2)) {
+            con.setAutoCommit(false);
 
-            ps1.setInt(1, Integer.parseInt(idPgn));
-            ps1.setInt(2, Integer.parseInt(idPgw));
-
-            ps2.setInt(1, Integer.parseInt(idPgw));
-
-            ps2.executeUpdate();
-            ps1.executeUpdate();
+            ps.setNull(1, Types.INTEGER);
+            ps.setString(2, idPgw);
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "DELETE SUCCESS");
+            ps1.setInt(1, Integer.parseInt(idPgn));
+            ps1.executeUpdate();
+
+            ps2.setInt(1, Integer.parseInt(idPgn));
+            ps2.executeUpdate();
+
+            con.commit();
+            Notification.Information("Information", "DELETE SUCCESS");
         }
         catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "DELETE FAILED");
+            if (con != null) {
+                try {
+                    con.rollback();
+                }
+                catch (Exception ex) {
+                    System.out.println("Rollback Failed");
+                }
+                System.out.println("Rollback Succes");
+            }
+            Notification.Error("ERROR", "DELETE FAILED");
         }
 
         App.setRoot("fxml/admin_menu/pegawaiAdmin");
@@ -280,11 +298,11 @@ public class PegawaiController implements Initializable {
     }
 
     private void pullDBPegawai() {
+        Connection con = DBConnect.getConnection();
         ResultSet resultSet;
         String query = "SELECT ID_Pengguna, ID_Pegawai, Nama, jenis_Kelamin, jalan_Pegawai, kecamatan_Pegawai, kota_Pegawai, no_Cabang FROM Pegawai";
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl);
-            PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = con.prepareStatement(query)) {
 
             // Create and execute a SELECT SQL statement.
             resultSet = ps.executeQuery();
@@ -300,9 +318,7 @@ public class PegawaiController implements Initializable {
                         resultSet.getString(7),
                         Integer.parseInt(resultSet.getString(8))
                 ));
-
             }
-
         }
         catch (SQLException e) {
             e.printStackTrace();
