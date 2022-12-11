@@ -167,7 +167,7 @@ public class PesananAdminController implements Initializable {
         String kuantitas = kuantitasTF.getText().trim();
 
         Connection con = DBConnect.getConnection();
-        String query = "UPDATE Daftar_Pesanan SET jumlah_Pembelian WHERE ID_Pesanan = ? AND ID_Produk = ?";
+        String query = "UPDATE Daftar_Pesanan SET jumlah_Pembelian = ? WHERE ID_Pesanan = ? AND ID_Produk = ?";
 
         try(PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, kuantitas);
